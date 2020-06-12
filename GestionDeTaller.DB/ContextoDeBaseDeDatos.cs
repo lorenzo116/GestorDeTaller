@@ -20,7 +20,7 @@ namespace GestionDeTaller.DA
 
         public DbSet<Clientes> Clientes { get; set; }
 
-        public DbSet<DetalleDeMantenimiento> DetallesDeMantenimiento { get; set; }
+        public DbSet<DetalleOrdenesDeMantenimiento> DetallesDeMantenimiento { get; set; }
 
         public DbSet<Mantenimientos> Mantenimientos { get; set; }
 
