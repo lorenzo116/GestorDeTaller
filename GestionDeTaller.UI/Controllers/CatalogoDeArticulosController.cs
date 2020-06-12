@@ -41,7 +41,7 @@ namespace GestionDeTaller.UI.Controllers
             detallesDelArticulo.Descripcion = articulo.Descripcion;
             
 
-            return View(articulo);
+            return View(detallesDelArticulo);
         }
 
         // GET: Articulos/Agregar
