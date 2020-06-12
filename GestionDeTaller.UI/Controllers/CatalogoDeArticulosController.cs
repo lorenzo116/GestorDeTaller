@@ -31,18 +31,24 @@ namespace GestionDeTaller.UI.Controllers
         // GET: Articulos/Detalles/5
         public ActionResult Detalles(int Id)
         {
-
-
             Articulo articulo;
-            DetallesDelArticulo detallesDelArticulo = new DetallesDelArticulo();
-            articulo = RepositorioDelTaller.ObtenerArticuloPorID(Id);
-            detallesDelArticulo.Nombre = articulo.Nombre;
-            detallesDelArticulo.Marca = articulo.Marca;
-            detallesDelArticulo.Descripcion = articulo.Descripcion;
-            
-
-            return View(detallesDelArticulo);
+            articulo = RepositorioDelTaller.ObtenerArticuloPorID(Id);           
+            return View(articulo);
         }
+
+        public ActionResult RepuestosAsociados(int Id)
+        {
+            Articulo articulo;
+            articulo = RepositorioDelTaller.ObtenerArticuloPorID(Id);
+
+            List<Repuestos> laLista;
+            laLista = RepositorioDelTaller.ObtenerLosRepuestos(articulo);
+            return View(laLista);
+
+
+        }
+
+
 
         // GET: Articulos/Agregar
         public ActionResult Agregar()

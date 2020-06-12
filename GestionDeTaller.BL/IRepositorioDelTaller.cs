@@ -9,7 +9,7 @@ namespace GestionDeTaller.BL
     {
         public List<Articulo> ObtenerTodosLosArticulos();
 
-        public List<Repuestos> ObtenerLosRepuestos(int id_articulo);
+        public List<Repuestos> ObtenerLosRepuestos(Articulo articulo);
 
         public void AgregarArticulo(Articulo articulo);
 

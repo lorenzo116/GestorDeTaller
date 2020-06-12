@@ -53,10 +53,10 @@ namespace GestionDeTaller.BL
 
         }
 
-        public List<Repuestos> ObtenerLosRepuestos(int id_articulo)
+        public List<Repuestos> ObtenerLosRepuestos(Articulo articulo)
         {
             var resultado = from c in ElContextoDeBaseDeDatos.Repuestos
-                            where c.Id_Articulo == id_articulo
+                            where c.Id_Articulo.Equals(articulo.Id)
                             select c;
             return resultado.ToList();    
         }
