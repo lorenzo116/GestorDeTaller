@@ -12,6 +12,6 @@ namespace GestionDeTaller.Models
 
         public string Descripcion { get; set; }
 
-        public float CostoFijo { get; set; }
+        public double CostoFijo { get; set; }
     }
 }
