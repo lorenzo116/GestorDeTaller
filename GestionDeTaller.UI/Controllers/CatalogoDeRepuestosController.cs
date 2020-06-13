@@ -2,17 +2,35 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using GestionDeTaller.BL;
+using GestionDeTaller.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Routing;
 
 namespace GestionDeTaller.UI.Controllers
 {
     public class CatalogoDeRepuestosController : Controller
     {
-        // GET: CatalogoDeRepuestos
-        public ActionResult Listar()
+
+        private IRepositorioDelTaller RepositorioDelTaller;
+        public CatalogoDeRepuestosController(IRepositorioDelTaller repositorioDeLibros)
         {
-            return View();
+            RepositorioDelTaller = repositorioDeLibros;
+        }
+
+
+
+
+        // GET: CatalogoDeRepuestos
+        public ActionResult Listar(int Id)
+        {
+            ViewBag.Id_Articulo = Id;
+            List<Repuestos> laLista = new List<Repuestos>();
+            Articulo articulo = new Articulo();
+            articulo = RepositorioDelTaller.ObtenerArticuloPorID(Id);
+            laLista = RepositorioDelTaller.ObtenerRepuestosAsociados(articulo);
+            return View(laLista);
         }
 
         // GET: CatalogoDeRepuestos/Details/5
@@ -22,21 +40,35 @@ namespace GestionDeTaller.UI.Controllers
         }
 
         // GET: CatalogoDeRepuestos/Create
-        public ActionResult Create()
-        {
-            return View();
+        public ActionResult Agregar(int Id)
+        {          
+            Repuestos repuesto = new Repuestos();
+            repuesto.Id_Articulo = Id;
+            return View(repuesto);
         }
 
-        // POST: CatalogoDeRepuestos/Create
+        // POST: Persona/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Agregar(Repuestos repuesto)
         {
             try
             {
-                // TODO: Add insert logic here
-
-                return RedirectToAction(nameof(Index));
+                if (ModelState.IsValid)
+                {
+                    // TODO: Add insert logic here
+                    RepositorioDelTaller.AgregarRepuesto(repuesto);
+                    return RedirectToAction("Listar", new RouteValueDictionary(new
+                    {
+                        controller = "CatalogoDeRepuestos",
+                        Action = "Listar",
+                        Id = repuesto.Id
+                    }));
+                }
+                else
+                {
+                    return View();
+                }
             }
             catch
             {
