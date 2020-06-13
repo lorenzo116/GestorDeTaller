@@ -59,7 +59,7 @@ namespace GestionDeTaller.UI
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=CatalogoDeArticulos}/{action=Listar}/{id?}");
             });
         }
     }
