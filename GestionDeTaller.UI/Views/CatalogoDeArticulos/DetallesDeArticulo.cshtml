@@ -49,44 +49,6 @@
     <br />
     @foreach (var item in Model.repuestosAsosiados)
     {
-        <!--<div class="list-group">
-            <a href="#" class="list-group-item list-group-item-action active">
-                <h5>Nombre del repuesto:</h5>
-            </a>
-            <a href="#" class="list-group-item list-group-item-action">
-                @item.Nombre
-            </a>
-            <a href="#" class="list-group-item list-group-item-action active">
-                <h5>Precio:</h5>
-            </a>
-            <a href="#" class="list-group-item list-group-item-action">
-                @item.Precio
-            </a>
-            <a href="#" class="list-group-item list-group-item-action active">
-                <h5>Descripción:</h5>
-            </a>
-            <a href="#" class="list-group-item list-group-item-action">
-                @item.Descripcion
-            </a>
-        </div>-->
-        <!--<div>
-            <div>
-                <h5>Nombre del repuesto:</h5>
-                @item.Nombre
-                <br />
-            </div>
-            <div>
-                <h5>Precio:</h5>
-                @item.Precio
-                <br />
-            </div>
-            <div>
-                <h5>Descripción:</h5>
-                @item.Descripcion
-                <br />
-            </div>
-            <hr />
-        </div>-->
         <div class="card bg-secondary mb-3" style="max-width: 20rem;">
             <div class="card-header">Repuesto asociado</div>
             <div class="card-body">
@@ -104,6 +66,5 @@
     }
 </div>
 <div>
-    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
-    <a asp-action="Listar">Back to List</a>
+    <a asp-action="Listar" class="btn btn-outline-primary">Regresar a la lista</a>
 </div>

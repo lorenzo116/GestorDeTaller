@@ -1,19 +1,13 @@
 ﻿@model IEnumerable<GestionDeTaller.Models.Mantenimientos>
 
 @{
-    Layout = null;
+    ViewData["Title"] = "Listar";
 }
 
-<!DOCTYPE html>
+<h1>Listar</h1>
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Listar</title>
-</head>
-<body>
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="AgregarMantenimiento">Nuevo Mantenimiento</a>
 </p>
 <table class="table">
     <thead>
@@ -39,5 +33,3 @@
 }
     </tbody>
 </table>
-</body>
-</html>
