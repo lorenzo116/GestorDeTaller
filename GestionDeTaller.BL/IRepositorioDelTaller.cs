@@ -25,5 +25,7 @@ namespace GestionDeTaller.BL
         public void Editar(Articulo articulo);
 
         public List<Mantenimientos> ObtenerLosMantenimientos(Articulo articulo);
+
+        public void AgregarMantenimiento(Mantenimientos mantenimiento);
     }
 }

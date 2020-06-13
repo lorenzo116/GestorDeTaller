@@ -120,5 +120,11 @@ namespace GestionDeTaller.BL
                             select c;
             return resultado.ToList();
         }
+
+        public void AgregarMantenimiento(Mantenimientos mantenimiento)
+        {
+            ElContextoDeBaseDeDatos.Mantenimientos.Add(mantenimiento);
+            ElContextoDeBaseDeDatos.SaveChanges();
+        }
     }
 }

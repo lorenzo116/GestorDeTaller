@@ -13,8 +13,4 @@
     <ProjectReference Include="..\GestionDeTaller.DB\GestionDeTaller.DA.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Views\CatalogoDeMantenimientos\" />
-  </ItemGroup>
-
 </Project>

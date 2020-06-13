@@ -32,7 +32,7 @@ namespace GestionDeTaller.UI.Controllers
         }
 
         // GET: CatalogoDeMantenimientos/Create
-        public ActionResult Create()
+        public ActionResult AgregarMantenimiento()
         {
             return View();
         }
@@ -40,13 +40,20 @@ namespace GestionDeTaller.UI.Controllers
         // POST: CatalogoDeMantenimientos/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult AgregarMantenimiento(Mantenimientos mantenimiento)
         {
             try
             {
-                // TODO: Add insert logic here
-
+                if (ModelState.IsValid)
+                {
+                    RepositorioDelTaller.AgregarMantenimiento(mantenimiento);
                 return RedirectToAction(nameof(Listar));
+                }
+                else
+                {
+                    return View();
+                }
+
             }
             catch
             {
