@@ -26,8 +26,14 @@ namespace GestionDeTaller.BL
 
 
         public void AgregarArticulo(Articulo articulo)
-        {         
+        {
             ElContextoDeBaseDeDatos.Articulo.Add(articulo);
+            ElContextoDeBaseDeDatos.SaveChanges();
+        }
+
+        public void AgregarRepuesto(Repuestos repuesto)
+        {
+            ElContextoDeBaseDeDatos.Repuestos.Add(repuesto);
             ElContextoDeBaseDeDatos.SaveChanges();
         }
 
@@ -44,7 +50,7 @@ namespace GestionDeTaller.BL
             Articulo articuloParaEditar;
             articuloParaEditar = ObtenerArticuloPorID(articulo.Id);
 
-            articuloParaEditar.Nombre= articulo.Nombre;
+            articuloParaEditar.Nombre = articulo.Nombre;
             articuloParaEditar.Marca = articulo.Marca;
             articuloParaEditar.Descripcion = articulo.Descripcion;
 
@@ -56,9 +62,55 @@ namespace GestionDeTaller.BL
         public List<Repuestos> ObtenerLosRepuestos(Articulo articulo)
         {
             var resultado = from c in ElContextoDeBaseDeDatos.Repuestos
-                             where c.Id_Articulo.Equals(articulo.Id)
+                            where c.Id_Articulo == articulo.Id
                             select c;
-            return resultado.ToList();    
+            return resultado.ToList();
+        }
+
+        public List<Repuestos> DetallesDeOrdenesDeMantenimiento(){
+
+            List<Repuestos> laListaDeDetalles;
+            laListaDeDetalles = ElContextoDeBaseDeDatos.Repuestos.ToList();
+            return laListaDeDetalles;
+
+
+        }
+
+        public String ObtenerOrdenesTerminadas(int id)
+        {
+            var laLista = from c in ElContextoDeBaseDeDatos.OrdenesDeMantenimiento
+                          where c.Id_Articulo == id
+                          select c;
+            laLista.ToList();
+            int ordenesTerminadas = 0;
+            foreach (var orden in laLista)
+            {
+                if (orden.Estado == Estado.Terminada)
+                {
+                    ordenesTerminadas++;
+                }
+            }
+            return ordenesTerminadas.ToString();
+          
+        }
+
+
+
+        public String ObtenerOrdenesEnProceso(int id)
+        {
+            var laLista = from c in ElContextoDeBaseDeDatos.OrdenesDeMantenimiento
+                          where c.Id_Articulo == id
+                          select c;
+            laLista.ToList();
+            int ordenesEnProceso = 0;
+            foreach (var orden in laLista)
+            {
+                if (orden.Estado == Estado.Proceso)
+                {
+                    ordenesEnProceso++;
+                }
+            }
+            return ordenesEnProceso.ToString();
         }
     }
 }

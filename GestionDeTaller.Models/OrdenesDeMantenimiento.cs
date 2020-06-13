@@ -21,10 +21,10 @@ namespace GestionDeTaller.Models
 
         public int Id_Articulo { get; set; }
 
-        public DateTime FechaDeInicio { get; set; }
+        public DateTime? FechaDeInicio { get; set; }
 
-        public DateTime FechaDeFinalizacion { get; set; }
+        public DateTime? FechaDeFinalizacion { get; set; }
 
-        public string MotivoDeCancelacion { get; set; }
+        public string? MotivoDeCancelacion { get; set; }
     }
 }

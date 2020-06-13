@@ -7,7 +7,15 @@
 <h1>Listar</h1>
 
 <p>
+<<<<<<< HEAD
+
+    
+
+    <a asp-action="AgregarArticulo">Agregar nuevo artículo</a>
+
+=======
     <a asp-action="Agregar">Agregar nuevo artículo</a>
+>>>>>>> 71f94667a0096a3a008782fbc99aabc1fb8ff9b4
 </p>
 <table class="table">
     <thead>
@@ -40,9 +48,11 @@
             </td>
             <td>
                 @Html.ActionLink("Editar", "Editar", new { id = item.Id }) |
-                @Html.ActionLink("Detalles", "Detalles", new { id = item.Id }) |
-                @Html.ActionLink("Detalles de Repuestos", "DetalleRepuestos", new { id = item.Id }) |
+                @Html.ActionLink("Detalles", "DetallesDeArticulo", new { id = item.Id }) |
+                @Html.ActionLink("Detalles de Repuestos", "RepuestosAsociados", new { id = item.Id }) |
                 @Html.ActionLink("Detalles de Mantenimientos", "DetalleMantenimientos", new { id = item.Id })
+                
+
             </td>
         </tr>
 }

@@ -18,7 +18,6 @@ namespace GestionDeTaller.UI.Controllers
             RepositorioDelTaller = repositorioDeLibros;
         }
 
-
         // GET: Articulos
         public ActionResult Listar()
         {
@@ -29,29 +28,46 @@ namespace GestionDeTaller.UI.Controllers
         }
 
         // GET: Articulos/Detalles/5
-        public ActionResult Detalles(int Id)
-        {
-            Articulo articulo;
-            articulo = RepositorioDelTaller.ObtenerArticuloPorID(Id);           
-            return View(articulo);
-        }
+    
 
-        public ActionResult RepuestosAsociados(int Id)
+        public ActionResult DetallesDeArticulo(int Id)
         {
             Articulo articulo;
             articulo = RepositorioDelTaller.ObtenerArticuloPorID(Id);
-
+            ArticuloDetallado articuloDetallado = new ArticuloDetallado();
+            List<ArticuloDetallado> laListaCompleta = new List<ArticuloDetallado>();
             List<Repuestos> laLista;
-            laLista = RepositorioDelTaller.ObtenerLosRepuestos(articulo);
-            return View(laLista);
+            laLista= RepositorioDelTaller.ObtenerLosRepuestos(articulo);
+            articuloDetallado.Nombre = articulo.Nombre;
+            articuloDetallado.Marca = articulo.Marca;
+            articuloDetallado.Descripcion = articulo.Descripcion;
+            Repuestos repuesto;
+            if (laLista.Count>0) {
+                repuesto = laLista[0];
+                articuloDetallado.NombreDelRepuesto = repuesto.Nombre;
+                articuloDetallado.PrecioDelRepuesto = repuesto.Precio;
+                laLista.RemoveAt(0);
+            }        
+            string ordenesTerminadas, ordenesEnProceso;
+            ordenesTerminadas = RepositorioDelTaller.ObtenerOrdenesTerminadas(Id);
+            ordenesEnProceso = RepositorioDelTaller.ObtenerOrdenesEnProceso(Id);
+            articuloDetallado.CantidadDeOrdenesEnProceso = ordenesEnProceso;
+            articuloDetallado.CantidadDeOrdenesTerminadas = ordenesTerminadas;
+            laListaCompleta.Add(articuloDetallado);
 
+            foreach (var repuestos in laLista)
+            {
+                articuloDetallado = new ArticuloDetallado();
+                articuloDetallado.NombreDelRepuesto = repuestos.Nombre;
+                articuloDetallado.PrecioDelRepuesto = repuestos.Precio;
+                laListaCompleta.Add(articuloDetallado);
 
+            }
+            return View(laListaCompleta);
         }
 
-
-
         // GET: Articulos/Agregar
-        public ActionResult Agregar()
+        public ActionResult AgregarArticulo()
         {
             return View();
         }
@@ -59,14 +75,14 @@ namespace GestionDeTaller.UI.Controllers
         // POST: Persona/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Agregar(Articulo libro)
+        public ActionResult AgregarArticulo(Articulo articulo)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
                     // TODO: Add insert logic here
-                    RepositorioDelTaller.AgregarArticulo(libro);
+                    RepositorioDelTaller.AgregarArticulo(articulo);
                     return RedirectToAction(nameof(Listar));
                 }
                 else
@@ -112,7 +128,38 @@ namespace GestionDeTaller.UI.Controllers
             }
         }
 
-        // GET: Articulos/Delete/5
-       
+
+
+
+        // GET: Articulos/Agregar
+        public ActionResult AgregarRepuesto()
+        {
+            return View();
+        }
+
+        // POST: Persona/Create
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult AgregarRepuesto(Repuestos repuesto)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    // TODO: Add insert logic here
+                    RepositorioDelTaller.AgregarRepuesto(repuesto);
+                    return RedirectToAction(nameof(Listar));
+                }
+                else
+                {
+                    return View();
+                }
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
     }
 }
