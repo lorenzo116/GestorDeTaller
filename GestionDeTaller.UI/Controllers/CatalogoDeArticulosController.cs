@@ -7,6 +7,7 @@ using GestionDeTaller.Models;
 using GestionDeTaller.UI.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Routing;
 
 namespace GestionDeTaller.UI.Controllers
 {
@@ -140,10 +141,10 @@ namespace GestionDeTaller.UI.Controllers
         }
 
         // GET: Articulos/Agregar
-        public ActionResult DetalleMantenimientos()
+        public ActionResult DetalleMantenimientos(int id)
         {
-
-            return RedirectToAction("Listar", "CatalogoDeMantenimientos");
+            return RedirectToAction("Listar", new RouteValueDictionary(new
+            { Controller = "CatalogoDeMantenimientos", Action = "Listar", Id = id }));
         }
 
     }
