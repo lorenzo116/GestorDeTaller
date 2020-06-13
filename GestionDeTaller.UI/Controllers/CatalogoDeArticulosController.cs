@@ -139,5 +139,12 @@ namespace GestionDeTaller.UI.Controllers
             }
         }
 
+        // GET: Articulos/Agregar
+        public ActionResult DetalleMantenimientos()
+        {
+
+            return RedirectToAction("Listar", "CatalogoDeMantenimientos");
+        }
+
     }
 }
