@@ -59,7 +59,7 @@ namespace GestionDeTaller.BL
 
         }
 
-        public List<Repuestos> ObtenerLosRepuestos(Articulo articulo)
+        public List<Repuestos> ObtenerRepuestosAsociados(Articulo articulo)
         {
             var resultado = from c in ElContextoDeBaseDeDatos.Repuestos
                             where c.Id_Articulo == articulo.Id
@@ -76,7 +76,7 @@ namespace GestionDeTaller.BL
 
         }
 
-        public String ObtenerOrdenesTerminadas(int id)
+        public String ContarOrdenesTerminadas(int id)
         {
             var laLista = from c in ElContextoDeBaseDeDatos.OrdenesDeMantenimiento
                           where c.Id_Articulo == id
@@ -96,7 +96,7 @@ namespace GestionDeTaller.BL
 
 
 
-        public String ObtenerOrdenesEnProceso(int id)
+        public String ContarOrdenesEnProceso(int id)
         {
             var laLista = from c in ElContextoDeBaseDeDatos.OrdenesDeMantenimiento
                           where c.Id_Articulo == id

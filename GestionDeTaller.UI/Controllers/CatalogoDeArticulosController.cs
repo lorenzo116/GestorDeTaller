@@ -32,38 +32,16 @@ namespace GestionDeTaller.UI.Controllers
 
         public ActionResult DetallesDeArticulo(int Id)
         {
-            Articulo articulo;
-            articulo = RepositorioDelTaller.ObtenerArticuloPorID(Id);
             ArticuloDetallado articuloDetallado = new ArticuloDetallado();
-            List<ArticuloDetallado> laListaCompleta = new List<ArticuloDetallado>();
-            List<Repuestos> laLista;
-            laLista= RepositorioDelTaller.ObtenerLosRepuestos(articulo);
+            Articulo articulo = RepositorioDelTaller.ObtenerArticuloPorID(Id);
             articuloDetallado.Nombre = articulo.Nombre;
             articuloDetallado.Marca = articulo.Marca;
             articuloDetallado.Descripcion = articulo.Descripcion;
-            Repuestos repuesto;
-            if (laLista.Count>0) {
-                repuesto = laLista[0];
-                articuloDetallado.NombreDelRepuesto = repuesto.Nombre;
-                articuloDetallado.PrecioDelRepuesto = repuesto.Precio;
-                laLista.RemoveAt(0);
-            }        
-            string ordenesTerminadas, ordenesEnProceso;
-            ordenesTerminadas = RepositorioDelTaller.ObtenerOrdenesTerminadas(Id);
-            ordenesEnProceso = RepositorioDelTaller.ObtenerOrdenesEnProceso(Id);
-            articuloDetallado.CantidadDeOrdenesEnProceso = ordenesEnProceso;
-            articuloDetallado.CantidadDeOrdenesTerminadas = ordenesTerminadas;
-            laListaCompleta.Add(articuloDetallado);
+            articuloDetallado.CantidadDeOrdenesEnProceso = RepositorioDelTaller.ContarOrdenesEnProceso(Id);
+            articuloDetallado.CantidadDeOrdenesTerminadas = RepositorioDelTaller.ContarOrdenesTerminadas(Id);
+            articuloDetallado.repuestosAsosiados = RepositorioDelTaller.ObtenerRepuestosAsociados(articulo);
 
-            foreach (var repuestos in laLista)
-            {
-                articuloDetallado = new ArticuloDetallado();
-                articuloDetallado.NombreDelRepuesto = repuestos.Nombre;
-                articuloDetallado.PrecioDelRepuesto = repuestos.Precio;
-                laListaCompleta.Add(articuloDetallado);
-
-            }
-            return View(laListaCompleta);
+            return View(articuloDetallado);
         }
 
         // GET: Articulos/Agregar

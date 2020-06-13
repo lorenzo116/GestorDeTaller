@@ -11,16 +11,16 @@ namespace GestionDeTaller.BL
 
         public List<Repuestos> DetallesDeOrdenesDeMantenimiento();
 
-        public List<Repuestos> ObtenerLosRepuestos(Articulo articulo);
+        public List<Repuestos> ObtenerRepuestosAsociados(Articulo articulo);
 
         public void AgregarArticulo(Articulo articulo);
         public void AgregarRepuesto(Repuestos repuesto);
 
         public Articulo ObtenerArticuloPorID(int id);
 
-        public String ObtenerOrdenesTerminadas(int id);
+        public String ContarOrdenesTerminadas(int id);
 
-        public String ObtenerOrdenesEnProceso(int id);
+        public String ContarOrdenesEnProceso(int id);
 
         public void Editar(Articulo articulo);
     }

@@ -1,73 +1,48 @@
-﻿@model IEnumerable<GestionDeTaller.UI.Models.ArticuloDetallado>
+﻿@model GestionDeTaller.UI.Models.ArticuloDetallado
 
 @{
-    ViewData["Title"] = "Detalles del articulo";
+    ViewData["Title"] = "DetallesDeArticulo";
 }
 
-<h1>Detalles de articulo</h1>
+<h1>DetallesDeArticulo</h1>
 
-
-<table class="table">
-    <thead>
-        <tr class="table-primary">
-            
-            <th>
-                @Html.DisplayNameFor(model => model.Nombre)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Marca)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Descripcion)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.NombreDelRepuesto)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PrecioDelRepuesto)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CantidadDeOrdenesTerminadas)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CantidadDeOrdenesEnProceso)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-
-                <td>
-                    @Html.DisplayFor(modelItem => item.Nombre)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Marca)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Descripcion)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.NombreDelRepuesto)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.PrecioDelRepuesto)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CantidadDeOrdenesTerminadas)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CantidadDeOrdenesEnProceso)
-                </td>
-
-            </tr>
-
-        }
-        <div>
-            <a asp-action="Listar">Regresar a la lista de artículos</a>
-        </div>
-
-    </tbody>
-</table>
+<div>
+    <h4>ArticuloDetallado</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Nombre)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Nombre)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Marca)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Marca)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Descripcion)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Descripcion)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.CantidadDeOrdenesTerminadas)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.CantidadDeOrdenesTerminadas)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.CantidadDeOrdenesEnProceso)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.CantidadDeOrdenesEnProceso)
+        </dd>
+    </dl>
+</div>
+<div>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    <a asp-action="Index">Back to List</a>
+</div>
