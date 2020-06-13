@@ -7,6 +7,7 @@ using GestionDeTaller.Models;
 using GestionDeTaller.UI.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Routing;
 using Microsoft.AspNetCore.Routing;
 
 namespace GestionDeTaller.UI.Controllers
@@ -108,43 +109,21 @@ namespace GestionDeTaller.UI.Controllers
         }
 
 
-
-
-        // GET: Articulos/Agregar
-        public ActionResult AgregarRepuesto()
-        {
-            return View();
-        }
-
-        // POST: Persona/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult AgregarRepuesto(Repuestos repuesto)
-        {
-            try
-            {
-                if (ModelState.IsValid)
-                {
-                    // TODO: Add insert logic here
-                    RepositorioDelTaller.AgregarRepuesto(repuesto);
-                    return RedirectToAction(nameof(Listar));
-                }
-                else
-                {
-                    return View();
-                }
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: Articulos/Agregar
-        public ActionResult DetalleMantenimientos(int id)
+        public ActionResult DetallesDeRepuesto(int id)
         {
             return RedirectToAction("Listar", new RouteValueDictionary(new
-            { Controller = "CatalogoDeMantenimientos", Action = "Listar", Id = id }));
+            {
+                controller = "CatalogoDeRepuestos",
+                Action = "Listar",
+                Id = id
+            })); 
+        }
+
+        
+  
+        public ActionResult DetalleMantenimientos()
+        {
+                return RedirectToAction("Listar", "CatalogoDeMantenimientos");
         }
 
     }
