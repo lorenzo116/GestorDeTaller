@@ -23,5 +23,7 @@ namespace GestionDeTaller.BL
         public String ContarOrdenesEnProceso(int id);
 
         public void Editar(Articulo articulo);
+
+        public List<Mantenimientos> ObtenerLosMantenimientos(Articulo articulo);
     }
 }

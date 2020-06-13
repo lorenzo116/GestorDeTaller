@@ -112,5 +112,13 @@ namespace GestionDeTaller.BL
             }
             return ordenesEnProceso.ToString();
         }
+
+        public List<Mantenimientos> ObtenerLosMantenimientos(Articulo articulo)
+        {
+            var resultado = from c in ElContextoDeBaseDeDatos.Mantenimientos
+                            where c.Id_Articulo == articulo.Id
+                            select c;
+            return resultado.ToList();
+        }
     }
 }
