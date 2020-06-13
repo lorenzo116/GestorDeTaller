@@ -4,45 +4,106 @@
     ViewData["Title"] = "DetallesDeArticulo";
 }
 
-<h1>DetallesDeArticulo</h1>
+<h1>Detalles de articulo</h1>
 
 <div>
-    <h4>ArticuloDetallado</h4>
+    <h4>Articulo detallado</h4>
     <hr />
     <dl class="row">
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Nombre)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Nombre)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Marca)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Marca)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Descripcion)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Descripcion)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.CantidadDeOrdenesTerminadas)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.CantidadDeOrdenesTerminadas)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.CantidadDeOrdenesEnProceso)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.CantidadDeOrdenesEnProceso)
         </dd>
     </dl>
 </div>
+<br />
+<div>
+    <h4>Repuestos asociados</h4>
+    <hr />
+    <br />
+    @foreach (var item in Model.repuestosAsosiados)
+    {
+        <!--<div class="list-group">
+            <a href="#" class="list-group-item list-group-item-action active">
+                <h5>Nombre del repuesto:</h5>
+            </a>
+            <a href="#" class="list-group-item list-group-item-action">
+                @item.Nombre
+            </a>
+            <a href="#" class="list-group-item list-group-item-action active">
+                <h5>Precio:</h5>
+            </a>
+            <a href="#" class="list-group-item list-group-item-action">
+                @item.Precio
+            </a>
+            <a href="#" class="list-group-item list-group-item-action active">
+                <h5>Descripción:</h5>
+            </a>
+            <a href="#" class="list-group-item list-group-item-action">
+                @item.Descripcion
+            </a>
+        </div>-->
+        <!--<div>
+            <div>
+                <h5>Nombre del repuesto:</h5>
+                @item.Nombre
+                <br />
+            </div>
+            <div>
+                <h5>Precio:</h5>
+                @item.Precio
+                <br />
+            </div>
+            <div>
+                <h5>Descripción:</h5>
+                @item.Descripcion
+                <br />
+            </div>
+            <hr />
+        </div>-->
+        <div class="card bg-secondary mb-3" style="max-width: 20rem;">
+            <div class="card-header">Repuesto asociado</div>
+            <div class="card-body">
+                <h4 class="card-title">@item.Nombre</h4>
+                <p class="card-text">
+                    <h5>Precio:</h5>
+                    @item.Precio
+                    <hr />
+                    <h5>Descripción</h5>
+                    @item.Descripcion
+                </p>
+            </div>
+        </div>
+        <br />
+    }
+</div>
 <div>
     @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Listar">Back to List</a>
 </div>
