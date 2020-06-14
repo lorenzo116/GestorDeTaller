@@ -5,6 +5,7 @@
 }
 
 <h1>Agregar</h1>
+<br />
 <div>
         <a asp-action="Listar" asp-controller="CatalogoDeArticulos" class="btn btn-outline-primary btn-sm">Regresar a la lista de articulos</a>
 
@@ -35,14 +36,10 @@
                 <span asp-validation-for="Descripcion" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Crear" class="btn btn-outline-primary btn-sm" />
             </div>
         </form>
     </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
 </div>
 
 @section Scripts {

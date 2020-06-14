@@ -4,15 +4,20 @@
     ViewData["Title"] = "Editar";
 }
 
-<h1>Editar</h1>
-
-<h4>Articulo</h4>
+<h1>Editar articulo</h1>
+<br />
+<div>
+    <a asp-action="Listar" asp-controller="CatalogoDeArticulos" class="btn btn-outline-primary btn-sm">Regresar a la lista de articulos</a>
+</div>
 <hr />
+<br />
+<br />
+
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Editar">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-           
+
             <div class="form-group">
                 <label asp-for="Nombre" class="control-label"></label>
                 <input asp-for="Nombre" class="form-control" />
@@ -30,8 +35,7 @@
             </div>
             <div class="form-group">
                 <br />
-                <input type="submit" value="Guardar" class="btn btn-outline-primary" btn-sm" />
-                <a asp-action="Listar" class="btn btn-outline-primary" btn-sm">Regresar a la lista</a>
+                <input type="submit" value="Guardar" class="btn btn-outline-primary btn-sm" />
             </div>
         </form>
     </div>

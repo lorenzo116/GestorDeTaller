@@ -13,15 +13,13 @@
         <form asp-action="Terminar">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <input type="submit" value="Terminar" class="btn btn-primary" />
+                <input type="submit" value="Terminar" class="btn btn-outline-primary btn-sm" />
+                <a asp-action="Listar" class="btn btn-outline-primary btn-sm">Regresar</a>
             </div>
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-action="Listar">Regresar</a>
-</div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
