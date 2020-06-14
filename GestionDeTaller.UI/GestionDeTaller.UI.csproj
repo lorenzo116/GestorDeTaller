@@ -13,4 +13,6 @@
     <ProjectReference Include="..\GestionDeTaller.DB\GestionDeTaller.DA.csproj" />
   </ItemGroup>
 
+  <ProjectExtensions><VisualStudio><UserProperties appsettings_1json__JsonSchema="" /></VisualStudio></ProjectExtensions>
+
 </Project>
