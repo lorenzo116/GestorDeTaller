@@ -126,5 +126,39 @@ namespace GestionDeTaller.BL
             ElContextoDeBaseDeDatos.Mantenimientos.Add(mantenimiento);
             ElContextoDeBaseDeDatos.SaveChanges();
         }
+        public List<OrdenesDeMantenimiento> ObtenerOrdenesDeMantenimiento()
+        {
+            List<OrdenesDeMantenimiento> laListaDeOrdenes;
+            laListaDeOrdenes = ElContextoDeBaseDeDatos.OrdenesDeMantenimiento.ToList();
+            return laListaDeOrdenes;
+        }
+        public OrdenesDeMantenimiento ObtenerOrdenPorID(int id)
+        {
+            OrdenesDeMantenimiento orden;
+            orden = ElContextoDeBaseDeDatos.OrdenesDeMantenimiento.Find(id);
+            return orden;
+        }
+        public void EditarOrden(OrdenesDeMantenimiento orden)
+        {
+            OrdenesDeMantenimiento OrdenParaEditar;
+            OrdenParaEditar = ObtenerOrdenPorID(orden.Id);
+
+            OrdenParaEditar.NombreDelCliente = orden.NombreDelCliente;
+            OrdenParaEditar.DescripcionDelProblema = orden.DescripcionDelProblema;
+            OrdenParaEditar.MontoDeAdelanto = orden.MontoDeAdelanto;
+
+            ElContextoDeBaseDeDatos.OrdenesDeMantenimiento.Update(OrdenParaEditar);
+            ElContextoDeBaseDeDatos.SaveChanges();
+        }
+
+        public void IniciarOrden(int id)
+        {
+            OrdenesDeMantenimiento OrdenParaEnviar;
+            OrdenParaEnviar = ObtenerOrdenPorID(id);
+            OrdenParaEnviar.Estado = Estado.Proceso;
+            OrdenParaEnviar.FechaDeInicio = DateTime.Now;
+            ElContextoDeBaseDeDatos.OrdenesDeMantenimiento.Update(OrdenParaEnviar);
+            ElContextoDeBaseDeDatos.SaveChanges();
+        }
     }
 }
