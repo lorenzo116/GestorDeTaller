@@ -4,10 +4,19 @@
     ViewData["Title"] = "Editar";
 }
 
-<h1>Editar</h1>
 
-<h4>Repuestos</h4>
+    <h1>Editar Repuesto</h1>
 <hr />
+<div>
+    <a asp-action="Listar" asp-controller="CatalogoDeArticulos" class="btn btn-outline-primary btn-sm">Regresar a la lista de articulos</a>
+
+    <a asp-action="Listar" asp-route-Id="@ViewBag.Id_Articulo" class="btn btn-outline-primary btn-sm">Agregar a la lista de repuestos</a>
+</div>
+<br>
+<br>
+
+
+
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Editar">
@@ -39,14 +48,6 @@
 </div>
 
 
-
-
-
-
-
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

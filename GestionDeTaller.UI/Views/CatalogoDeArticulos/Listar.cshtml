@@ -7,7 +7,7 @@
 <h1>Catalogo de artículos</h1>
 
 <p>
-    <a asp-action="AgregarArticulo" class="btn btn-outline-primary" btn-sm">Agregar nuevo artículo</a>
+    <a asp-action="AgregarArticulo" class="btn btn-outline-primary" btn-sm">Agregar artículo nuevo </a>
 </p>
 <table class="table">
     <thead>
@@ -26,33 +26,27 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-
-                <td>
-                    @Html.DisplayFor(modelItem => item.Nombre)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Marca)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Descripcion)
-                </td>
-                <td>
-                    <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
-                        <div class="btn-group mr-2" role="group" aria-label="Opciones">
-                            <a asp-action="Editar" asp-route-id="@item.Id" class="btn btn-outline-primary btn-sm">Editar</a>
-                            &nbsp
-                            <a asp-action="DetallesDeArticulo" asp-route-id="@item.Id" class="btn btn-outline-primary btn-sm">Detalles</a>
-                            &nbsp
-                            <a asp-action="DetallesDeRepuesto" asp-route-id="@item.Id" class="btn btn-outline-primary btn-sm">Detalles de Repuestos</a>
-                            &nbsp
-                            <a asp-action="DetalleMantenimientos" asp-route-id="@item.Id" class="btn btn-outline-primary btn-sm">Detalles de Mantenimientoss</a>
-                        </div>
-                    </div>
-                </td>
-            </tr>
-        }
+@foreach (var item in Model) {
+        <tr>
+          
+            <td>
+                @Html.DisplayFor(modelItem => item.Nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Marca)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Descripcion)
+            </td>
+            <td>
+               
+              
+                <a asp-action="Editar" asp-route-id="@item.Id" class="btn btn-outline-primary btn-sm">Editar</a>
+                <a asp-action="DetallesDeArticulo"  asp-route-id="@item.Id" class="btn btn-outline-primary btn-sm">Detalles</a>
+                <a asp-action="Listar" asp-controller="CatalogoDeRepuestos" asp-route-id="@item.Id" class="btn btn-outline-primary btn-sm">Detalles de Repuestos</a>
+                <a asp-action="Listar" asp-controller="CatalogoDeMantenimientos" asp-route-id="@item.Id" class="btn btn-outline-primary btn-sm">Detalles de Mantenimientoss</a>
+            </td>
+        </tr>
+}
     </tbody>
 </table>

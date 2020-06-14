@@ -1,0 +1,59 @@
+﻿@model GestionDeTaller.UI.Models.MantenimientoDetallado
+
+@{
+    ViewData["Title"] = "DetallesDeMantenimientos";
+}
+
+<h1>Detalles de mantenimientos</h1>
+
+<div>
+    <a asp-action="Listar" asp-controller="CatalogoDeArticulos" class="btn btn-outline-primary btn-sm">Regresar a la lista de articulos</a>
+
+    <a asp-action="Listar" asp-route-Id="@ViewBag.Id_Articulo" class="btn btn-outline-primary btn-sm">Regresar a la lista de mantenimientos</a>
+</div>
+
+<div>
+    
+    <hr />
+    <dl class="row">
+        
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Descripcion)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Descripcion)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ResumenDeUso)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ResumenDeUso)
+        </dd>
+    </dl>
+</div>
+<div>
+    <h4>Repuestos asociados</h4>
+    <hr />
+    <br />
+    @foreach (var item in Model.RepuestosAsociados)
+    {
+        <div class="card bg-secondary mb-3" style="max-width: 20rem;">
+            <div class="card-header">Lista de repuestos asociados</div>
+            <div class="card-body">
+                <h4 class="card-title">@item.Nombre</h4>
+                <p class="card-text">
+                    <h5>Precio:</h5>
+                    @item.Precio
+                    <hr />
+                   
+                </p>
+            </div>
+        </div>
+        <br />
+    }
+</div>
+
+<div>
+    
+    
+</div>

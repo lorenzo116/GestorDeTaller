@@ -4,12 +4,20 @@
     ViewData["Title"] = "DetallesDeRepuesto";
 }
 
-<h1>DetallesDeRepuesto</h1>
 
+
+<h1>Detalles del repuesto </h1>
+<hr />
 <div>
-    <h4>RepuestoDetallado</h4>
-    <hr />
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Listar" asp-controller="CatalogoDeArticulos" class="btn btn-outline-primary btn-sm">Regresar a la lista de articulos</a>
+
+    <a asp-action="Listar" asp-route-Id="@ViewBag.Id_Articulo" class="btn btn-outline-primary btn-sm">Regresar a la lista de repuestos</a>
+</div>
+<br>
+<br>
+<div>
+
+
     <dl class="row">
 
         <dt class="col-sm-2">
@@ -40,7 +48,7 @@
 </div>
 
 <div>
-    
+
     <hr />
     <br />
     <div class="card bg-secondary mb-3" style="max-width: 20rem;">
@@ -70,9 +78,9 @@
         <div class="card bg-secondary mb-3" style="max-width: 20rem;">
             <div class="card-header">Mantenimiento asociado</div>
             <div class="card-body">
-                
+
                 <p class="card-text">
-                   
+
                     <h5>Descripción</h5>
                     @item.Descripcion
                 </p>
@@ -83,6 +91,6 @@
 </div>
 
 <div>
-    
-    
+
+
 </div>

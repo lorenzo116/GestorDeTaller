@@ -5,6 +5,11 @@
 }
 
 <h1>Agregar</h1>
+<div>
+        <a asp-action="Listar" asp-controller="CatalogoDeArticulos" class="btn btn-outline-primary btn-sm">Regresar a la lista de articulos</a>
+
+        <a asp-action="Listar" asp-route-Id="@ViewBag.Id_Articulo" class="btn btn-outline-primary btn-sm">Agregar a la lista de repuestos</a>
+</div>
 
 <h4>Repuestos</h4>
 <hr />
@@ -13,8 +18,6 @@
         <form asp-action="Agregar">
             @Html.HiddenFor(m => m.Id_Articulo)
             
-
-
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Nombre" class="control-label"></label>
@@ -32,12 +35,14 @@
                 <span asp-validation-for="Descripcion" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-outline-primary btn-sm" />
-                <a asp-action="DetallesDeRepuesto" asp-route-id="Id_Articulo" class="btn btn-outline-primary btn-sm">Lista de repuestos</a>
-                <a asp-action="Listar" asp-controller="CatalogoDeArticulos" class="btn btn-outline-primary btn-sm">Lista de artículos</a>
+                <input type="submit" value="Create" class="btn btn-primary" />
             </div>
         </form>
     </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
 </div>
 
 @section Scripts {

@@ -28,6 +28,8 @@ namespace GestionDeTaller.BL
         public Mantenimientos ObtenerMantenimientoPorID(int id);
 
         public List<Mantenimientos> ObtenerMantenimientosPorRepuesto(List<RepuestosParaMantenimiento> repuestosAsociados);
+
+        public List<Repuestos> ObtenerRepuestosPorMantenimiento(List<RepuestosParaMantenimiento> repuestosAsociados);
         public String ContarOrdenesTerminadas(int id);
 
         public String ContarOrdenesEnProceso(int id);
@@ -36,8 +38,16 @@ namespace GestionDeTaller.BL
 
         public void EditarRepuesto(Repuestos repuesto);
 
+        public void EditarMantenimiento(Mantenimientos Mmntenimiento);
+
+
+        
+
+
+
         public List<Mantenimientos> ObtenerLosMantenimientos(Articulo articulo);
 
+        public List<RepuestosParaMantenimiento> ObtenerMantenimientosParaRepuestos(int Id);
         public List<RepuestosParaMantenimiento> ObtenerRepuestoParaMantenimientos(int Id);
         public void AgregarMantenimiento(Mantenimientos mantenimiento);
         public OrdenesDeMantenimiento ObtenerOrdenPorID(int id);

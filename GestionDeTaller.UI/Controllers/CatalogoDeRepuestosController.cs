@@ -32,14 +32,15 @@ namespace GestionDeTaller.UI.Controllers
             return View(laLista);
         }
 
-        // GET: CatalogoDeRepuestos/Details/5
+      
         
 
-        // GET: CatalogoDeRepuestos/Create
+        // GET: CatalogoDeRepuestos/Agregar
         public ActionResult Agregar(int Id_Articulo)
         {            
             Repuestos repuesto = new Repuestos();
             repuesto.Id_Articulo = Id_Articulo;
+            ViewBag.Id_Articulo =Id_Articulo;
             return View(repuesto);
         }
 
@@ -75,6 +76,8 @@ namespace GestionDeTaller.UI.Controllers
         // GET: CatalogoDeRepuestos/Edit/5
         public ActionResult Editar(int Id)
         {
+            Repuestos Repuesto = RepositorioDelTaller.ObtenerRepuestoPorID(Id);
+            ViewBag.Id_Articulo = Repuesto.Id_Articulo;
             if (ModelState.IsValid)
             {
                 Repuestos repuesto;
@@ -91,6 +94,7 @@ namespace GestionDeTaller.UI.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Editar(Repuestos repuesto)
         {
+            
             try
             {
                 RepositorioDelTaller.EditarRepuesto(repuesto);
@@ -112,15 +116,17 @@ namespace GestionDeTaller.UI.Controllers
 
         public ActionResult DetallesDeRepuesto(int Id)
         {
+            
             RepuestoDetallado repuestoDetallado = new RepuestoDetallado();
             Repuestos repuesto = RepositorioDelTaller.ObtenerRepuestoPorID(Id);
+            ViewBag.Id_Articulo = repuesto.Id_Articulo;
             Articulo articulo = RepositorioDelTaller.ObtenerArticuloPorID(repuesto.Id_Articulo);
             repuestoDetallado.Nombre = repuesto.Nombre;
             repuestoDetallado.Precio = repuesto.Precio;
             repuestoDetallado.Descripcion = repuesto.Descripcion;
             repuestoDetallado.ArticuloAsociado = articulo;
             List<RepuestosParaMantenimiento> repuestosAsociados;
-            repuestosAsociados = RepositorioDelTaller.ObtenerRepuestoParaMantenimientos(Id);
+            repuestosAsociados = RepositorioDelTaller.ObtenerMantenimientosParaRepuestos(Id);
             repuestoDetallado.MantenimientosAsociados = RepositorioDelTaller.ObtenerMantenimientosPorRepuesto(repuestosAsociados);
 
             return View(repuestoDetallado);

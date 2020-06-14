@@ -7,11 +7,9 @@
 <h1>Lista de repuestos</h1>
 
 <p>
-    @* Este es el unico que sirve, el que está comentado no pasa el @ViewBag. No se porque *@
-    @Html.ActionLink("Agregar", "Agregar", new { Id_Articulo = ViewBag.Id_Articulo })
+    <a asp-action="Agregar" asp-route-Id_Articulo="@ViewBag.Id_Articulo" class="btn btn-outline-primary btn-sm">Agregar repuesto</a>
 
-    @*<a asp-action="Agregar" asp-route-id="@ViewBag.Id_Articulo" class="btn btn-outline-primary btn-sm">Agregar</a>*@
-
+    <a asp-action="Listar" asp-controller="CatalogoDeArticulos" class="btn btn-outline-primary btn-sm">Regresar a la lista de articulos</a>
 </p>
 <table class="table">
     <thead>

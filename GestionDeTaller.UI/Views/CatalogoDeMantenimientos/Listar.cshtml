@@ -4,11 +4,16 @@
     ViewData["Title"] = "Listar";
 }
 
-<h1>Listar</h1>
+<h1>Lista de Mantenimientos</h1>
 
 <p>
-    @Html.ActionLink("Agregar", "AgregarMantenimiento", new { Id_Articulo = ViewBag.Id_Articulo })
-    @*<a asp-action="AgregarMantenimiento">Nuevo Mantenimiento</a>*@
+<p>
+    <div>
+        <a asp-action="AgregarMantenimiento" asp-route-Id_Articulo="@ViewBag.Id_Articulo" class="btn btn-outline-primary btn-sm">Agregar mantenimiento</a>
+
+        <a asp-action="Listar" asp-controller="CatalogoDeArticulos" class="btn btn-outline-primary btn-sm">Regresar a la lista de articulos</a>
+    </div>
+</p>
 </p>
 <table class="table">
     <thead>
@@ -20,18 +25,22 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Descripcion)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Descripcion)
+                </td>
+                <td>
+                   
+                    <a asp-action="Editar" asp-route-id="@item.Id" class="btn btn-outline-primary btn-sm">Editar</a>
+                    <a asp-action="DetallesDeMantenimientos" asp-route-Id="@item.Id" class="btn btn-outline-primary btn-sm">Detalles</a>
+
+
+
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
 <a asp-controller="CatalogoDeArticulos" asp-action="Listar" class="btn btn-outline-primary" btn-sm">Regresar a la lista</a>

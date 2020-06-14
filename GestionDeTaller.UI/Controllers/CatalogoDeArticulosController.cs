@@ -106,25 +106,8 @@ namespace GestionDeTaller.UI.Controllers
             {
                 return View();
             }
-        }
-
-
-        public ActionResult DetallesDeRepuesto(int id)
-        {
-            return RedirectToAction("Listar", new RouteValueDictionary(new
-            {
-                controller = "CatalogoDeRepuestos",
-                Action = "Listar",
-                Id = id
-            })); 
-        }
-
-        
-  
-        public ActionResult DetalleMantenimientos()
-        {
-                return RedirectToAction("Listar", "CatalogoDeMantenimientos");
-        }
+        } 
+      
 
     }
 }
