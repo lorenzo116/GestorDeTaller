@@ -1,0 +1,37 @@
+﻿@model IEnumerable<GestionDeTaller.Models.OrdenesDeMantenimiento>
+
+@{
+    ViewData["Title"] = "Listar";
+}
+
+<h1>Ordenes de mantenimiento canceladas</h1>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.NombreDelCliente)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FechaDeIngreso)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.NombreDelCliente)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FechaDeIngreso)
+            </td>
+            <td>
+                @Html.ActionLink("Ver Detalles", "Detalles", new { id=item.Id })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

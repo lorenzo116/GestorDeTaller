@@ -118,9 +118,21 @@ namespace GestionDeTaller.UI.Controllers
             repuestoDetallado.Nombre = repuesto.Nombre;
             repuestoDetallado.Precio = repuesto.Precio;
             repuestoDetallado.Descripcion = repuesto.Descripcion;
-            repuestoDetallado.MantenimientosAsociados = RepositorioDelTaller.ObtenerRepuestoParaMantenimientos(Id);
+            repuestoDetallado.ArticuloAsociado = articulo;
+            List<RepuestosParaMantenimiento> repuestosAsociados;
+            repuestosAsociados = RepositorioDelTaller.ObtenerRepuestoParaMantenimientos(Id);
+            repuestoDetallado.MantenimientosAsociados = RepositorioDelTaller.ObtenerMantenimientosPorRepuesto(repuestosAsociados);
 
             return View(repuestoDetallado);
+        }
+
+        public ActionResult VolverADetallesDeRepuesto(int id) {
+            return RedirectToAction("Listar", new RouteValueDictionary(new
+            {
+                controller = "CatalogoDeRepuestos",
+                Action = "Listar",
+                Id = id
+            }));
         }
 
 
