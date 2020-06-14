@@ -9,34 +9,57 @@
 <div>
     <h4>RepuestoDetallado</h4>
     <hr />
+    <a asp-action="Index">Back to List</a>
     <dl class="row">
-       
-        <dt class = "col-sm-2">
+
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Nombre)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Nombre)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Precio)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Precio)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Descripcion)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Descripcion)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.ResumenDeUso)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.ResumenDeUso)
         </dd>
     </dl>
 </div>
+
+<div>
+    
+    <hr />
+    <br />
+    <div class="card bg-secondary mb-3" style="max-width: 20rem;">
+        <div class="card-header">Arículo asociado</div>
+        <div class="card-body">
+
+            <p class="card-text">
+
+                <h5>Nombre</h5>
+                @Model.ArticuloAsociado.Nombre
+                <h5>Marca</h5>
+                @Model.ArticuloAsociado.Marca
+            </p>
+        </div>
+    </div>
+
+
+</div>
+
 
 <div>
     <h4>Mantenimientos asociados</h4>
@@ -50,7 +73,7 @@
                 
                 <p class="card-text">
                    
-                    <h4>Descripción</h4>
+                    <h5>Descripción</h5>
                     @item.Descripcion
                 </p>
             </div>
@@ -60,6 +83,6 @@
 </div>
 
 <div>
-    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
-    <a asp-action="Index">Back to List</a>
+    
+    
 </div>
