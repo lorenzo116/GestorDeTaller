@@ -87,15 +87,21 @@ namespace GestionDeTaller.UI.Controllers
             }
         }
 
-        public ActionResult Iniciar(int Id)
+        public ActionResult Iniciar(int id)
         {
-            OrdenesDeMantenimiento orden;
-            orden = RepositorioDelTaller.ObtenerOrdenPorID(Id);
-
-            return View(orden);
+            if (ModelState.IsValid)
+            {
+                OrdenesDeMantenimiento orden;
+                orden = RepositorioDelTaller.ObtenerOrdenPorID(id);
+                return View(orden);
+            }
+            else
+            {
+                return View();
+            }
         }
 
-
+        // POST: OrdenesDeMantenimientoRecibidas/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Iniciar(OrdenesDeMantenimiento orden)
@@ -104,7 +110,7 @@ namespace GestionDeTaller.UI.Controllers
             {
                 RepositorioDelTaller.IniciarOrden(orden);
 
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Listar));
             }
             catch
             {

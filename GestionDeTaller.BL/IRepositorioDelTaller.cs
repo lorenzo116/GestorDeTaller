@@ -43,6 +43,8 @@ namespace GestionDeTaller.BL
         public OrdenesDeMantenimiento ObtenerOrdenPorID(int id);
         public void EditarOrden(OrdenesDeMantenimiento orden);
         public void IniciarOrden(OrdenesDeMantenimiento orden);
-        
+        public void TerminarOrden(OrdenesDeMantenimiento orden);
+        public void CancelarOrden(OrdenesDeMantenimiento orden);
+
     }
 }
