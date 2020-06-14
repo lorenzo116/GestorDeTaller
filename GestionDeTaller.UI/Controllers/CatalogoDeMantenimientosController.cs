@@ -6,6 +6,7 @@ using GestionDeTaller.BL;
 using GestionDeTaller.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Routing;
 
 namespace GestionDeTaller.UI.Controllers
 {
@@ -32,9 +33,11 @@ namespace GestionDeTaller.UI.Controllers
         }
 
         // GET: CatalogoDeMantenimientos/Create
-        public ActionResult AgregarMantenimiento()
+        public ActionResult AgregarMantenimiento(int Id_Articulo)
         {
-            return View();
+            Mantenimientos mantenimiento = new Mantenimientos();
+            mantenimiento.Id_Articulo = Id_Articulo;
+            return View(mantenimiento);
         }
 
         // POST: CatalogoDeMantenimientos/Create
@@ -47,7 +50,12 @@ namespace GestionDeTaller.UI.Controllers
                 if (ModelState.IsValid)
                 {
                     RepositorioDelTaller.AgregarMantenimiento(mantenimiento);
-                return RedirectToAction(nameof(Listar));
+                    return RedirectToAction("Listar", new RouteValueDictionary(new
+                    {
+                        controller = "CatalogoDeMantenimientos",
+                        Action = "Listar",
+                        Id = mantenimiento.Id_Articulo
+                    }));
                 }
                 else
                 {

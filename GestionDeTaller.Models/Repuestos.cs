@@ -7,7 +7,7 @@ namespace GestionDeTaller.Models
 {
     public class Repuestos
     {
-        [Key]
+        
         public int Id { get; set; }
 
         [Required(ErrorMessage = "El nombre es requierido")]
