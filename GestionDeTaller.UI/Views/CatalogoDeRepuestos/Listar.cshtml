@@ -4,10 +4,12 @@
     ViewData["Title"] = "Listar";
 }
 
-<h1>Listar</h1>
+<h1>Lista de repuestos</h1>
 
 <p>
-    @Html.ActionLink("Agregar", "Agregar", new {  id=ViewBag.Id_Articulo}) 
+
+    @Html.ActionLink("Agregar", "Agregar", new { Id_Articulo=@ViewBag.Id_Articulo }) 
+    <a asp-action="Agregar" class="btn btn-outline-primary" btn-sm">Agregar repuesto nuevo</a>
 </p>
 <table class="table">
     <thead>

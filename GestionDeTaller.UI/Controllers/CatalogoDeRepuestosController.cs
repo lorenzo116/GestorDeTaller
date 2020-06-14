@@ -40,10 +40,10 @@ namespace GestionDeTaller.UI.Controllers
         }
 
         // GET: CatalogoDeRepuestos/Create
-        public ActionResult Agregar(int Id)
-        {          
+        public ActionResult Agregar(int Id_Articulo)
+        {            
             Repuestos repuesto = new Repuestos();
-            repuesto.Id_Articulo = Id;
+            repuesto.Id_Articulo = Id_Articulo;
             return View(repuesto);
         }
 
@@ -62,7 +62,7 @@ namespace GestionDeTaller.UI.Controllers
                     {
                         controller = "CatalogoDeRepuestos",
                         Action = "Listar",
-                        Id = repuesto.Id
+                        Id = repuesto.Id_Articulo
                     }));
                 }
                 else
