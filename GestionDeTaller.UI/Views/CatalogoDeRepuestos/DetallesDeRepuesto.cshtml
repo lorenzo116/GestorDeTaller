@@ -1,0 +1,65 @@
+﻿@model GestionDeTaller.UI.Models.RepuestoDetallado
+
+@{
+    ViewData["Title"] = "DetallesDeRepuesto";
+}
+
+<h1>DetallesDeRepuesto</h1>
+
+<div>
+    <h4>RepuestoDetallado</h4>
+    <hr />
+    <dl class="row">
+       
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Nombre)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Nombre)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Precio)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Precio)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Descripcion)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Descripcion)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ResumenDeUso)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ResumenDeUso)
+        </dd>
+    </dl>
+</div>
+
+<div>
+    <h4>Mantenimientos asociados</h4>
+    <hr />
+    <br />
+    @foreach (var item in Model.MantenimientosAsociados)
+    {
+        <div class="card bg-secondary mb-3" style="max-width: 20rem;">
+            <div class="card-header">Mantenimiento asociado</div>
+            <div class="card-body">
+                
+                <p class="card-text">
+                   
+                    <h4>Descripción</h4>
+                    @item.Descripcion
+                </p>
+            </div>
+        </div>
+        <br />
+    }
+</div>
+
+<div>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    <a asp-action="Index">Back to List</a>
+</div>

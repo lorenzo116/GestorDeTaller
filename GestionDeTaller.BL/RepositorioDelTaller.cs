@@ -45,6 +45,22 @@ namespace GestionDeTaller.BL
 
         }
 
+        public Repuestos ObtenerRepuestoPorID(int id)
+        {
+            Repuestos repuesto;
+            repuesto = ElContextoDeBaseDeDatos.Repuestos.Find(id);
+            return repuesto;
+
+        }
+
+        public Mantenimientos ObtenerMantenimientoPorID(int id)
+        {
+            Mantenimientos mantenimiento;
+            mantenimiento = ElContextoDeBaseDeDatos.Mantenimientos.Find(id);
+            return mantenimiento;
+
+        }
+
         public void Editar(Articulo articulo)
         {
             Articulo articuloParaEditar;
@@ -55,6 +71,20 @@ namespace GestionDeTaller.BL
             articuloParaEditar.Descripcion = articulo.Descripcion;
 
             ElContextoDeBaseDeDatos.Articulo.Update(articuloParaEditar);
+            ElContextoDeBaseDeDatos.SaveChanges();
+
+        }
+
+        public void EditarRepuesto(Repuestos repuesto)
+        {
+            Repuestos repuestoParaEditar;
+            repuestoParaEditar = ObtenerRepuestoPorID(repuesto.Id);
+
+            repuestoParaEditar.Nombre = repuesto.Nombre;
+            repuestoParaEditar.Precio = repuesto.Precio;
+            repuestoParaEditar.Descripcion = repuesto.Descripcion;
+
+            ElContextoDeBaseDeDatos.Repuestos.Update(repuestoParaEditar);
             ElContextoDeBaseDeDatos.SaveChanges();
 
         }
@@ -113,6 +143,29 @@ namespace GestionDeTaller.BL
             return ordenesEnProceso.ToString();
         }
 
+
+        public List<Mantenimientos> ObtenerRepuestoParaMantenimientos(int Id)
+        {
+            var resultado = from c in ElContextoDeBaseDeDatos.RepuestosParaMantenimiento
+                            where c.Id_Repuesto == Id
+                            select c;
+            resultado.ToList();
+
+            List<Mantenimientos> mantenimientos = new List<Mantenimientos>();
+            Mantenimientos mantenimiento;
+            foreach (var repuestoAsociado in resultado)
+            {
+                if (repuestoAsociado.Id_Repuesto == Id) {
+                    mantenimiento = ObtenerMantenimientoPorID(repuestoAsociado.Id_Mantenimiento);
+                    mantenimientos.Add(mantenimiento);
+                    
+                }
+            }
+            return mantenimientos;
+        }
+
+
+
         public List<Mantenimientos> ObtenerLosMantenimientos(Articulo articulo)
         {
             var resultado = from c in ElContextoDeBaseDeDatos.Mantenimientos
@@ -126,5 +179,7 @@ namespace GestionDeTaller.BL
             ElContextoDeBaseDeDatos.Mantenimientos.Add(mantenimiento);
             ElContextoDeBaseDeDatos.SaveChanges();
         }
+
+       
     }
 }

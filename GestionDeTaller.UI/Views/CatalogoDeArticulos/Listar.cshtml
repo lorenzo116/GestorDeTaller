@@ -39,15 +39,8 @@
                 @Html.DisplayFor(modelItem => item.Descripcion)
             </td>
             <td>
-                <!--
-                @Html.ActionLink("Editar", "Editar", new { id = item.Id }) |
-                @Html.ActionLink("Detalles", "DetallesDeArticulo", new { id = item.Id }) |
-                @Html.ActionLink("Detalles de Repuestos", "RepuestosAsociados", new { id = item.Id }) |
-                @Html.ActionLink("Detalles de Mantenimientos", "DetalleMantenimientos", new { id = item.Id })
-                -->
-                    
-
-                <a asp-action="Agregar" asp-route-id="@item.Id" class="btn btn-outline-primary btn-sm">Agregar</a>
+               
+              
                 <a asp-action="Editar" asp-route-id="@item.Id" class="btn btn-outline-primary btn-sm">Editar</a>
                 <a asp-action="DetallesDeArticulo" asp-route-id="@item.Id" class="btn btn-outline-primary btn-sm">Detalles</a>
                 <a asp-action="DetallesDeRepuesto" asp-route-id="@item.Id" class="btn btn-outline-primary btn-sm">Detalles de Repuestos</a>

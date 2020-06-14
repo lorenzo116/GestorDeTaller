@@ -7,9 +7,11 @@
 <h1>Lista de repuestos</h1>
 
 <p>
+    @* Este es el unico que sirve, el que está comentado no pasa el @ViewBag. No se porque *@
+    @Html.ActionLink("Agregar", "Agregar", new { Id_Articulo = ViewBag.Id_Articulo })
 
-    @Html.ActionLink("Agregar", "Agregar", new { Id_Articulo=@ViewBag.Id_Articulo }) 
-    <a asp-action="Agregar" class="btn btn-outline-primary" btn-sm">Agregar repuesto nuevo</a>
+    @*<a asp-action="Agregar" asp-route-id="@ViewBag.Id_Articulo" class="btn btn-outline-primary btn-sm">Agregar</a>*@
+
 </p>
 <table class="table">
     <thead>
@@ -41,9 +43,9 @@
                 @Html.DisplayFor(modelItem => item.Descripcion)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                <a asp-action="Editar" asp-route-id="@item.Id" class="btn btn-outline-primary btn-sm">Editar</a>
+                <a asp-action="DetallesDeRepuesto" asp-route-id="@item.Id" class="btn btn-outline-primary btn-sm">Detalles</a>
+                
             </td>
         </tr>
 }
