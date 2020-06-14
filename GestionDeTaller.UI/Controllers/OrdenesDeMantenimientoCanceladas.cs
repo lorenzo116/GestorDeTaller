@@ -9,37 +9,38 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace GestionDeTaller.UI.Controllers
 {
-    public class OrdenesDeMantenimientoRecibidas : Controller
+    public class OrdenesDeMantenimientoCanceladas : Controller
     {
         private readonly IRepositorioDelTaller RepositorioDelTaller;
 
-        public OrdenesDeMantenimientoRecibidas(IRepositorioDelTaller repositorioDeOrdenes)
+        public OrdenesDeMantenimientoCanceladas(IRepositorioDelTaller repositorioDeOrdenes)
         {
             RepositorioDelTaller = repositorioDeOrdenes;
         }
 
-        // GET: OrdenesDeMantenimientoRecibidas
+        // GET: OrdenesDeMantenimientoCanceladas
         public ActionResult Listar()
         {
-            List<OrdenesDeMantenimiento> laLista;
-            laLista = RepositorioDelTaller.ObtenerOrdenesDeMantenimiento();
+            List<OrdenesDeMantenimiento> ordenes;
 
-            return View(laLista);
+            ordenes = RepositorioDelTaller.ObtenerOrdenesCanceladas();
+
+            return View(ordenes);
         }
 
-        // GET: OrdenesDeMantenimientoRecibidas/Details/5
+        // GET: OrdenesDeMantenimientoCanceladas/Details/5
         public ActionResult Details(int id)
         {
             return View();
         }
 
-        // GET: OrdenesDeMantenimientoRecibidas/Create
+        // GET: OrdenesDeMantenimientoCanceladas/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: OrdenesDeMantenimientoRecibidas/Create
+        // POST: OrdenesDeMantenimientoCanceladas/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(IFormCollection collection)
@@ -54,32 +55,20 @@ namespace GestionDeTaller.UI.Controllers
             }
         }
 
-
-        // GET: OrdenesDeMantenimientoRecibidas/Edit/5
-        public ActionResult Editar(int id)
+        // GET: OrdenesDeMantenimientoCanceladas/Edit/5
+        public ActionResult Edit(int id)
         {
-            if (ModelState.IsValid)
-            {
-                OrdenesDeMantenimiento orden;
-                orden = RepositorioDelTaller.ObtenerOrdenPorID(id);
-                return View(orden);
-            }
-            else
-            {
-                return View();
-            }
+            return View();
         }
 
-        // POST: OrdenesDeMantenimientoRecibidas/Edit/5
+        // POST: OrdenesDeMantenimientoCanceladas/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Editar(OrdenesDeMantenimiento orden)
+        public ActionResult Edit(int id, IFormCollection collection)
         {
             try
             {
-                RepositorioDelTaller.EditarOrden(orden);
-
-                return RedirectToAction(nameof(Listar));
+                return RedirectToAction(nameof(Index));
             }
             catch
             {
@@ -87,23 +76,19 @@ namespace GestionDeTaller.UI.Controllers
             }
         }
 
-        public ActionResult Iniciar(int Id)
+        // GET: OrdenesDeMantenimientoCanceladas/Delete/5
+        public ActionResult Delete(int id)
         {
-            OrdenesDeMantenimiento orden;
-            orden = RepositorioDelTaller.ObtenerOrdenPorID(Id);
-
-            return View(orden);
+            return View();
         }
 
-
+        // POST: OrdenesDeMantenimientoCanceladas/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Iniciar(OrdenesDeMantenimiento orden)
+        public ActionResult Delete(int id, IFormCollection collection)
         {
             try
             {
-                RepositorioDelTaller.IniciarOrden(orden);
-
                 return RedirectToAction(nameof(Index));
             }
             catch

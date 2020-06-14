@@ -45,6 +45,34 @@ namespace GestionDeTaller.BL
 
         }
 
+        public Repuestos ObtenerRepuestoPorID(int id)
+        {
+            Repuestos repuesto;
+            repuesto = ElContextoDeBaseDeDatos.Repuestos.Find(id);
+            return repuesto;
+
+        }
+
+        public Mantenimientos ObtenerMantenimientoPorID(int id)
+        {
+            Mantenimientos mantenimiento;
+            mantenimiento = ElContextoDeBaseDeDatos.Mantenimientos.Find(id);
+            return mantenimiento;
+
+        }
+
+        public List<Mantenimientos> ObtenerMantenimientosPorRepuesto(List<RepuestosParaMantenimiento> repuestosAsociados)
+        {
+            List<Mantenimientos> listaDeMantenimientos = new List<Mantenimientos>();
+            Mantenimientos mantenimiento;
+            foreach (var asociacion in repuestosAsociados)
+            {
+                mantenimiento = ObtenerMantenimientoPorID(asociacion.Id_Mantenimiento);
+                listaDeMantenimientos.Add(mantenimiento);
+            }
+            return listaDeMantenimientos;
+        }
+
         public void Editar(Articulo articulo)
         {
             Articulo articuloParaEditar;
@@ -55,6 +83,20 @@ namespace GestionDeTaller.BL
             articuloParaEditar.Descripcion = articulo.Descripcion;
 
             ElContextoDeBaseDeDatos.Articulo.Update(articuloParaEditar);
+            ElContextoDeBaseDeDatos.SaveChanges();
+
+        }
+
+        public void EditarRepuesto(Repuestos repuesto)
+        {
+            Repuestos repuestoParaEditar;
+            repuestoParaEditar = ObtenerRepuestoPorID(repuesto.Id);
+
+            repuestoParaEditar.Nombre = repuesto.Nombre;
+            repuestoParaEditar.Precio = repuesto.Precio;
+            repuestoParaEditar.Descripcion = repuesto.Descripcion;
+
+            ElContextoDeBaseDeDatos.Repuestos.Update(repuestoParaEditar);
             ElContextoDeBaseDeDatos.SaveChanges();
 
         }
@@ -113,6 +155,19 @@ namespace GestionDeTaller.BL
             return ordenesEnProceso.ToString();
         }
 
+
+        public List<RepuestosParaMantenimiento> ObtenerRepuestoParaMantenimientos(int Id)
+        {
+            var resultado = from c in ElContextoDeBaseDeDatos.RepuestosParaMantenimiento
+                            where c.Id_Repuesto == Id
+                            select c;
+           return resultado.ToList();
+                        
+            
+        }
+
+
+
         public List<Mantenimientos> ObtenerLosMantenimientos(Articulo articulo)
         {
             var resultado = from c in ElContextoDeBaseDeDatos.Mantenimientos
@@ -126,6 +181,7 @@ namespace GestionDeTaller.BL
             ElContextoDeBaseDeDatos.Mantenimientos.Add(mantenimiento);
             ElContextoDeBaseDeDatos.SaveChanges();
         }
+
         public List<OrdenesDeMantenimiento> ObtenerOrdenesDeMantenimiento()
         {
             List<OrdenesDeMantenimiento> laListaDeOrdenes;
@@ -151,14 +207,40 @@ namespace GestionDeTaller.BL
             ElContextoDeBaseDeDatos.SaveChanges();
         }
 
-        public void IniciarOrden(int id)
+        public void IniciarOrden(OrdenesDeMantenimiento orden)
         {
             OrdenesDeMantenimiento OrdenParaEnviar;
-            OrdenParaEnviar = ObtenerOrdenPorID(id);
+            OrdenParaEnviar = ObtenerOrdenPorID(orden.Id);
             OrdenParaEnviar.Estado = Estado.Proceso;
             OrdenParaEnviar.FechaDeInicio = DateTime.Now;
             ElContextoDeBaseDeDatos.OrdenesDeMantenimiento.Update(OrdenParaEnviar);
             ElContextoDeBaseDeDatos.SaveChanges();
+
+        }
+        public List<OrdenesDeMantenimiento> ObtenerOrdenesEnProceso()
+        {
+            var resultado = from c in ElContextoDeBaseDeDatos.OrdenesDeMantenimiento
+                            where c.Estado == Estado.Proceso
+
+                            select c;
+            return resultado.ToList();
+        }
+        public List<OrdenesDeMantenimiento> ObtenerOrdenesTerminadas()
+        {
+            var resultado = from c in ElContextoDeBaseDeDatos.OrdenesDeMantenimiento
+                            where c.Estado == Estado.Terminada
+
+                            select c;
+            return resultado.ToList();
+        }
+
+        public List<OrdenesDeMantenimiento> ObtenerOrdenesCanceladas()
+        {
+            var resultado = from c in ElContextoDeBaseDeDatos.OrdenesDeMantenimiento
+                            where c.Estado == Estado.Cancelada
+
+                            select c;
+            return resultado.ToList();
         }
     }
 }

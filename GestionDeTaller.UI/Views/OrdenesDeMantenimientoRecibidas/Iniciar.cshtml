@@ -1,0 +1,23 @@
+﻿@model GestionDeTaller.Models.OrdenesDeMantenimiento
+
+@{
+    ViewData["Title"] = "Iniciar";
+}
+
+<h2>Confirmar Inicio</h2>
+<br />
+<h5>¿Desea Iniciar? Pulse  el botón Confirmar para confirmar inicio o pulse regresar para cancelar </h5>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Entregado">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <input type="submit" value="Confirmar" class="btn btn-primary" />
+            </div>
+            <div>
+                <a asp-action="Listar">Regresar</a>
+            </div>
+        </form>
+    </div>
+</div>

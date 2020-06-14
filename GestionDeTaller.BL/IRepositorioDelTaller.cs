@@ -12,6 +12,9 @@ namespace GestionDeTaller.BL
         public List<Repuestos> DetallesDeOrdenesDeMantenimiento();
 
         public List<OrdenesDeMantenimiento> ObtenerOrdenesDeMantenimiento();
+        public List<OrdenesDeMantenimiento> ObtenerOrdenesEnProceso();
+        public List<OrdenesDeMantenimiento> ObtenerOrdenesTerminadas();
+        public List<OrdenesDeMantenimiento> ObtenerOrdenesCanceladas();
 
         public List<Repuestos> ObtenerRepuestosAsociados(Articulo articulo);
 
@@ -39,6 +42,7 @@ namespace GestionDeTaller.BL
         public void AgregarMantenimiento(Mantenimientos mantenimiento);
         public OrdenesDeMantenimiento ObtenerOrdenPorID(int id);
         public void EditarOrden(OrdenesDeMantenimiento orden);
-        public void IniciarOrden(int id);
+        public void IniciarOrden(OrdenesDeMantenimiento orden);
+        
     }
 }

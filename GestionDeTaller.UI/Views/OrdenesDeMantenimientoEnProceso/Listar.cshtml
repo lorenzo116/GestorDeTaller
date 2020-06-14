@@ -4,11 +4,9 @@
     ViewData["Title"] = "Listar";
 }
 
-<h1>Ordenes de mantenimiento recibidas (provicional)</h1>
+<h1>Ordenes de Mantenimiento en proceso</h1>
 
-<p>
-    <a asp-action="Create">Crear nueva orden</a>
-</p>
+
 <table class="table">
     <thead>
         <tr>
@@ -17,6 +15,9 @@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.FechaDeIngreso)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FechaDeInicio)
             </th>
             <th></th>
         </tr>
@@ -31,9 +32,13 @@
                 @Html.DisplayFor(modelItem => item.FechaDeIngreso)
             </td>
             <td>
-                @Html.ActionLink("Editar", "Editar", new {id=item.Id}) |
-                @Html.ActionLink("Detalles", "Detalles", new { id=item.Id }) |
-                @Html.ActionLink("Iniciar", "Iniciar", new { /* id=item.PrimaryKey */ })
+                @Html.DisplayFor(modelItem => item.FechaDeInicio)
+            </td>
+            <td>
+                @Html.ActionLink("Terminar", "Terminar", new { id = item.Id }) |
+                @Html.ActionLink("Cancelar", "Cancelar", new { id = item.Id }) |
+                @Html.ActionLink("Agregar Mantenimientos", "AgregarMantenimiento", new { id = item.Id }) |
+                @Html.ActionLink("Detalles", "Detalles", new { id = item.Id })
             </td>
         </tr>
 }
