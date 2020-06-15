@@ -97,6 +97,17 @@ namespace GestionDeTaller.BL
 
         }
 
+        public List<RepuestosParaMantenimiento> ObtenerRepuestoParaMantenimientos(int Id)
+        {
+            var resultado = from c in ElContextoDeBaseDeDatos.RepuestosParaMantenimiento
+                            where c.Id_Mantenimiento == Id
+                            select c;
+            return resultado.ToList();
+
+
+        }
+
+        
         public List<Repuestos> ObtenerRepuestosPorMantenimiento(List<RepuestosParaMantenimiento> repuestosAsociados)
         {
             List<Repuestos> listaDeRepuestos = new List<Repuestos>();
@@ -108,6 +119,7 @@ namespace GestionDeTaller.BL
             }
             return listaDeRepuestos;
         }
+
 
         public void Editar(Articulo articulo)
         {
@@ -246,19 +258,6 @@ namespace GestionDeTaller.BL
             }
             return ordenesEnProceso.ToString();
         }
-
-
-        public List<RepuestosParaMantenimiento> ObtenerRepuestoParaMantenimientos(int Id)
-        {
-            var resultado = from c in ElContextoDeBaseDeDatos.RepuestosParaMantenimiento
-                            where c.Id_Repuesto == Id
-                            select c;
-           return resultado.ToList();
-                        
-            
-        }
-
-
         
         public List<Mantenimientos> ObtenerLosMantenimientos(Articulo articulo)
         {
