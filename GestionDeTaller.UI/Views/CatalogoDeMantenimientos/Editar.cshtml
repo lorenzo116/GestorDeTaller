@@ -5,13 +5,16 @@
 }
 
 <h1>Editar mantenimiento</h1>
-
+<br />
 <div>
     <a asp-action="Listar" asp-controller="CatalogoDeArticulos" class="btn btn-outline-primary btn-sm">Regresar a la lista de articulos</a>
 
     <a asp-action="Listar" asp-route-Id="@ViewBag.Id_Articulo" class="btn btn-outline-primary btn-sm">Regresar a la lista de mantenimienos</a>
 </div>
 <hr />
+<br />
+<br />
+
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Editar">
@@ -30,14 +33,14 @@
                 <span asp-validation-for="CostoFijo" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Guardar" class="btn btn-primary" />
+                <input type="submit" value="Guardar" class="btn btn-outline-primary btn-sm" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    
+
 </div>
 
 @section Scripts {

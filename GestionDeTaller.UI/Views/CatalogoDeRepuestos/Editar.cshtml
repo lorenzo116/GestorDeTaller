@@ -5,17 +5,17 @@
 }
 
 
-    <h1>Editar Repuesto</h1>
-<hr />
+<h1>Editar Repuesto</h1>
+<br />
 <div>
     <a asp-action="Listar" asp-controller="CatalogoDeArticulos" class="btn btn-outline-primary btn-sm">Regresar a la lista de articulos</a>
 
     <a asp-action="Listar" asp-route-Id="@ViewBag.Id_Articulo" class="btn btn-outline-primary btn-sm">Agregar a la lista de repuestos</a>
 </div>
+
+<hr />
 <br>
 <br>
-
-
 
 <div class="row">
     <div class="col-md-4">
@@ -40,8 +40,7 @@
                 <span asp-validation-for="Descripcion" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-outline-primary btn-sm" />
-                <a asp-action="Listar" asp-controller="CatalogoDeArticulos" class="btn btn-outline-primary btn-sm">Lista de artículos</a>
+                <input type="submit" value="Guardar" class="btn btn-outline-primary btn-sm" />
             </div>
         </form>
     </div>
