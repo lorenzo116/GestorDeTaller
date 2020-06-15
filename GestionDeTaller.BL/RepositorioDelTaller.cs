@@ -24,6 +24,20 @@ namespace GestionDeTaller.BL
             return laListaDeArticulos;
         }
 
+        public List<OrdenesDeMantenimiento> ObtenerTodasLasOrdenes()
+        {
+            List<OrdenesDeMantenimiento> laListaDeOrdenes;
+            laListaDeOrdenes = ElContextoDeBaseDeDatos.OrdenesDeMantenimiento.ToList();
+            return laListaDeOrdenes;
+        }
+
+
+        public List<DetalleOrdenesDeMantenimiento> ObtenerTodosLosDetallesDeOrdenes()
+        {
+            List<DetalleOrdenesDeMantenimiento> laListaDeDetalleDeOrdenes;
+            laListaDeDetalleDeOrdenes = ElContextoDeBaseDeDatos.DetalleOrdenesDeMantenimiento.ToList();
+            return laListaDeDetalleDeOrdenes;
+        }
 
         public void AgregarArticulo(Articulo articulo)
         {
@@ -142,6 +156,51 @@ namespace GestionDeTaller.BL
             return resultado.ToList();
         }
 
+        public int resumenDeUsoDelMantenimiento(int id)
+        {
+            List<OrdenesDeMantenimiento> ordenesAsociadas = new List<OrdenesDeMantenimiento>();
+            List<DetalleOrdenesDeMantenimiento> detalleOrdenesDeMantenimientos;
+            OrdenesDeMantenimiento ordeneDeMantenimiento;
+
+            detalleOrdenesDeMantenimientos = ObtenerTodosLosDetallesDeOrdenes();
+
+            foreach (var detalle in detalleOrdenesDeMantenimientos)
+            {
+                if (detalle.Id_Mantenimiento==id) 
+                {
+                    ordeneDeMantenimiento = ObtenerOrdenPorID(detalle.Id_OrdenesDeMantenimiento);
+                    ordenesAsociadas.Add(ordeneDeMantenimiento);
+
+                }
+
+            }
+            return ordenesAsociadas.Count;
+        }
+
+        public int resumenDeUsoDelRepuesto(int id) {
+        
+        List<RepuestosParaMantenimiento> listaDeMantenimientosAsociados;
+        List<DetalleOrdenesDeMantenimiento> detalleOrdenesDeMantenimientos;
+        List<OrdenesDeMantenimiento> ordenesAsociadas = new List<OrdenesDeMantenimiento>();
+        OrdenesDeMantenimiento ordeneDeMantenimiento;
+
+        listaDeMantenimientosAsociados = ObtenerMantenimientosParaRepuestos(id);
+        detalleOrdenesDeMantenimientos = ObtenerTodosLosDetallesDeOrdenes();
+         
+        foreach (var mantenimiento in listaDeMantenimientosAsociados)
+        {
+            foreach (var orden in detalleOrdenesDeMantenimientos)
+            {
+                if (mantenimiento.Id_Mantenimiento == orden.Id_Mantenimiento) 
+                {
+                    ordeneDeMantenimiento = ObtenerOrdenPorID(orden.Id_OrdenesDeMantenimiento);
+                    ordenesAsociadas.Add( ordeneDeMantenimiento);
+                }
+            }
+        }
+        return ordenesAsociadas.Count;
+        }
+
         public List<Repuestos> DetallesDeOrdenesDeMantenimiento(){
 
             List<Repuestos> laListaDeDetalles;
@@ -200,7 +259,7 @@ namespace GestionDeTaller.BL
         }
 
 
-
+        
         public List<Mantenimientos> ObtenerLosMantenimientos(Articulo articulo)
         {
             var resultado = from c in ElContextoDeBaseDeDatos.Mantenimientos
@@ -215,12 +274,7 @@ namespace GestionDeTaller.BL
             ElContextoDeBaseDeDatos.SaveChanges();
         }
 
-        public List<OrdenesDeMantenimiento> ObtenerOrdenesDeMantenimiento()
-        {
-            List<OrdenesDeMantenimiento> laListaDeOrdenes;
-            laListaDeOrdenes = ElContextoDeBaseDeDatos.OrdenesDeMantenimiento.ToList();
-            return laListaDeOrdenes;
-        }
+       
         public OrdenesDeMantenimiento ObtenerOrdenPorID(int id)
         {
             OrdenesDeMantenimiento orden;

@@ -128,6 +128,7 @@ namespace GestionDeTaller.UI.Controllers
             List<RepuestosParaMantenimiento> repuestosAsociados;
             repuestosAsociados = RepositorioDelTaller.ObtenerMantenimientosParaRepuestos(Id);
             repuestoDetallado.MantenimientosAsociados = RepositorioDelTaller.ObtenerMantenimientosPorRepuesto(repuestosAsociados);
+            repuestoDetallado.ResumenDeUso = RepositorioDelTaller.resumenDeUsoDelRepuesto(Id);
 
             return View(repuestoDetallado);
         }

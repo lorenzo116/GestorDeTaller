@@ -22,7 +22,7 @@ namespace GestionDeTaller.UI.Controllers
         public ActionResult Listar()
         {
             List<OrdenesDeMantenimiento> laLista;
-            laLista = RepositorioDelTaller.ObtenerOrdenesDeMantenimiento();
+            laLista = RepositorioDelTaller.ObtenerTodasLasOrdenes();
 
             return View(laLista);
         }
