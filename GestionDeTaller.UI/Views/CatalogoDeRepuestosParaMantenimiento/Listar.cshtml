@@ -3,45 +3,38 @@
 @{
     ViewData["Title"] = "Listar";
 }
-
 <h1>Lista de Repuestos asociados</h1>
-
 <p>
     <div>
         <a asp-action="ListarRepuestosSinMantenimiento" asp-route-Id_Mantenimiento="@ViewBag.Id_Mantenimiento" class="btn btn-outline-primary btn-sm">Asociar Repuesto</a>
-
         <a asp-action="Listar" asp-controller="CatalogoDeMantenimientos" asp-route-Id="@ViewBag.Id_Articulo" class="btn btn-outline-primary btn-sm">Regresar a la lista de mantenimientos</a>
-
         <br>
         <br>
     </div>
-  
-    </p>
-    <table class="table">
-        <thead>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Nombre)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
             <tr>
-
-                <th>
-                    @Html.DisplayNameFor(model => model.Nombre)
-                </th>
-
-                <th></th>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nombre)
+                </td>
+                <td>
+                    <a  asp-action="Desasociar" asp-route-Id_Repuesto="@item.Id" asp-route-Id_Mantenimiento="@ViewBag.Id_Mantenimiento"  class="btn btn-outline-primary btn-sm"
+                       onclick="return confirm('¿Esta seguro de que quiere desasociar el repuesto @item.Nombre del mantenimiento @ViewBag.descripconDelMantenimiento?');">Desasociar Repuesto</a>
+                </td>
             </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
-            {
-                <tr>
+        }
+    </tbody>
+</table>
 
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Nombre)
-                    </td>
 
-                    <td>
-                        <a asp-action="DesasociarRepuesto" asp-route-id="@item.Id" class="btn btn-outline-primary btn-sm">Desasociar Repuesto</a>
-
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>

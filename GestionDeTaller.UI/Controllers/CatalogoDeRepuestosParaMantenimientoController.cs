@@ -7,6 +7,7 @@ using GestionDeTaller.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Routing;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace GestionDeTaller.UI.Controllers
@@ -26,6 +27,7 @@ namespace GestionDeTaller.UI.Controllers
             mantenimiento = RepositorioDelTaller.ObtenerMantenimientoPorID(Id);
             ViewBag.Id_Articulo = mantenimiento.Id_Articulo;
             ViewBag.Id_Mantenimiento = Id;
+            ViewBag.descripconDelMantenimiento = mantenimiento.Descripcion;
             List<Repuestos> laListaDeRepuestos = new List<Repuestos>();
             List<RepuestosParaMantenimiento> laListaDeRepuestosYMantenimientos = new List<RepuestosParaMantenimiento>();
             laListaDeRepuestosYMantenimientos = RepositorioDelTaller.ObtenerRepuestoParaMantenimientos(Id);
@@ -39,6 +41,8 @@ namespace GestionDeTaller.UI.Controllers
             Mantenimientos mantenimiento;
             mantenimiento = RepositorioDelTaller.ObtenerMantenimientoPorID(Id_Mantenimiento);
             ViewBag.Id_Mantenimiento = Id_Mantenimiento;
+            ViewBag.descripcionDelMantenimiento = mantenimiento.Descripcion;
+
             ViewBag.Id_Articulo = mantenimiento.Id_Articulo;
             List<Repuestos> listaDeRepuestosSinMantenimiento;
             listaDeRepuestosSinMantenimiento = RepositorioDelTaller.ObtenerRepuestosSinAsociar(mantenimiento.Id_Articulo);
@@ -47,81 +51,31 @@ namespace GestionDeTaller.UI.Controllers
         }
 
 
-        // GET: CatalogoDeRepuestosParaMantenimiento/Details/5
-        public ActionResult Details(int Id)
+        public ActionResult Asociar(int Id_Repuesto, int Id_Mantenimiento) 
         {
-            List<RepuestosParaMantenimiento> laLista;
-            laLista = RepositorioDelTaller.ObtenerRepuestoParaMantenimientos(Id);
-            return View();
-        }
+            RepuestosParaMantenimiento repuestoParaAsociar = new RepuestosParaMantenimiento();
+            repuestoParaAsociar.Id_Mantenimiento = Id_Mantenimiento;
+            repuestoParaAsociar.Id_Repuesto = Id_Repuesto;
+            RepositorioDelTaller.AsociarRepuestoConUnMantenimiento(repuestoParaAsociar);
 
-        // GET: CatalogoDeRepuestosParaMantenimiento/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: CatalogoDeRepuestosParaMantenimiento/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
-        {
-            try
+            return RedirectToAction("ListarRepuestosSinMantenimiento", new RouteValueDictionary(new
             {
-                // TODO: Add insert logic here
-
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+                controller = "CatalogoDeRepuestosParaMantenimiento",
+                Action = "ListarRepuestosSinMantenimiento", 
+                Id_Mantenimiento = Id_Mantenimiento }));
         }
 
-        // GET: CatalogoDeRepuestosParaMantenimiento/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Desasociar(int Id_Repuesto, int Id_Mantenimiento) 
         {
-            return View();
+            RepositorioDelTaller.DesasociarRepuestoDeMantenimiento(Id_Repuesto, Id_Mantenimiento);
+            return RedirectToAction("Listar", new RouteValueDictionary(new
+            {
+                controller = "CatalogoDeRepuestosParaMantenimiento",
+                Action = "ListarRepuestosSinMantenimiento",
+                Id = Id_Mantenimiento
+            }));
         }
 
-        // POST: CatalogoDeRepuestosParaMantenimiento/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
-        {
-            try
-            {
-                // TODO: Add update logic here
-
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: CatalogoDeRepuestosParaMantenimiento/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: CatalogoDeRepuestosParaMantenimiento/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
+       
     }
 }

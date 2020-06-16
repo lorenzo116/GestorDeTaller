@@ -31,7 +31,8 @@
             </td>
            
             <td>
-                <a asp-action="Asociar" asp-route-Id_Articulo="@ViewBag.Id_Mantenimiento" class="btn btn-outline-primary btn-sm">Asociar Repuesto</a>
+                <a asp-action="Asociar" asp-route-Id_Repuesto="@item.Id" asp-route-Id_Mantenimiento="@ViewBag.Id_Mantenimiento"  class="btn btn-outline-primary btn-sm"
+                   onclick="return confirm('¿Esta seguro de quiere asociar el repuesto @item.Nombre con el mantenimiento @ViewBag.descripcionDelMantenimiento?');">Asociar Repuesto</a>
                
             </td>
         </tr>

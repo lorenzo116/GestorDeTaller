@@ -126,27 +126,6 @@ namespace GestionDeTaller.UI.Controllers
             }
         }
 
-        // GET: CatalogoDeMantenimientos/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: CatalogoDeMantenimientos/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction(nameof(Listar));
-            }
-            catch
-            {
-                return View();
-            }
-        }
+        
     }
 }

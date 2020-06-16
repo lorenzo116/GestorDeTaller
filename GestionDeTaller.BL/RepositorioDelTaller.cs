@@ -411,5 +411,27 @@ namespace GestionDeTaller.BL
 
             return repuestosSinMantenimiento;
         }
+
+        public void AsociarRepuestoConUnMantenimiento(RepuestosParaMantenimiento repuestoParaAsociar)
+        {
+            ElContextoDeBaseDeDatos.RepuestosParaMantenimiento.Add(repuestoParaAsociar);
+            ElContextoDeBaseDeDatos.SaveChanges();
+        }
+
+        public void DesasociarRepuestoDeMantenimiento(int Id_Repuesto, int Id_Mantenimiento) 
+        {
+            List<RepuestosParaMantenimiento> repuestosParaMantenimientos;
+            repuestosParaMantenimientos = ObtenerTodosLosRepuestosParaMantenimiento();
+            foreach (var repuestoParaMantenimiento in repuestosParaMantenimientos)
+            {
+                if (repuestoParaMantenimiento.Id_Repuesto == Id_Repuesto) 
+                {
+                    ElContextoDeBaseDeDatos.RepuestosParaMantenimiento.Remove(repuestoParaMantenimiento);
+                    ElContextoDeBaseDeDatos.SaveChanges();
+                }
+
+            }
+            
+        }
     }
 }

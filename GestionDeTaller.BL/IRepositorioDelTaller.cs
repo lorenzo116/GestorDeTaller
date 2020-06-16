@@ -45,6 +45,8 @@ namespace GestionDeTaller.BL
         public void IniciarOrden(OrdenesDeMantenimiento orden);
         public void TerminarOrden(OrdenesDeMantenimiento orden);
         public void CancelarOrden(OrdenesDeMantenimiento orden);
+        public void AsociarRepuestoConUnMantenimiento(RepuestosParaMantenimiento repuestoParaAsociar);
+        public void DesasociarRepuestoDeMantenimiento(int Id_Repuesto, int Id_Mantenimiento);
 
     }
 }
