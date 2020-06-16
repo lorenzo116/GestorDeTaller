@@ -45,7 +45,7 @@ namespace GestionDeTaller.UI.Controllers
 
             ViewBag.Id_Articulo = mantenimiento.Id_Articulo;
             List<Repuestos> listaDeRepuestosSinMantenimiento;
-            listaDeRepuestosSinMantenimiento = RepositorioDelTaller.ObtenerRepuestosSinAsociar(mantenimiento.Id_Articulo);
+            listaDeRepuestosSinMantenimiento = RepositorioDelTaller.ObtenerRepuestosSinAsociar(mantenimiento.Id);
 
             return View(listaDeRepuestosSinMantenimiento);
         }
