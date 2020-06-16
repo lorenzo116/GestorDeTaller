@@ -23,9 +23,12 @@ namespace GestionDeTaller.UI.Controllers
         public ActionResult Listar(int Id)
         {
             ViewBag.Id_Articulo = Id;
-            Articulo articulo = RepositorioDelTaller.ObtenerArticuloPorID(Id);
+
             List<Mantenimientos> laListaDeMantenimientos;
+            Articulo articulo;
+            articulo = RepositorioDelTaller.ObtenerArticuloPorID(Id);
             laListaDeMantenimientos = RepositorioDelTaller.ObtenerLosMantenimientos(articulo);
+
             return View(laListaDeMantenimientos);
         }
 
@@ -49,9 +52,10 @@ namespace GestionDeTaller.UI.Controllers
         // GET: CatalogoDeMantenimientos/Create
         public ActionResult AgregarMantenimiento(int Id_Articulo)
         {
-            ViewBag.Id_Articulo =Id_Articulo;
+            
             Mantenimientos mantenimiento = new Mantenimientos();
             mantenimiento.Id_Articulo = Id_Articulo;
+            ViewBag.Id_Articulo = Id_Articulo;
             return View(mantenimiento);
         }
 
@@ -76,7 +80,6 @@ namespace GestionDeTaller.UI.Controllers
                 {
                     return View();
                 }
-
             }
             catch
             {

@@ -6,6 +6,8 @@ using GestionDeTaller.BL;
 using GestionDeTaller.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace GestionDeTaller.UI.Controllers
 {
@@ -20,13 +22,30 @@ namespace GestionDeTaller.UI.Controllers
         // GET: CatalogoDeRepuestosParaMantenimiento
         public ActionResult Listar(int Id)
         {
+            Mantenimientos mantenimiento;
+            mantenimiento = RepositorioDelTaller.ObtenerMantenimientoPorID(Id);
+            ViewBag.Id_Articulo = mantenimiento.Id_Articulo;
             ViewBag.Id_Mantenimiento = Id;
             List<Repuestos> laListaDeRepuestos = new List<Repuestos>();
             List<RepuestosParaMantenimiento> laListaDeRepuestosYMantenimientos = new List<RepuestosParaMantenimiento>();
             laListaDeRepuestosYMantenimientos = RepositorioDelTaller.ObtenerRepuestoParaMantenimientos(Id);
-            laListaDeRepuestos = RepositorioDelTaller.ObtenerRepuestosPorMantenimiento(laListaDeRepuestosYMantenimientos);
+            laListaDeRepuestos = RepositorioDelTaller.ObtenerRepuestosPorMantenimiento(laListaDeRepuestosYMantenimientos);   
             return View(laListaDeRepuestos);
         }
+
+        public ActionResult ListarRepuestosSinMantenimiento(int Id_Mantenimiento) 
+        {
+         
+            Mantenimientos mantenimiento;
+            mantenimiento = RepositorioDelTaller.ObtenerMantenimientoPorID(Id_Mantenimiento);
+            ViewBag.Id_Mantenimiento = Id_Mantenimiento;
+            ViewBag.Id_Articulo = mantenimiento.Id_Articulo;
+            List<Repuestos> listaDeRepuestosSinMantenimiento;
+            listaDeRepuestosSinMantenimiento = RepositorioDelTaller.ObtenerRepuestosSinAsociar(mantenimiento.Id_Articulo);
+
+            return View(listaDeRepuestosSinMantenimiento);
+        }
+
 
         // GET: CatalogoDeRepuestosParaMantenimiento/Details/5
         public ActionResult Details(int Id)

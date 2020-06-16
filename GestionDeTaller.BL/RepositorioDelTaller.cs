@@ -3,7 +3,7 @@ using GestionDeTaller.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
+using System.Web.WebPages.Html;
 
 namespace GestionDeTaller.BL
 {
@@ -16,7 +16,7 @@ namespace GestionDeTaller.BL
 
         }
 
-
+        
         public List<Articulo> ObtenerTodosLosArticulos()
         {
             List<Articulo> laListaDeArticulos;
@@ -29,6 +29,20 @@ namespace GestionDeTaller.BL
             List<OrdenesDeMantenimiento> laListaDeOrdenes;
             laListaDeOrdenes = ElContextoDeBaseDeDatos.OrdenesDeMantenimiento.ToList();
             return laListaDeOrdenes;
+        }
+
+        public List<Repuestos> ObtenerTodosLosRepuestos()
+        {
+            List<Repuestos> laListaDeRepuestos;
+            laListaDeRepuestos = ElContextoDeBaseDeDatos.Repuestos.ToList();
+            return laListaDeRepuestos;
+        }
+
+        public List<RepuestosParaMantenimiento> ObtenerTodosLosRepuestosParaMantenimiento()
+        {
+            List<RepuestosParaMantenimiento> laListaDeRepuestosParaMantenimiento;
+            laListaDeRepuestosParaMantenimiento = ElContextoDeBaseDeDatos.RepuestosParaMantenimiento.ToList();
+            return laListaDeRepuestosParaMantenimiento;
         }
 
 
@@ -168,6 +182,14 @@ namespace GestionDeTaller.BL
             return resultado.ToList();
         }
 
+        public List<Mantenimientos> ObtenerMantenimientosDeUnArticulo(Articulo articulo)
+        {
+            var resultado = from c in ElContextoDeBaseDeDatos.Mantenimientos
+                            where c.Id_Articulo == articulo.Id
+                            select c;
+            return resultado.ToList();
+        }
+
         public int resumenDeUsoDelMantenimiento(int id)
         {
             List<OrdenesDeMantenimiento> ordenesAsociadas = new List<OrdenesDeMantenimiento>();
@@ -239,8 +261,6 @@ namespace GestionDeTaller.BL
             return ordenesTerminadas.ToString();
           
         }
-
-
 
         public String ContarOrdenesEnProceso(int id)
         {
@@ -347,6 +367,49 @@ namespace GestionDeTaller.BL
             OrdenParaTerminar.MotivoDeCancelacion = orden.MotivoDeCancelacion;
             ElContextoDeBaseDeDatos.OrdenesDeMantenimiento.Update(OrdenParaTerminar);
             ElContextoDeBaseDeDatos.SaveChanges();
+        }
+
+        public List<RepuestosParaMantenimiento> ObtenerRepuestosConMantenimientos() 
+        {
+            List<RepuestosParaMantenimiento> laListaDeRepuestosConMantenimiento;
+            laListaDeRepuestosConMantenimiento = ElContextoDeBaseDeDatos.RepuestosParaMantenimiento.ToList();
+            return laListaDeRepuestosConMantenimiento;
+        }
+
+        public List<Repuestos> ObtenerRepuestosSinAsociar(int Id)
+        {
+            Mantenimientos mantenimiento;
+            mantenimiento = ObtenerMantenimientoPorID(Id);
+            int Id_Articulo = mantenimiento.Id_Articulo;
+
+            Articulo articulo = ObtenerArticuloPorID(Id_Articulo);
+            List<Repuestos> TodosLosRepuestos = new List<Repuestos>();
+            List<Repuestos> repuestosSinMantenimiento = new List<Repuestos>();
+            List<Repuestos> RepuestosDelArticulo;
+            List<RepuestosParaMantenimiento> listaDeRepuestosConMantenimiento;
+
+            repuestosSinMantenimiento = ObtenerRepuestosAsociados(articulo);
+
+            
+            listaDeRepuestosConMantenimiento = ObtenerRepuestosConMantenimientos();
+
+            RepuestosDelArticulo = ObtenerRepuestosAsociados(articulo);
+            TodosLosRepuestos = ObtenerRepuestosAsociados(articulo);
+            
+            foreach (var repuesto in TodosLosRepuestos)
+            {
+                foreach (var repuestoConMantenimiento in listaDeRepuestosConMantenimiento)
+                {
+                   if (repuesto.Id == repuestoConMantenimiento.Id_Repuesto)
+                        {
+                            repuestosSinMantenimiento.Remove(repuesto);
+                        }
+                }
+            }
+           
+           
+
+            return repuestosSinMantenimiento;
         }
     }
 }

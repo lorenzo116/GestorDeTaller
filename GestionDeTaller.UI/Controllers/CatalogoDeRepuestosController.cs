@@ -25,11 +25,13 @@ namespace GestionDeTaller.UI.Controllers
         public ActionResult Listar(int Id)
         {
             ViewBag.Id_Articulo = Id;
-            List<Repuestos> laLista = new List<Repuestos>();
+
+            List<Repuestos> laListaDeRepuestos = new List<Repuestos>();
             Articulo articulo = new Articulo();
             articulo = RepositorioDelTaller.ObtenerArticuloPorID(Id);
-            laLista = RepositorioDelTaller.ObtenerRepuestosAsociados(articulo);
-            return View(laLista);
+            laListaDeRepuestos = RepositorioDelTaller.ObtenerRepuestosAsociados(articulo);
+            
+            return View(laListaDeRepuestos);
         }
 
       
@@ -53,7 +55,6 @@ namespace GestionDeTaller.UI.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    // TODO: Add insert logic here
                     RepositorioDelTaller.AgregarRepuesto(repuesto);
                     return RedirectToAction("Listar", new RouteValueDictionary(new
                     {

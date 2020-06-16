@@ -14,6 +14,7 @@ namespace GestionDeTaller.Models
         [Required(ErrorMessage ="La descripcion es requerida")]
         public string Descripcion { get; set; }
 
+        [Required(ErrorMessage = "El costo fijo es requerido")]
         [Range(0, int.MaxValue, ErrorMessage = "El costo fijo debe ser mayor 0 ")]
         public double CostoFijo { get; set; }
     }

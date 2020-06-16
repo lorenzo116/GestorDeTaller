@@ -1,0 +1,40 @@
+﻿@model IEnumerable<GestionDeTaller.Models.Repuestos>
+
+@{
+    ViewData["Title"] = "ListarRepuestosSinMantenimiento";
+}
+
+<h1>ListarRepuestosSinMantenimiento</h1>
+
+<p>
+    <a asp-action="Listar" asp-controller="CatalogoDeRepuestosParaMantenimiento" asp-route-Id="@ViewBag.Id_Mantenimiento" class="btn btn-outline-primary btn-sm">Regresar a repuestos asociado</a>
+
+    <a asp-action="Listar" asp-controller="CatalogoDeMantenimientos" asp-route-Id="@ViewBag.Id_Articulo" class="btn btn-outline-primary btn-sm">Regresar a la lista de Mantenimientos</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+           
+            <th>
+                @Html.DisplayNameFor(model => model.Nombre)
+            </th>
+            
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+           
+            <td>
+                @Html.DisplayFor(modelItem => item.Nombre)
+            </td>
+           
+            <td>
+                <a asp-action="Asociar" asp-route-Id_Articulo="@ViewBag.Id_Mantenimiento" class="btn btn-outline-primary btn-sm">Asociar Repuesto</a>
+               
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

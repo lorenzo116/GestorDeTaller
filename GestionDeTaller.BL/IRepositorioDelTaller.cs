@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Web.Mvc;
 
 namespace GestionDeTaller.BL
 {
@@ -14,9 +15,14 @@ namespace GestionDeTaller.BL
         public List<OrdenesDeMantenimiento> ObtenerOrdenesEnProceso();
         public List<OrdenesDeMantenimiento> ObtenerOrdenesTerminadas();
         public List<OrdenesDeMantenimiento> ObtenerOrdenesCanceladas();
+        public List<Repuestos> ObtenerRepuestosSinAsociar(int Id);
+        public List<Repuestos> ObtenerTodosLosRepuestos();
+        public List<RepuestosParaMantenimiento> ObtenerTodosLosRepuestosParaMantenimiento();
         public int resumenDeUsoDelRepuesto(int Id);
         public int resumenDeUsoDelMantenimiento(int id);
         public List<Repuestos> ObtenerRepuestosAsociados(Articulo articulo);
+
+        public List<Mantenimientos> ObtenerMantenimientosDeUnArticulo(Articulo articulo);
         public void AgregarArticulo(Articulo articulo);
         public void AgregarRepuesto(Repuestos repuesto);
         public Articulo ObtenerArticuloPorID(int id);

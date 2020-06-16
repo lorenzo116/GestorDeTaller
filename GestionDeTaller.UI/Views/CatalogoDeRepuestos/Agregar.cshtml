@@ -4,15 +4,14 @@
     ViewData["Title"] = "Agregar";
 }
 
-<h1>Agregar</h1>
+<h1>Agregar Repuesto</h1>
 <br />
 <div>
-        <a asp-action="Listar" asp-controller="CatalogoDeArticulos" class="btn btn-outline-primary btn-sm">Regresar a la lista de articulos</a>
+    <a asp-action="Listar" asp-controller="CatalogoDeArticulos" class="btn btn-outline-primary btn-sm">Regresar a la lista de articulos</a>
 
-        <a asp-action="Listar" asp-route-Id="@ViewBag.Id_Articulo" class="btn btn-outline-primary btn-sm">Agregar a la lista de repuestos</a>
+    <a asp-action="Listar" asp-route-Id="@ViewBag.Id_Articulo" class="btn btn-outline-primary btn-sm">Agregar a la lista de repuestos</a>
 </div>
 
-<h4>Repuestos</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
