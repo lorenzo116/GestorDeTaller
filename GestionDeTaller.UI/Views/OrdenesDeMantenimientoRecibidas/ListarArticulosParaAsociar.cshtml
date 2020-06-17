@@ -1,0 +1,46 @@
+﻿@model IEnumerable<GestionDeTaller.Models.Articulo>
+
+@{
+    ViewData["Title"] = "ListarArticulosParaAsociar";
+}
+
+<h1>ListarArticulosParaAsociar</h1>
+
+<p><a asp-action="Agregar" class="btn btn-outline-primary btn-sm">Regresar</a>
+    <a asp-action="Listar" class="btn btn-outline-primary btn-sm" onclick="return confirm('¿Desea cancelar la orden nueva?')">Cancelar</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+           
+            <th>
+                @Html.DisplayNameFor(model => model.Nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Marca)
+            </th>
+           
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+           
+            <td>
+                @Html.DisplayFor(modelItem => item.Nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Marca)
+            </td>
+            
+            <td>
+                <a asp-action="AsociarArticulo" asp-route-Id_Articulo="@item.Id" asp-route-nombre="@ViewBag.NombreDelCliente" 
+                   asp-route-descripcion="@ViewBag.DescripcionDelProblema" asp-route-montoDeAdelanto="@ViewBag.MontoDeAdelanto" 
+                   class="btn btn-outline-primary btn-sm"
+                   onclick="return confirm ('Seguro que desea asociar el articulo @item.Nombre a la nueva orden')">Asociar</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

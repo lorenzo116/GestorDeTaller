@@ -36,8 +36,7 @@ namespace GestionDeTaller.UI.Controllers
         }
 
         public ActionResult ListarRepuestosSinMantenimiento(int Id_Mantenimiento) 
-        {
-         
+        {     
             Mantenimientos mantenimiento;
             mantenimiento = RepositorioDelTaller.ObtenerMantenimientoPorID(Id_Mantenimiento);
             ViewBag.Id_Mantenimiento = Id_Mantenimiento;

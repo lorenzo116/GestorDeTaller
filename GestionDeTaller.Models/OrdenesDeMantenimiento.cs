@@ -12,10 +12,12 @@ namespace GestionDeTaller.Models
         public int Id { get; set; }
 
         [Display(Name = "Nombre del Cliente")]
+        [Required (ErrorMessage ="El nombre del cliente es requerido")]
         public string NombreDelCliente { get; set; }
 
         public Estado Estado { get; set; }
 
+        [Required(ErrorMessage = "La descripcion es requerida")]
         [Display(Name = "Descripción del problema")]
         public string DescripcionDelProblema { get; set; }
 
@@ -24,6 +26,8 @@ namespace GestionDeTaller.Models
         public DateTime FechaDeIngreso { get; set; }
 
         [Display(Name = "Monto de Adelanto")]
+        [Required(ErrorMessage = "El monto de adelanto es requerido")]
+        [Range(0, int.MaxValue, ErrorMessage = "El monto de adelanto debe ser 0 o mayor ")]
         public decimal MontoDeAdelanto { get; set; }
 
         public int Id_Articulo { get; set; }

@@ -25,6 +25,7 @@ namespace GestionDeTaller.BL
         public List<Mantenimientos> ObtenerMantenimientosDeUnArticulo(Articulo articulo);
         public void AgregarArticulo(Articulo articulo);
         public void AgregarRepuesto(Repuestos repuesto);
+        public void AgregarOrden(OrdenesDeMantenimiento orden);
         public Articulo ObtenerArticuloPorID(int id);
         public Repuestos ObtenerRepuestoPorID(int id);
         public Mantenimientos ObtenerMantenimientoPorID(int id);

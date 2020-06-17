@@ -6,6 +6,7 @@ using GestionDeTaller.BL;
 using GestionDeTaller.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Routing;
 
 namespace GestionDeTaller.UI.Controllers
 {
@@ -36,25 +37,63 @@ namespace GestionDeTaller.UI.Controllers
         // GET: OrdenesDeMantenimientoRecibidas/Create
         public ActionResult Agregar()
         {
-            List<Articulo> listaDeArticulos = new List<Articulo>();
-            listaDeArticulos = RepositorioDelTaller.ObtenerTodosLosArticulos();
+            
             return View();
         }
 
         // POST: OrdenesDeMantenimientoRecibidas/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Agregar(OrdenesDeMantenimiento orden)
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                if (ModelState.IsValid)
+                {
+
+                    return RedirectToAction("ListarArticulosParaAsociar", new RouteValueDictionary(new
+                    {
+                        controller = "OrdenesDeMantenimientoRecibidas",
+                        Action = "ListarArticulosParaAsociar",
+                        nombre = orden.NombreDelCliente,
+                        descripcion = orden.DescripcionDelProblema,
+                        montoDeAdelanto = orden.MontoDeAdelanto,
+                    })) ;
+                }
+                else
+                {
+                    return View();
+                }
             }
             catch
             {
                 return View();
             }
         }
+
+
+        public ActionResult ListarArticulosParaAsociar(string nombre, string descripcion, decimal montoDeAdelanto)
+        {
+            List<Articulo> articulos;
+            articulos = RepositorioDelTaller.ObtenerTodosLosArticulos();
+            ViewBag.NombreDelCliente = nombre;
+            ViewBag.DescripcionDelProblema = descripcion;
+            ViewBag.MontoDeAdelanto = montoDeAdelanto;
+
+            return View(articulos);
+        }
+
+        public ActionResult AsociarArticulo(int Id_Articulo, string nombre, string descripcion, decimal montoDeAdelanto) 
+        {
+            OrdenesDeMantenimiento orden = new OrdenesDeMantenimiento();
+            orden.NombreDelCliente = nombre;
+            orden.DescripcionDelProblema = descripcion;
+            orden.MontoDeAdelanto = montoDeAdelanto;
+            orden.Id_Articulo = Id_Articulo;
+            RepositorioDelTaller.AgregarOrden(orden);
+            return RedirectToAction("Listar");
+        }
+
 
 
         // GET: OrdenesDeMantenimientoRecibidas/Edit/5

@@ -58,6 +58,13 @@ namespace GestionDeTaller.BL
             ElContextoDeBaseDeDatos.Articulo.Add(articulo);
             ElContextoDeBaseDeDatos.SaveChanges();
         }
+        public void AgregarOrden(OrdenesDeMantenimiento orden)
+        {
+            orden.Estado = Estado.Recibida;
+            orden.FechaDeIngreso = DateTime.Now;
+            ElContextoDeBaseDeDatos.OrdenesDeMantenimiento.Add(orden);
+            ElContextoDeBaseDeDatos.SaveChanges();
+        }
 
         public void AgregarRepuesto(Repuestos repuesto)
         {
@@ -406,9 +413,6 @@ namespace GestionDeTaller.BL
                         }
                 }
             }
-           
-           
-
             return repuestosSinMantenimiento;
         }
 
