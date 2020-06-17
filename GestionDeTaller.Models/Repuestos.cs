@@ -14,7 +14,9 @@ namespace GestionDeTaller.Models
        
         public int Id_Articulo { get; set; }
 
+        
         [Required(ErrorMessage = "El precio es requierido")]
+        [Range(0, int.MaxValue, ErrorMessage = "El costo fijo debe ser mayor 0 ")]
         public double Precio { get; set; }
 
         [Required(ErrorMessage = "La descripcion es requierida")]

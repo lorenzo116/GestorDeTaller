@@ -34,8 +34,10 @@ namespace GestionDeTaller.UI.Controllers
         }
 
         // GET: OrdenesDeMantenimientoRecibidas/Create
-        public ActionResult Create()
+        public ActionResult Agregar()
         {
+            List<Articulo> listaDeArticulos = new List<Articulo>();
+            listaDeArticulos = RepositorioDelTaller.ObtenerTodosLosArticulos();
             return View();
         }
 
