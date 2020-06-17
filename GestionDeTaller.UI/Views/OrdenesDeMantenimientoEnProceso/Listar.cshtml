@@ -39,7 +39,7 @@
                     @Html.DisplayFor(modelItem => item.FechaDeInicio)
                 </td>
                 <td>
-                    @Html.Label("", item.DiasEnProceso.Subtract(item.FechaDeIngreso - item.FechaDeInicio).Days.ToString())
+                    @Html.Label("", (item.DiasEnProceso = (int)(item.FechaDeInicio - item.FechaDeIngreso).GetValueOrDefault().TotalDays).ToString())
                 </td>
                 <td>
                     <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">

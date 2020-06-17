@@ -46,10 +46,10 @@
                 @Html.DisplayFor(modelItem => item.FechaDeFinalizacion)
             </td>
             <td>
-                @Html.Label("", item.DiasEnProceso.Subtract(item.FechaDeIngreso - item.FechaDeInicio).Days.ToString())
+                @Html.Label("", (item.DiasEnProceso = (int) (item.FechaDeInicio - item.FechaDeIngreso).GetValueOrDefault().TotalDays).ToString())
             </td>
             <td>
-                @Html.Label("", item.DiasTrabajados.Subtract(item.FechaDeFinalizacion - item.FechaDeInicio).Days.ToString())
+                @Html.Label("", (item.DiasTrabajados = (int) (item.FechaDeFinalizacion - item.FechaDeInicio).GetValueOrDefault().TotalDays).ToString())
             </td>
             <td>
                 <!--

@@ -28,18 +28,18 @@ namespace GestionDeTaller.Models
         public int Id_Articulo { get; set; }
 
         [Display(Name = "Fecha de Inicio")]
-        public DateTime FechaDeInicio { get; set; }
+        public DateTime? FechaDeInicio { get; set; }
 
         [Display(Name = "Fecha de Finalización")]
-        public DateTime FechaDeFinalizacion { get; set; }
+        public DateTime? FechaDeFinalizacion { get; set; }
 
         [Display(Name = "Motivo de Cancelación")]
         public string? MotivoDeCancelacion { get; set; }
 
         [NotMapped, Display(Name = "Días En Proceso")]
-        public TimeSpan DiasEnProceso { get; set; }
+        public int DiasEnProceso { get; set; }
 
         [NotMapped, Display(Name = "Días Trabajados")]
-        public TimeSpan DiasTrabajados { get; set; }
+        public int DiasTrabajados { get; set; }
     }
 }
