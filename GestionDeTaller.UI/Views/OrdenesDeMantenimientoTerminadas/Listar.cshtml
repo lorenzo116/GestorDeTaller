@@ -21,6 +21,12 @@
             <th>
                 @Html.DisplayNameFor(model => model.FechaDeFinalizacion)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DiasEnProceso)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DiasTrabajados)
+            </th>
             <th></th>
         </tr>
     </thead>
@@ -40,9 +46,15 @@
                 @Html.DisplayFor(modelItem => item.FechaDeFinalizacion)
             </td>
             <td>
-                <!--    
-                @Html.ActionLink("Ver Detalles", "Detalles", new { id = item.Id })
-                -->
+                @Html.Label("", item.DiasEnProceso.Subtract(item.FechaDeIngreso - item.FechaDeInicio).Days.ToString())
+            </td>
+            <td>
+                @Html.Label("", item.DiasTrabajados.Subtract(item.FechaDeFinalizacion - item.FechaDeInicio).Days.ToString())
+            </td>
+            <td>
+                <!--
+        @Html.ActionLink("Ver Detalles", "Detalles", new { id = item.Id })
+        -->
                 <a asp-action="Detalles" asp-route-id="@item.Id" class="btn btn-outline-primary btn-sm">Detalles</a>
             </td>
         </tr>

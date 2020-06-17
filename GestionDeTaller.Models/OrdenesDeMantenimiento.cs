@@ -31,12 +31,15 @@ namespace GestionDeTaller.Models
         public DateTime FechaDeInicio { get; set; }
 
         [Display(Name = "Fecha de Finalización")]
-        public DateTime? FechaDeFinalizacion { get; set; }
+        public DateTime FechaDeFinalizacion { get; set; }
 
         [Display(Name = "Motivo de Cancelación")]
         public string? MotivoDeCancelacion { get; set; }
 
         [NotMapped, Display(Name = "Días En Proceso")]
         public TimeSpan DiasEnProceso { get; set; }
+
+        [NotMapped, Display(Name = "Días Trabajados")]
+        public TimeSpan DiasTrabajados { get; set; }
     }
 }
