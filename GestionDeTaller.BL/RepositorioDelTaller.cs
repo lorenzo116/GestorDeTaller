@@ -3,6 +3,7 @@ using GestionDeTaller.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices.WindowsRuntime;
 using System.Web.WebPages.Html;
 
 namespace GestionDeTaller.BL
@@ -472,11 +473,25 @@ namespace GestionDeTaller.BL
         }
         public void AgregarMantenimientoAUnaOrden(int Id_Mantenimiento, int Id_Orden) 
         {
-            DetalleOrdenesDeMantenimiento detallesDeOrden = new DetalleOrdenesDeMantenimiento();
-            detallesDeOrden.Id_Mantenimiento = Id_Mantenimiento;
-            detallesDeOrden.Id_OrdenesDeMantenimiento = Id_Orden;
-            ElContextoDeBaseDeDatos.DetalleOrdenesDeMantenimiento.Add(detallesDeOrden);
-            ElContextoDeBaseDeDatos.SaveChanges();
+            Boolean existe = false;
+            List<DetalleOrdenesDeMantenimiento> detallesDeOrdenes;
+            detallesDeOrdenes = ObtenerTodosLosDetallesDeOrdenes();
+            foreach (var detalle in detallesDeOrdenes)
+            {
+                if (detalle.Id_OrdenesDeMantenimiento==Id_Orden) 
+                {
+                    if (detalle.Id_Mantenimiento==Id_Mantenimiento) {
+                        existe =true;
+                        break;
+                    }                
+                }
+            }
+            if (existe==false) {
+                DetalleOrdenesDeMantenimiento detallesDeOrden = new DetalleOrdenesDeMantenimiento();
+                detallesDeOrden.Id_Mantenimiento = Id_Mantenimiento;
+                detallesDeOrden.Id_OrdenesDeMantenimiento = Id_Orden;
+                ElContextoDeBaseDeDatos.DetalleOrdenesDeMantenimiento.Add(detallesDeOrden);
+                ElContextoDeBaseDeDatos.SaveChanges(); }
 
 
         }
