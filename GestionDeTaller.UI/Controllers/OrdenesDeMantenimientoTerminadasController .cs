@@ -9,12 +9,12 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace GestionDeTaller.UI.Controllers
 {
-    public class OrdenesDeMantenimientoTerminadas : Controller
+    public class OrdenesDeMantenimientoTerminadasController : Controller
     {
 
         private readonly IRepositorioDelTaller Repositorio;
 
-        public OrdenesDeMantenimientoTerminadas(IRepositorioDelTaller repositorio)
+        public OrdenesDeMantenimientoTerminadasController(IRepositorioDelTaller repositorio)
         {
             Repositorio = repositorio;
         }
