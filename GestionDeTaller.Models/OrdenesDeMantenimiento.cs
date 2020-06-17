@@ -19,6 +19,7 @@ namespace GestionDeTaller.Models
         [Display(Name = "Descripción del problema")]
         public string DescripcionDelProblema { get; set; }
 
+        [DisplayFormat(DataFormatString = "{0:d}", ApplyFormatInEditMode = true)]
         [Display(Name = "Fecha de Ingreso")]
         public DateTime FechaDeIngreso { get; set; }
 
@@ -27,9 +28,11 @@ namespace GestionDeTaller.Models
 
         public int Id_Articulo { get; set; }
 
+        [DisplayFormat(DataFormatString = "{0:d}", ApplyFormatInEditMode = true)]
         [Display(Name = "Fecha de Inicio")]
         public DateTime? FechaDeInicio { get; set; }
 
+        [DisplayFormat(DataFormatString = "{0:d}", ApplyFormatInEditMode = true)]
         [Display(Name = "Fecha de Finalización")]
         public DateTime? FechaDeFinalizacion { get; set; }
 
