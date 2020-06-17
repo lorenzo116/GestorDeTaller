@@ -19,6 +19,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.FechaDeInicio)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DiasEnProceso)
+            </th>
             <th></th>
         </tr>
     </thead>
@@ -34,6 +37,9 @@
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.FechaDeInicio)
+                </td>
+                <td>
+                    @Html.Label("", item.DiasEnProceso.Subtract(item.FechaDeIngreso - item.FechaDeInicio).Days.ToString())
                 </td>
                 <td>
                     <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.SqlTypes;
 using System.Text;
 
@@ -27,12 +28,15 @@ namespace GestionDeTaller.Models
         public int Id_Articulo { get; set; }
 
         [Display(Name = "Fecha de Inicio")]
-        public DateTime? FechaDeInicio { get; set; }
+        public DateTime FechaDeInicio { get; set; }
 
         [Display(Name = "Fecha de Finalización")]
         public DateTime? FechaDeFinalizacion { get; set; }
 
         [Display(Name = "Motivo de Cancelación")]
         public string? MotivoDeCancelacion { get; set; }
+
+        [NotMapped, Display(Name = "Días En Proceso")]
+        public TimeSpan DiasEnProceso { get; set; }
     }
 }
