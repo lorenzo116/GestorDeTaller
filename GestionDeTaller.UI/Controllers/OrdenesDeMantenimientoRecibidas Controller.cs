@@ -83,6 +83,7 @@ namespace GestionDeTaller.UI.Controllers
             return View(articulos);
         }
 
+
         public ActionResult AsociarArticulo(int Id_Articulo, string nombre, string descripcion, decimal montoDeAdelanto) 
         {
             OrdenesDeMantenimiento orden = new OrdenesDeMantenimiento();
@@ -94,7 +95,21 @@ namespace GestionDeTaller.UI.Controllers
             return RedirectToAction("Listar");
         }
 
+        public ActionResult ListarMantenimientos(int id_Orden)
+        {
+            ViewBag.Id_Orden = id_Orden;
+            List<Mantenimientos> mantenimientos;
+            mantenimientos = RepositorioDelTaller.ObtenerMantenimientosParaUnaOrden(id_Orden);
 
+             return View(mantenimientos);
+        }
+
+
+        public ActionResult AgregarMantenimiento(int Id_Mantenimiento, int Id_Orden)
+        {
+            RepositorioDelTaller.AgregarMantenimientoAUnaOrden(Id_Mantenimiento, Id_Orden);
+            return RedirectToAction("Listar");
+        }
 
         // GET: OrdenesDeMantenimientoRecibidas/Edit/5
         public ActionResult Editar(int id)

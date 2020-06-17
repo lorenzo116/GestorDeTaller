@@ -32,10 +32,11 @@
                 @Html.DisplayFor(modelItem => item.FechaDeIngreso)
             </td>
             <td>
-               
+
                 <a asp-action="Editar" asp-route-id="@item.Id" class="btn btn-outline-primary btn-sm">Editar</a>
                 <a asp-action="Detalles" asp-route-id="@item.Id" class="btn btn-outline-primary btn-sm">Detalles</a>
                 <a asp-action="Iniciar" asp-route-id="@item.Id" class="btn btn-outline-primary btn-sm">Iniciar</a>
+                <a asp-action="ListarMantenimientos" asp-route-id_Orden="@item.Id" class="btn btn-outline-primary btn-sm">Agregar Mantenimiento</a>
             </td>
         </tr>
 }

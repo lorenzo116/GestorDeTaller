@@ -47,6 +47,6 @@ namespace GestionDeTaller.Models
         public int DiasEnProceso { get; set; }
 
         [NotMapped, Display(Name = "Días Trabajados")]
-        public int DiasTrabajados { get; set; }
+        public decimal DiasTrabajados { get; set; }
     }
 }

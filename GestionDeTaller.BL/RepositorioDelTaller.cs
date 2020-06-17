@@ -141,7 +141,40 @@ namespace GestionDeTaller.BL
             return listaDeRepuestos;
         }
 
+        public double ObtenerPrecioTotalDeUnMantenimiento(Mantenimientos mantenimiento) 
+        {
+            double precioTotal = 0;
+            List<RepuestosParaMantenimiento> repuestosAsociados;
+            List<Repuestos> repuestos;
 
+            repuestosAsociados = ObtenerRepuestoParaMantenimientos(mantenimiento.Id);
+            repuestos = ObtenerRepuestosPorMantenimiento(repuestosAsociados);
+            foreach (var repuesto in repuestos)
+            {
+                precioTotal += repuesto.Precio;
+
+            }
+            precioTotal += mantenimiento.CostoFijo;
+            return precioTotal;
+        }
+
+        public List<Mantenimientos> ObtenerMantenimientosParaUnaOrden(int id_Orden)
+        {
+            OrdenesDeMantenimiento orden;
+            Articulo articulo;
+            List<Mantenimientos> listaDeMantenimientos;
+            
+            orden = ObtenerOrdenPorID(id_Orden);
+            articulo = ObtenerArticuloPorID(orden.Id_Articulo);
+            listaDeMantenimientos = ObtenerMantenimientosDeUnArticulo(articulo);
+            
+            foreach (var mantenimiento in listaDeMantenimientos)
+            {
+                mantenimiento.PrecioTotal = ObtenerPrecioTotalDeUnMantenimiento(mantenimiento);
+            }          
+
+            return listaDeMantenimientos;
+        }
         public void Editar(Articulo articulo)
         {
             Articulo articuloParaEditar;
@@ -436,6 +469,16 @@ namespace GestionDeTaller.BL
 
             }
             
+        }
+        public void AgregarMantenimientoAUnaOrden(int Id_Mantenimiento, int Id_Orden) 
+        {
+            DetalleOrdenesDeMantenimiento detallesDeOrden = new DetalleOrdenesDeMantenimiento();
+            detallesDeOrden.Id_Mantenimiento = Id_Mantenimiento;
+            detallesDeOrden.Id_OrdenesDeMantenimiento = Id_Orden;
+            ElContextoDeBaseDeDatos.DetalleOrdenesDeMantenimiento.Add(detallesDeOrden);
+            ElContextoDeBaseDeDatos.SaveChanges();
+
+
         }
     }
 }

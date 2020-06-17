@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Security.Authentication.ExtendedProtection;
 using System.Text;
 
@@ -17,5 +18,8 @@ namespace GestionDeTaller.Models
         [Required(ErrorMessage = "El costo fijo es requerido")]
         [Range(0, int.MaxValue, ErrorMessage = "El costo fijo debe ser mayor 0 ")]
         public double CostoFijo { get; set; }
+
+        [NotMapped]
+        public double PrecioTotal { get; set; }
     }
 }

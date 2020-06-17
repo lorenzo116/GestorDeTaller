@@ -18,6 +18,8 @@ namespace GestionDeTaller.BL
         public List<Repuestos> ObtenerRepuestosSinAsociar(int Id);
         public List<Repuestos> ObtenerTodosLosRepuestos();
         public List<RepuestosParaMantenimiento> ObtenerTodosLosRepuestosParaMantenimiento();
+        public List<Mantenimientos>ObtenerMantenimientosParaUnaOrden(int id);
+        public double ObtenerPrecioTotalDeUnMantenimiento(Mantenimientos mantenimiento);       
         public int resumenDeUsoDelRepuesto(int Id);
         public int resumenDeUsoDelMantenimiento(int id);
         public List<Repuestos> ObtenerRepuestosAsociados(Articulo articulo);
@@ -48,6 +50,7 @@ namespace GestionDeTaller.BL
         public void CancelarOrden(OrdenesDeMantenimiento orden);
         public void AsociarRepuestoConUnMantenimiento(RepuestosParaMantenimiento repuestoParaAsociar);
         public void DesasociarRepuestoDeMantenimiento(int Id_Repuesto, int Id_Mantenimiento);
+        public void AgregarMantenimientoAUnaOrden(int Id_Mantenimiento, int Id_Orden);
 
     }
 }
