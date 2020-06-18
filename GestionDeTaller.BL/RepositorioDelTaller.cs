@@ -158,6 +158,21 @@ namespace GestionDeTaller.BL
             precioTotal += mantenimiento.CostoFijo;
             return precioTotal;
         }
+        public double ObtenerCostoDeRepuestosDeMantenimiento(Mantenimientos mantenimiento)
+        {
+            double CostoDeRepuestos = 0;
+            List<RepuestosParaMantenimiento> repuestosAsociados;
+            List<Repuestos> repuestos;
+
+            repuestosAsociados = ObtenerRepuestoParaMantenimientos(mantenimiento.Id);
+            repuestos = ObtenerRepuestosPorMantenimiento(repuestosAsociados);
+
+            foreach (var repuesto in repuestos)
+            {
+                CostoDeRepuestos = CostoDeRepuestos + repuesto.Precio;
+            }
+            return CostoDeRepuestos;
+        }
 
         public List<Mantenimientos> ObtenerMantenimientosParaUnaOrden(int id_Orden)
         {
@@ -172,7 +187,11 @@ namespace GestionDeTaller.BL
             foreach (var mantenimiento in listaDeMantenimientos)
             {
                 mantenimiento.PrecioTotal = ObtenerPrecioTotalDeUnMantenimiento(mantenimiento);
-            }          
+            }
+            foreach (var mantenimiento in listaDeMantenimientos) //Prueba
+            {
+                mantenimiento.CostoDeRepuestos = ObtenerCostoDeRepuestosDeMantenimiento(mantenimiento);
+            }
 
             return listaDeMantenimientos;
         }

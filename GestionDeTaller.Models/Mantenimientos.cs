@@ -21,5 +21,8 @@ namespace GestionDeTaller.Models
 
         [NotMapped]
         public double PrecioTotal { get; set; }
+
+        [NotMapped]
+        public double CostoDeRepuestos { get; set; }
     }
 }

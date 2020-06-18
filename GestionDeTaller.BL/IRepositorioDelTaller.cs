@@ -20,7 +20,8 @@ namespace GestionDeTaller.BL
         public List<Repuestos> ObtenerTodosLosRepuestos();
         public List<RepuestosParaMantenimiento> ObtenerTodosLosRepuestosParaMantenimiento();
         public List<Mantenimientos>ObtenerMantenimientosParaUnaOrden(int id);
-        public double ObtenerPrecioTotalDeUnMantenimiento(Mantenimientos mantenimiento);       
+        public double ObtenerPrecioTotalDeUnMantenimiento(Mantenimientos mantenimiento);
+        public double ObtenerCostoDeRepuestosDeMantenimiento(Mantenimientos mantenimiento);
         public int resumenDeUsoDelRepuesto(int Id);
         public int resumenDeUsoDelMantenimiento(int id);
         public List<Repuestos> ObtenerRepuestosAsociados(Articulo articulo);
