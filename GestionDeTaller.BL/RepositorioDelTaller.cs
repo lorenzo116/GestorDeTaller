@@ -495,5 +495,21 @@ namespace GestionDeTaller.BL
 
 
         }
+
+        public List<OrdenesDeMantenimiento> ObtenerOrdenesRecibidas()
+        {
+            var resultado = from c in ElContextoDeBaseDeDatos.OrdenesDeMantenimiento
+                            where c.Estado == Estado.Recibida
+
+                            select c;
+            return resultado.ToList();
+        }
+
+        public OrdenesDeMantenimiento DetallesDeRecibidos(OrdenesDeMantenimiento orden)
+        {
+            OrdenesDeMantenimiento OrdenPorDetallar;
+            OrdenPorDetallar = ObtenerOrdenPorID(orden.Id);
+            return OrdenPorDetallar;
+        }
     }
 }
