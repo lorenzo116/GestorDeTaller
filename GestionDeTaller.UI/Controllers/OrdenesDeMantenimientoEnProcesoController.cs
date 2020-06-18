@@ -37,6 +37,38 @@ namespace GestionDeTaller.UI.Controllers
 
         public ActionResult Terminar(int id)
         {
+            OrdenesDeMantenimiento orden;
+
+            orden = Repositorio.ObtenerOrdenPorID(id);
+
+            Repositorio.TerminarOrden(orden);
+
+            return RedirectToAction(nameof(Listar));
+        }
+        public ActionResult Cancelar(int id)
+        {
+            OrdenesDeMantenimiento orden;
+            orden = Repositorio.ObtenerOrdenPorID(id);
+            return View(orden);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Cancelar(OrdenesDeMantenimiento orden)
+        {
+            try
+            {
+                Repositorio.CancelarOrden(orden);
+
+                return RedirectToAction(nameof(Listar));
+            }
+            catch
+            {
+                return View();
+            }
+        }
+        /*public ActionResult Terminar(int id)
+        {
             if (ModelState.IsValid)
             {
                 OrdenesDeMantenimiento orden;
@@ -94,6 +126,6 @@ namespace GestionDeTaller.UI.Controllers
             {
                 return View();
             }
-        }
+        }*/
     }
 }
