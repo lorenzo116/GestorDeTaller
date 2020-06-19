@@ -33,18 +33,6 @@
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Descripcion)
         </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.CantidadDeOrdenesTerminadas)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.CantidadDeOrdenesTerminadas)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.CantidadDeOrdenesEnProceso)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.CantidadDeOrdenesEnProceso)
-        </dd>
     </dl>
 </div>
 <br />
@@ -52,7 +40,7 @@
     <h4>Repuestos asociados</h4>
     <hr />
     <br />
-    @foreach (var item in Model.repuestosAsosiados)
+    @foreach (var item in Model.RepuestosAsociados)
     {
         <div class="card bg-secondary mb-3" style="max-width: 20rem;">
             <div class="card-header">Repuesto asociado</div>
@@ -70,6 +58,26 @@
         <br />
     }
 </div>
+
+<div>
+    <h4>Resumen De Reparaciones</h4>
+    <hr />
+    <div class="card bg-secondary mb-3" style="max-width: 20rem;">
+        <div class="card-header">Resumen De Reparaciones</div>
+        <div class="card-body">
+
+            <div class="card-text">
+                <p class="card-text">
+
+                </p>
+                <h5>@Html.DisplayNameFor(model => model.CantidadDeOrdenesTerminadas): @Html.DisplayFor(model => model.CantidadDeOrdenesTerminadas)</h5> 
+                <h5>@Html.DisplayNameFor(model => model.CantidadDeOrdenesEnProceso): @Html.DisplayFor(model => model.CantidadDeOrdenesEnProceso)</h5> 
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div>
 
 </div>

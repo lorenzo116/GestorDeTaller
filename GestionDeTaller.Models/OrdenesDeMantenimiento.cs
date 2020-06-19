@@ -17,7 +17,7 @@ namespace GestionDeTaller.Models
 
         public Estado Estado { get; set; }
 
-        [Required(ErrorMessage = "La descripcion es requerida")]
+        [Required(ErrorMessage = "La descripción es requerida")]
         [Display(Name = "Descripción del problema")]
         public string DescripcionDelProblema { get; set; }
 

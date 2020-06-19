@@ -13,8 +13,3 @@ namespace GestionDeTaller.Models
 
     }
 }
-/*
- * 	[Id] [int] IDENTITY(1,1) NOT NULL,
-	[Id_OrdenesDeMantenimiento] [int] NOT NULL,
-	[Id_Mantenimiento] [int] NOT NULL,
- */

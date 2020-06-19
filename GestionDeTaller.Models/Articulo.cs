@@ -9,13 +9,13 @@ namespace GestionDeTaller.Models
     {
         public int Id { get; set; }
 
-        [Required(ErrorMessage ="El Nombre es requierido")]
+        [Required(ErrorMessage ="El Nombre es requerido")]
         public String Nombre { get; set; }
 
-        [Required(ErrorMessage = "El Marca es requierida")]
+        [Required(ErrorMessage = "La Marca es requerida")]
         public String Marca { get; set; }
 
-        [Required(ErrorMessage = "La Descripcion es requierida")]
+        [Required(ErrorMessage = "La Descripción es requerida")]
         public String Descripcion { get; set; }
 
     }

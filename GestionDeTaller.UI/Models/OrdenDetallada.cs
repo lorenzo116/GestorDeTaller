@@ -11,7 +11,7 @@ namespace GestionDeTaller.UI.Models
     {
         [Display(Name = "Nombre Del Cliente")]
         public string NombreDelCliente { get; set; }
-        [Display(Name = "Descripcion del problema")]
+        [Display(Name = "Descripción del problema")]
         public string DescripcionDelProblema { get; set; }
         [Display(Name = "Fecha de ingreso")]
         public DateTime FechaDeIngreso { get; set; }

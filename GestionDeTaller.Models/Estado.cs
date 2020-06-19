@@ -8,7 +8,7 @@ namespace GestionDeTaller.Models
     {
 
         Recibida = 1,
-        Proceso = 2,
+        EnProceso = 2,
         Terminada = 3,
         Cancelada = 4,
 

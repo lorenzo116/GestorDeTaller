@@ -11,6 +11,7 @@ namespace GestionDeTaller.UI.Models
     {
         public int Id { get; set; }
 
+        [DisplayName("Descripción")]
         public string Descripcion { get; set; }
 
         [DisplayName("Resumen de uso")]

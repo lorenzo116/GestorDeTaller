@@ -20,10 +20,10 @@ namespace GestionDeTaller.Models
         [Display(Name ="Costo fijo")]
         public double CostoFijo { get; set; }
 
-        [NotMapped]
+        [NotMapped, Display(Name = "Precio Total")]
         public double PrecioTotal { get; set; }
 
-        [NotMapped]
+        [NotMapped, Display(Name = "Costo De Repuestos")]
         public double CostoDeRepuestos { get; set; }
     }
 }

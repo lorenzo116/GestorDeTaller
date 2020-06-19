@@ -37,7 +37,7 @@ namespace GestionDeTaller.UI.Controllers
             articuloDetallado.Descripcion = articulo.Descripcion;
             articuloDetallado.CantidadDeOrdenesEnProceso = RepositorioDelTaller.ContarOrdenesEnProceso(Id);
             articuloDetallado.CantidadDeOrdenesTerminadas = RepositorioDelTaller.ContarOrdenesTerminadas(Id);
-            articuloDetallado.repuestosAsosiados = RepositorioDelTaller.ObtenerRepuestosAsociados(articulo);
+            articuloDetallado.RepuestosAsociados = RepositorioDelTaller.ObtenerRepuestosAsociados(articulo);
 
             return View(articuloDetallado);
         }

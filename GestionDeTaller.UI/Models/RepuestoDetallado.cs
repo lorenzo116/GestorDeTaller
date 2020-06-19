@@ -16,7 +16,8 @@ namespace GestionDeTaller.UI.Models
         public string Nombre { get; set; }
         
         public double Precio { get; set; }
-        
+
+        [Display(Name = "Descripción")]
         public string Descripcion { get; set; }
 
         public Articulo ArticuloAsociado { get; set; }

@@ -250,7 +250,7 @@ namespace GestionDeTaller.BL
             return resultado.ToList();
         }
 
-        public int resumenDeUsoDelMantenimiento(int id)
+        public int ResumenDeUsoDelMantenimiento(int id)
         {
             List<OrdenesDeMantenimiento> ordenesAsociadas = new List<OrdenesDeMantenimiento>();
             List<DetalleOrdenesDeMantenimiento> detalleOrdenesDeMantenimientos;
@@ -271,7 +271,7 @@ namespace GestionDeTaller.BL
             return ordenesAsociadas.Count;
         }
 
-        public int resumenDeUsoDelRepuesto(int id) {
+        public int ResumenDeUsoDelRepuesto(int id) {
         
         List<RepuestosParaMantenimiento> listaDeMantenimientosAsociados;
         List<DetalleOrdenesDeMantenimiento> detalleOrdenesDeMantenimientos;
@@ -331,7 +331,7 @@ namespace GestionDeTaller.BL
             int ordenesEnProceso = 0;
             foreach (var orden in laLista)
             {
-                if (orden.Estado == Estado.Proceso)
+                if (orden.Estado == Estado.EnProceso)
                 {
                     ordenesEnProceso++;
                 }
@@ -377,7 +377,7 @@ namespace GestionDeTaller.BL
         {
             OrdenesDeMantenimiento OrdenParaEnviar;
             OrdenParaEnviar = ObtenerOrdenPorID(orden.Id);
-            OrdenParaEnviar.Estado = Estado.Proceso;
+            OrdenParaEnviar.Estado = Estado.EnProceso;
             OrdenParaEnviar.FechaDeInicio = DateTime.Now;
             ElContextoDeBaseDeDatos.OrdenesDeMantenimiento.Update(OrdenParaEnviar);
             ElContextoDeBaseDeDatos.SaveChanges();
@@ -386,7 +386,7 @@ namespace GestionDeTaller.BL
         public List<OrdenesDeMantenimiento> ObtenerOrdenesEnProceso()
         {
             var resultado = from c in ElContextoDeBaseDeDatos.OrdenesDeMantenimiento
-                            where c.Estado == Estado.Proceso
+                            where c.Estado == Estado.EnProceso
 
                             select c;
             return resultado.ToList();

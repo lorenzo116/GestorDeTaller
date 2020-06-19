@@ -9,17 +9,17 @@ namespace GestionDeTaller.Models
     {
         public int Id { get; set; }
 
-        [Required(ErrorMessage = "El nombre es requierido")]
+        [Required(ErrorMessage = "El nombre es requerido")]
         public string Nombre { get; set; }
        
         public int Id_Articulo { get; set; }
 
         
-        [Required(ErrorMessage = "El precio es requierido")]
-        [Range(0, int.MaxValue, ErrorMessage = "El costo fijo debe ser mayor 0 ")]
+        [Required(ErrorMessage = "El precio es requerido")]
+        [Range(0, int.MaxValue, ErrorMessage = "El precio debe ser mayor 0 ")]
         public double Precio { get; set; }
 
-        [Required(ErrorMessage = "La descripcion es requierida")]
+        [Required(ErrorMessage = "La descripción es requerida")]
         public string Descripcion { get; set; }
     }
 }

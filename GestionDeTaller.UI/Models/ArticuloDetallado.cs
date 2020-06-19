@@ -13,7 +13,7 @@ namespace GestionDeTaller.UI.Models
         public string Nombre { get; set; }
 
         public string Marca { get; set; }
-
+        [Display(Name = "Descripción")]
         public string Descripcion { get; set; }
 
         [Display(Name = "Ordenes Terminadas")]
@@ -21,7 +21,7 @@ namespace GestionDeTaller.UI.Models
 
         [Display(Name = "Ordenes En Proceso")]
         public string CantidadDeOrdenesEnProceso { get; set; }
-        public List<Repuestos> repuestosAsosiados { get; set; }
+        public List<Repuestos> RepuestosAsociados { get; set; }
 
 
     }
