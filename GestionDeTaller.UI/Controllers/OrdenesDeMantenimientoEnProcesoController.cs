@@ -20,7 +20,6 @@ namespace GestionDeTaller.UI.Controllers
         } 
 
 
-        // GET: OrdenesDeMantenimientoEnProceso
         public ActionResult Listar()
         {
             List<OrdenesDeMantenimiento> ordenes;
@@ -45,12 +44,6 @@ namespace GestionDeTaller.UI.Controllers
             ordenDetallada.ListaDeMantenimientosAsociados = Repositorio.ObtenerMantenimientosParaUnaOrden(Id);
 
             return View(ordenDetallada);
-        }
-
-        // GET: OrdenesDeMantenimientoEnProceso/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
         }
 
         public ActionResult Terminar(int id)

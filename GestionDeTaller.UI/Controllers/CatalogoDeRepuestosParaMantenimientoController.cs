@@ -20,7 +20,6 @@ namespace GestionDeTaller.UI.Controllers
             RepositorioDelTaller = repositorioDeLibros;
         }
 
-        // GET: CatalogoDeRepuestosParaMantenimiento
         public ActionResult Listar(int Id)
         {
             Mantenimientos mantenimiento;
