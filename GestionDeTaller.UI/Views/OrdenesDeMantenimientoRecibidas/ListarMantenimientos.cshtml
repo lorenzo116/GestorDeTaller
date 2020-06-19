@@ -40,9 +40,6 @@
                             @Html.DisplayFor(modelItem => item.PrecioTotal)
                         </td>
                         <td>
-
-
-
                             <a asp-action="AgregarMantenimiento" asp-route-Id_Mantenimiento="@item.Id" asp-route-Id_Orden="@ViewBag.Id_Orden" class="btn btn-outline-primary btn-sm"
                                onclick="return confirm('¿Desea agregar el mantenimiento @item.Descripcion a la orden actual?')">Agregar Mantenimiento</a>
                         </td>

@@ -19,7 +19,6 @@ namespace GestionDeTaller.UI.Controllers
             RepositorioDelTaller = repositorioDeOrdenes;
         }
 
-        // GET: OrdenesDeMantenimientoCanceladas
         public ActionResult Listar()
         {
             List<OrdenesDeMantenimiento> ordenes;

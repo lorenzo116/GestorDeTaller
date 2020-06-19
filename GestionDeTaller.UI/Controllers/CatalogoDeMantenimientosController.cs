@@ -19,7 +19,6 @@ namespace GestionDeTaller.UI.Controllers
             RepositorioDelTaller = repositorioDeLibros;
         }
 
-        // GET: CatalogoDeMantenimientos
         public ActionResult Listar(int Id)
         {
             ViewBag.Id_Articulo = Id;
@@ -32,7 +31,6 @@ namespace GestionDeTaller.UI.Controllers
             return View(laListaDeMantenimientos);
         }
 
-        // GET: CatalogoDeMantenimientos/Detalles/5
         public ActionResult DetallesDeMantenimientos(int Id)
         {
            
@@ -49,7 +47,6 @@ namespace GestionDeTaller.UI.Controllers
             return View(mantenimientoDetallado);
         }
 
-        // GET: CatalogoDeMantenimientos/Create
         public ActionResult AgregarMantenimiento(int Id_Articulo)
         {
             
@@ -59,7 +56,6 @@ namespace GestionDeTaller.UI.Controllers
             return View(mantenimiento);
         }
 
-        // POST: CatalogoDeMantenimientos/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult AgregarMantenimiento(Mantenimientos mantenimiento)
@@ -87,7 +83,6 @@ namespace GestionDeTaller.UI.Controllers
             }
         }
 
-        // GET: CatalogoDeMantenimientos/Edit/5
         public ActionResult Editar(int Id)
         {
             Mantenimientos mantenimiento = RepositorioDelTaller.ObtenerMantenimientoPorID(Id);
@@ -103,7 +98,7 @@ namespace GestionDeTaller.UI.Controllers
                 return View();
             }
         }
-        // POST: Articulos/Editar/
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Editar(Mantenimientos mantenimientos)
@@ -125,7 +120,5 @@ namespace GestionDeTaller.UI.Controllers
                 return View();
             }
         }
-
-        
     }
 }

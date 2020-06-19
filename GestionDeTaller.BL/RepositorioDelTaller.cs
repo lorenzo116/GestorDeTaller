@@ -195,7 +195,7 @@ namespace GestionDeTaller.BL
 
             return listaDeMantenimientos;
         }
-        public void Editar(Articulo articulo)
+        public void EditarArticulo(Articulo articulo)
         {
             Articulo articuloParaEditar;
             articuloParaEditar = ObtenerArticuloPorID(articulo.Id);
@@ -524,11 +524,5 @@ namespace GestionDeTaller.BL
             return resultado.ToList();
         }
 
-        public OrdenesDeMantenimiento DetallesDeRecibidos(OrdenesDeMantenimiento orden)
-        {
-            OrdenesDeMantenimiento OrdenPorDetallar;
-            OrdenPorDetallar = ObtenerOrdenPorID(orden.Id);
-            return OrdenPorDetallar;
-        }
     }
 }

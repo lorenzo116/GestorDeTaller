@@ -20,7 +20,6 @@ namespace GestionDeTaller.UI.Controllers
             RepositorioDelTaller = repositorioDeLibros;
         }
 
-        // GET: Articulos
         public ActionResult Listar()
         {
             List<Articulo> laLista;
@@ -28,9 +27,6 @@ namespace GestionDeTaller.UI.Controllers
 
             return View(laLista);
         }
-
-        // GET: Articulos/Detalles/5
-    
 
         public ActionResult DetallesDeArticulo(int Id)
         {
@@ -46,13 +42,11 @@ namespace GestionDeTaller.UI.Controllers
             return View(articuloDetallado);
         }
 
-        // GET: Articulos/Agregar
         public ActionResult AgregarArticulo()
         {
             return View();
         }
 
-        // POST: Persona/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult AgregarArticulo(Articulo articulo)
@@ -76,8 +70,6 @@ namespace GestionDeTaller.UI.Controllers
             }
         }
 
-        // GET: Articulos/Edit/5
-        // GET: Articulos/Editar/
         public ActionResult Editar(int Id)
         {
             if (ModelState.IsValid)
@@ -91,14 +83,14 @@ namespace GestionDeTaller.UI.Controllers
                 return View();
             }
         }
-        // POST: Articulos/Editar/
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Editar(Articulo articulo)
         {
             try
             {
-                RepositorioDelTaller.Editar(articulo);
+                RepositorioDelTaller.EditarArticulo(articulo);
 
                 return RedirectToAction(nameof(Listar));
             }

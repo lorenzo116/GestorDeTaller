@@ -20,7 +20,6 @@ namespace GestionDeTaller.UI.Controllers
             RepositorioDelTaller = repositorioDeOrdenes;
         }
 
-        // GET: OrdenesDeMantenimientoRecibidas
         public ActionResult Listar()
         {
             List<OrdenesDeMantenimiento> laLista;
@@ -29,7 +28,6 @@ namespace GestionDeTaller.UI.Controllers
             return View(laLista);
         }
 
-        // GET: OrdenesDeMantenimientoRecibidas/Details/5
         public ActionResult Detalles(int Id)
         {
             OrdenDetallada ordenDetallada = new OrdenDetallada();
@@ -47,14 +45,12 @@ namespace GestionDeTaller.UI.Controllers
             return View(ordenDetallada);
         }
 
-        // GET: OrdenesDeMantenimientoRecibidas/Create
         public ActionResult Agregar()
         {
             
             return View();
         }
 
-        // POST: OrdenesDeMantenimientoRecibidas/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Agregar(OrdenesDeMantenimiento orden)
@@ -124,7 +120,6 @@ namespace GestionDeTaller.UI.Controllers
             return RedirectToAction("Listar");
         }
 
-        // GET: OrdenesDeMantenimientoRecibidas/Edit/5
         public ActionResult Editar(int id)
         {
             if (ModelState.IsValid)
@@ -139,7 +134,6 @@ namespace GestionDeTaller.UI.Controllers
             }
         }
 
-        // POST: OrdenesDeMantenimientoRecibidas/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Editar(OrdenesDeMantenimiento orden)
@@ -168,23 +162,6 @@ namespace GestionDeTaller.UI.Controllers
 
             }
             else
-            {
-                return View();
-            }
-        }
-
-        // POST: OrdenesDeMantenimientoRecibidas/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Iniciar(OrdenesDeMantenimiento orden)
-        {
-            try
-            {
-                RepositorioDelTaller.IniciarOrden(orden);
-
-                return RedirectToAction(nameof(Listar));
-            }
-            catch
             {
                 return View();
             }

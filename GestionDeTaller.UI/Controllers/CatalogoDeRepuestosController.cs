@@ -21,7 +21,6 @@ namespace GestionDeTaller.UI.Controllers
         }
 
 
-        // GET: CatalogoDeRepuestos
         public ActionResult Listar(int Id)
         {
             ViewBag.Id_Articulo = Id;
@@ -34,10 +33,7 @@ namespace GestionDeTaller.UI.Controllers
             return View(laListaDeRepuestos);
         }
 
-      
-        
 
-        // GET: CatalogoDeRepuestos/Agregar
         public ActionResult Agregar(int Id_Articulo)
         {            
             Repuestos repuesto = new Repuestos();
@@ -46,7 +42,6 @@ namespace GestionDeTaller.UI.Controllers
             return View(repuesto);
         }
 
-        // POST: Persona/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Agregar(Repuestos repuesto)
@@ -74,7 +69,7 @@ namespace GestionDeTaller.UI.Controllers
             }
         }
 
-        // GET: CatalogoDeRepuestos/Edit/5
+
         public ActionResult Editar(int Id)
         {
             Repuestos Repuesto = RepositorioDelTaller.ObtenerRepuestoPorID(Id);
@@ -90,7 +85,7 @@ namespace GestionDeTaller.UI.Controllers
                 return View();
             }
         }
-        // POST: Articulos/Editar/
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Editar(Repuestos repuesto)
@@ -112,8 +107,6 @@ namespace GestionDeTaller.UI.Controllers
                 return View();
             }
         }
-
-        // GET: CatalogoDeRepuestos/Detalles/5
 
         public ActionResult DetallesDeRepuesto(int Id)
         {
@@ -142,7 +135,5 @@ namespace GestionDeTaller.UI.Controllers
                 Id = id
             }));
         }
-
-
     }
 }

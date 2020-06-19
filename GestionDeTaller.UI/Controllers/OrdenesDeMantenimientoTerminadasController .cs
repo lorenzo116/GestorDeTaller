@@ -20,7 +20,6 @@ namespace GestionDeTaller.UI.Controllers
             Repositorio = repositorio;
         }
 
-        // GET: OrdenesDeMantenimientoTerminadas
         public ActionResult Listar()
         {
             List<OrdenesDeMantenimiento> ordenes;
@@ -48,69 +47,6 @@ namespace GestionDeTaller.UI.Controllers
             ordenDetallada.ListaDeMantenimientosAsociados = Repositorio.ObtenerMantenimientosParaUnaOrden(Id);
 
             return View(ordenDetallada);
-        }
-
-        // GET: OrdenesDeMantenimientoTerminadas/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: OrdenesDeMantenimientoTerminadas/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: OrdenesDeMantenimientoTerminadas/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: OrdenesDeMantenimientoTerminadas/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: OrdenesDeMantenimientoTerminadas/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: OrdenesDeMantenimientoTerminadas/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
         }
     }
 }
