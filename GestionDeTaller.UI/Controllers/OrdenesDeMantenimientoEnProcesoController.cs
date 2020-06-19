@@ -17,7 +17,7 @@ namespace GestionDeTaller.UI.Controllers
         public OrdenesDeMantenimientoEnProcesoController(IRepositorioDelTaller repositorio)
         {
             Repositorio = repositorio;
-        } 
+        }
 
 
         public ActionResult Listar()
@@ -28,6 +28,15 @@ namespace GestionDeTaller.UI.Controllers
 
             return View(ordenes);
         }
+        public ActionResult ListarMantenimientos(int Id_Orden)
+        {
+            ViewBag.Id_Orden = Id_Orden;
+            List<Mantenimientos> mantenimientos;
+            mantenimientos = Repositorio.ObtenerMantenimientosParaUnaOrden(Id_Orden);
+
+            return View(mantenimientos);
+        }
+
         public ActionResult Detalles(int Id)
         {
             OrdenDetallada ordenDetallada = new OrdenDetallada();
