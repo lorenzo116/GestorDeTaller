@@ -1,0 +1,37 @@
+﻿@model IEnumerable<GestionDeTaller.Models.Mantenimientos>
+
+@{
+    ViewData["Title"] = "Agregar Mantenimiento";
+}
+
+<h1>Agregar Mantenimiento</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Descripcion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PrecioTotal)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Descripcion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PrecioTotal)
+            </td>
+            <td>
+                <a asp-action="AgregarMantenimiento" asp-route-Id_Mantenimiento="@item.Id" asp-route-Id_Orden="@ViewBag.Id_Orden" class="btn btn-outline-primary btn-sm"
+                   onclick="return confirm('¿Desea agregar el mantenimiento @item.Descripcion a la orden actual?')">Agregar Mantenimiento</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

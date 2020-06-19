@@ -47,10 +47,13 @@ namespace GestionDeTaller.UI.Controllers
             return View(ordenDetallada);
         }
 
-        // GET: OrdenesDeMantenimientoEnProceso/Details/5
-        public ActionResult Details(int id)
+        public ActionResult ListarMantenimientos(int Id_Orden)
         {
-            return View();
+            ViewBag.Id_Orden = Id_Orden;
+            List<Mantenimientos> mantenimientos;
+            mantenimientos = Repositorio.ObtenerMantenimientosParaUnaOrden(Id_Orden);
+
+            return View(mantenimientos);
         }
 
         public ActionResult Terminar(int id)
