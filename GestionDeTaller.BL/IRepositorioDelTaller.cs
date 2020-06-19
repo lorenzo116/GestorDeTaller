@@ -8,6 +8,13 @@ namespace GestionDeTaller.BL
 {
     public interface IRepositorioDelTaller
     {
+        public void AgregarArticulo(Articulo articulo);
+        public void AgregarMantenimiento(Mantenimientos mantenimiento);
+        public void AgregarMantenimientoAUnaOrden(int Id_Mantenimiento, int Id_Orden);
+        public void AgregarOrden(OrdenesDeMantenimiento orden);
+        public void AgregarRepuesto(Repuestos repuesto);
+        
+
         public List<Articulo> ObtenerTodosLosArticulos();
         public List<DetalleOrdenesDeMantenimiento> ObtenerTodosLosDetallesDeOrdenes();
         public List<Repuestos> DetallesDeOrdenesDeMantenimiento();
@@ -27,9 +34,7 @@ namespace GestionDeTaller.BL
         public List<Repuestos> ObtenerRepuestosAsociados(Articulo articulo);
 
         public List<Mantenimientos> ObtenerMantenimientosDeUnArticulo(Articulo articulo);
-        public void AgregarArticulo(Articulo articulo);
-        public void AgregarRepuesto(Repuestos repuesto);
-        public void AgregarOrden(OrdenesDeMantenimiento orden);
+       
         public Articulo ObtenerArticuloPorID(int id);
         public Repuestos ObtenerRepuestoPorID(int id);
         public Mantenimientos ObtenerMantenimientoPorID(int id);
@@ -44,7 +49,6 @@ namespace GestionDeTaller.BL
         public List<RepuestosParaMantenimiento> ObtenerMantenimientosParaRepuestos(int Id);
         public List<RepuestosParaMantenimiento> ObtenerRepuestoParaMantenimientos(int Id);
         
-        public void AgregarMantenimiento(Mantenimientos mantenimiento);
         public OrdenesDeMantenimiento ObtenerOrdenPorID(int id);
         public void EditarOrden(OrdenesDeMantenimiento orden);
         public void IniciarOrden(OrdenesDeMantenimiento orden);
@@ -52,7 +56,7 @@ namespace GestionDeTaller.BL
         public void CancelarOrden(OrdenesDeMantenimiento orden);
         public void AsociarRepuestoConUnMantenimiento(RepuestosParaMantenimiento repuestoParaAsociar);
         public void DesasociarRepuestoDeMantenimiento(int Id_Repuesto, int Id_Mantenimiento);
-        public void AgregarMantenimientoAUnaOrden(int Id_Mantenimiento, int Id_Orden);
+        
         public OrdenesDeMantenimiento DetallesDeRecibidos(OrdenesDeMantenimiento orden);
 
     }
