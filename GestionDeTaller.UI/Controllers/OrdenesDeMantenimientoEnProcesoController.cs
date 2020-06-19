@@ -36,6 +36,11 @@ namespace GestionDeTaller.UI.Controllers
 
             return View(mantenimientos);
         }
+        public ActionResult AgregarMantenimiento(int Id_Mantenimiento, int Id_Orden)
+        {
+            Repositorio.AgregarMantenimientoAUnaOrden(Id_Mantenimiento, Id_Orden);
+            return RedirectToAction("Listar");
+        }
 
         public ActionResult Detalles(int Id)
         {
