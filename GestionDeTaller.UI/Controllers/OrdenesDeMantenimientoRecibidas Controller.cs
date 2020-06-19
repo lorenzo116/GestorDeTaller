@@ -162,7 +162,10 @@ namespace GestionDeTaller.UI.Controllers
             {
                 OrdenesDeMantenimiento orden;
                 orden = RepositorioDelTaller.ObtenerOrdenPorID(id);
-                return View(orden);
+                RepositorioDelTaller.IniciarOrden(orden);
+
+                return RedirectToAction(nameof(Listar));
+
             }
             else
             {
