@@ -13,8 +13,6 @@ namespace GestionDeTaller.BL
         public void AgregarMantenimientoAUnaOrden(int Id_Mantenimiento, int Id_Orden);
         public void AgregarOrden(OrdenesDeMantenimiento orden);
         public void AgregarRepuesto(Repuestos repuesto);
-        
-
         public List<Articulo> ObtenerTodosLosArticulos();
         public List<DetalleOrdenesDeMantenimiento> ObtenerTodosLosDetallesDeOrdenes();
         public List<Repuestos> DetallesDeOrdenesDeMantenimiento();
@@ -34,7 +32,7 @@ namespace GestionDeTaller.BL
         public List<Mantenimientos> ObtenerLosMantenimientos(Articulo articulo);
         public List<RepuestosParaMantenimiento> ObtenerMantenimientosParaRepuestos(int Id);
         public List<RepuestosParaMantenimiento> ObtenerRepuestoParaMantenimientos(int Id);
-
+        public List<Mantenimientos> ObtenerMantenimientosConElPrecioTotal(Articulo articulo);
 
         public double ObtenerPrecioTotalDeUnMantenimiento(Mantenimientos mantenimiento);
         public double ObtenerCostoDeRepuestosDeMantenimiento(Mantenimientos mantenimiento);

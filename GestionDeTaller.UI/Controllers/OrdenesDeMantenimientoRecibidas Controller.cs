@@ -113,7 +113,7 @@ namespace GestionDeTaller.UI.Controllers
             articulo = RepositorioDelTaller.ObtenerArticuloPorID(orden.Id_Articulo);
             
             List<Mantenimientos> mantenimientos;
-            mantenimientos = RepositorioDelTaller.ObtenerMantenimientosDeUnArticulo(articulo);
+            mantenimientos = RepositorioDelTaller.ObtenerMantenimientosConElPrecioTotal(articulo);
 
              return View(mantenimientos);
         }

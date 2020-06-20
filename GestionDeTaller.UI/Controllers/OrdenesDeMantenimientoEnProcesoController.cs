@@ -36,8 +36,8 @@ namespace GestionDeTaller.UI.Controllers
             Articulo articulo;
             articulo = Repositorio.ObtenerArticuloPorID(orden.Id_Articulo);
             List<Mantenimientos> mantenimientos;
-            mantenimientos = Repositorio.ObtenerMantenimientosDeUnArticulo(articulo);
-
+            mantenimientos = Repositorio.ObtenerMantenimientosConElPrecioTotal(articulo);
+            
             return View(mantenimientos);
         }
         public ActionResult AgregarMantenimiento(int Id_Mantenimiento, int Id_Orden)

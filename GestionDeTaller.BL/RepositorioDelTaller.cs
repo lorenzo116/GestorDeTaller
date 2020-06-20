@@ -255,6 +255,20 @@ namespace GestionDeTaller.BL
                             where c.Id_Articulo == articulo.Id
                             select c;
             return resultado.ToList();
+
+        }
+
+        public List<Mantenimientos> ObtenerMantenimientosConElPrecioTotal(Articulo articulo) 
+        {
+            List<Mantenimientos> mantenimientos;
+            mantenimientos = ObtenerMantenimientosDeUnArticulo(articulo);
+
+            foreach (var mantenimiento in mantenimientos)
+            {
+                mantenimiento.PrecioTotal = ObtenerPrecioTotalDeUnMantenimiento(mantenimiento);
+
+            }
+            return mantenimientos;
         }
 
         public int ResumenDeUsoDelMantenimiento(int id)
