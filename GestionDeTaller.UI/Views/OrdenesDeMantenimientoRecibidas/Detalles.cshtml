@@ -4,7 +4,7 @@
     ViewData["Title"] = "Detalles";
 }
 
-<h1>Detalles de la orden</h1>
+<h4>Detalles de la orden</h4>
 <br />
 <div>
     <a asp-action="Listar" class="btn btn-outline-primary btn-sm">Regresar</a>
@@ -58,7 +58,7 @@
     @foreach (var item in Model.ListaDeMantenimientosAsociados)
     {
         <div class="card bg-secondary mb-3" style="max-width: 20rem;">
-            <div class="card-header">  Mantenimiento asociado al artículo</div>
+            <div class="card-header">  Mantenimiento asociado a la orden</div>
             <div class="card-body">
                 <h4 class="card-title">Datos del mantenimiento</h4>
                 <p class="card-text">

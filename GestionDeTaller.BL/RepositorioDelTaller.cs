@@ -177,12 +177,19 @@ namespace GestionDeTaller.BL
         public List<Mantenimientos> ObtenerMantenimientosParaUnaOrden(int id_Orden)
         {
             OrdenesDeMantenimiento orden;
-            Articulo articulo;
-            List<Mantenimientos> listaDeMantenimientos;
+            List<Mantenimientos> listaDeMantenimientos = new List<Mantenimientos>();
             
-            orden = ObtenerOrdenPorID(id_Orden);
-            articulo = ObtenerArticuloPorID(orden.Id_Articulo);
-            listaDeMantenimientos = ObtenerMantenimientosDeUnArticulo(articulo);
+            orden = ObtenerOrdenPorID(id_Orden);      
+            List<DetalleOrdenesDeMantenimiento> detallesDeOrdenes;         
+            detallesDeOrdenes = ObtenerTodosLosDetallesDeOrdenes();
+
+            foreach (var detalle in detallesDeOrdenes)
+            {
+                if (detalle.Id_OrdenesDeMantenimiento==id_Orden) 
+                {
+                    listaDeMantenimientos.Add(ObtenerMantenimientoPorID(detalle.Id_Mantenimiento));
+                }
+            }
             
             foreach (var mantenimiento in listaDeMantenimientos)
             {

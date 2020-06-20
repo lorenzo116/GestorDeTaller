@@ -107,8 +107,13 @@ namespace GestionDeTaller.UI.Controllers
         public ActionResult ListarMantenimientos(int id_Orden)
         {
             ViewBag.Id_Orden = id_Orden;
+            OrdenesDeMantenimiento orden;
+            Articulo articulo;
+            orden = RepositorioDelTaller.ObtenerOrdenPorID(id_Orden);
+            articulo = RepositorioDelTaller.ObtenerArticuloPorID(orden.Id_Articulo);
+            
             List<Mantenimientos> mantenimientos;
-            mantenimientos = RepositorioDelTaller.ObtenerMantenimientosParaUnaOrden(id_Orden);
+            mantenimientos = RepositorioDelTaller.ObtenerMantenimientosDeUnArticulo(articulo);
 
              return View(mantenimientos);
         }

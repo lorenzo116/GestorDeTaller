@@ -1,10 +1,10 @@
 ﻿@model IEnumerable<GestionDeTaller.Models.Articulo>
 
 @{
-    ViewData["Title"] = "Lista de Articulos Para Asociar";
+    ViewData["Title"] = "ListarArticulosParaAsociar";
 }
 
-<h1>ListarArticulosParaAsociar</h1>
+<h1>Lista de articulos para asociar</h1>
 
 <p><a asp-action="Agregar" class="btn btn-outline-primary btn-sm">Regresar</a>
     <a asp-action="Listar" class="btn btn-outline-primary btn-sm" onclick="return confirm('¿Desea cancelar la orden nueva?')">Cancelar</a>
@@ -38,31 +38,12 @@
                 <a asp-action="AsociarArticulo" asp-route-Id_Articulo="@item.Id" asp-route-nombre="@ViewBag.NombreDelCliente"
                    asp-route-descripcion="@ViewBag.DescripcionDelProblema" asp-route-montoDeAdelanto="@ViewBag.MontoDeAdelanto"
                    class="btn btn-outline-primary btn-sm"
-                   onclick="return confirm ('Seguro que desea asociar el articulo @item.Nombre a la nueva orden')">Asociar</a>
+                   onclick="return confirm ('Seguro que desea asociar el articulo @item.Nombre a la nueva orden')">Asociar
+                </a>
 
 
 
 
-                <button type="button" class="btn btn-outline-primary btn-sm" data-toggle="modal" data-target="#exampleModal">Terminar</button>
-                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Asociar</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                ¿Desea terminar el mantenimiento de @item.Nombre?
-                            </div>
-                            <div class="modal-footer">
-                                <a asp-action="Terminar" asp-route-id="@item.Id" class="btn btn-outline-primary btn-sm">Terminar</a>
-                                <button type="button" class="btn btn-outline-primary btn-sm" data-dismiss="modal">Cerrar</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </td>
         </tr>
 }
