@@ -39,13 +39,12 @@ namespace GestionDeTaller.SI.Controllers
 
         // POST api/<CatalogoDeArticulosController>
         [HttpPost]
-        public IActionResult Post([FromBody] Articulo articulo)
+        public IActionResult AgregarArticulo([FromBody] Articulo articulo)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
-                    // TODO: Add insert logic here
                     RepositorioDelTaller.AgregarArticulo(articulo);
                 }
             }

@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using GestionDeTaller.BL;
 using GestionDeTaller.Models;
@@ -8,6 +10,7 @@ using GestionDeTaller.UI.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
+using Newtonsoft.Json;
 
 namespace GestionDeTaller.UI.Controllers
 {
@@ -19,14 +22,26 @@ namespace GestionDeTaller.UI.Controllers
             RepositorioDelTaller = repositorioDeLibros;
         }
 
-        public ActionResult Listar(int Id)
+        public async Task<IActionResult> Listar(int Id)
         {
             ViewBag.Id_Articulo = Id;
+            List<Mantenimientos> laListaDeMantenimientos = new List<Mantenimientos>();
 
-            List<Mantenimientos> laListaDeMantenimientos;
-            Articulo articulo;
-            articulo = RepositorioDelTaller.ObtenerArticuloPorID(Id);
-            laListaDeMantenimientos = RepositorioDelTaller.ObtenerLosMantenimientos(articulo);
+            try
+            {
+                var httpClient = new HttpClient();
+
+                var response = await httpClient.GetAsync("https://localhost:44355/api/CatalogoDeMantenimientos");
+
+                string apiResponse = await response.Content.ReadAsStringAsync();
+
+                laListaDeMantenimientos = JsonConvert.DeserializeObject<List<Mantenimientos>>(apiResponse);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
 
             return View(laListaDeMantenimientos);
         }
@@ -58,26 +73,34 @@ namespace GestionDeTaller.UI.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult AgregarMantenimiento(Mantenimientos mantenimiento)
+        public async Task<ActionResult> AgregarMantenimiento(Mantenimientos mantenimiento)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
-                    RepositorioDelTaller.AgregarMantenimiento(mantenimiento);
-                    return RedirectToAction("Listar", new RouteValueDictionary(new
-                    {
-                        controller = "CatalogoDeMantenimientos",
-                        Action = "Listar",
-                        Id = mantenimiento.Id_Articulo
-                    }));
+                    var httpClient = new HttpClient();
+
+                    string json = JsonConvert.SerializeObject(mantenimiento);
+
+                    var buffer = System.Text.Encoding.UTF8.GetBytes(json);
+
+                    var byteContent = new ByteArrayContent(buffer);
+
+                    byteContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+
+                    await httpClient.PostAsync("https://localhost:44355/api/CatalogoDeMantenimientos", byteContent);
+
+
+                    return RedirectToAction(nameof(Listar));
                 }
                 else
                 {
                     return View();
                 }
+
             }
-            catch
+            catch (Exception ex)
             {
                 return View();
             }

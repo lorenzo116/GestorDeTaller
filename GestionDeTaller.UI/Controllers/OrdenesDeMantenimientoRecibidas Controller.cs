@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using GestionDeTaller.BL;
 using GestionDeTaller.Models;
@@ -8,6 +10,7 @@ using GestionDeTaller.UI.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
+using Newtonsoft.Json;
 
 namespace GestionDeTaller.UI.Controllers
 {
@@ -20,10 +23,24 @@ namespace GestionDeTaller.UI.Controllers
             RepositorioDelTaller = repositorioDeOrdenes;
         }
 
-        public ActionResult Listar()
+        public async Task<ActionResult> Listar()
         {
-            List<OrdenesDeMantenimiento> laLista;
-            laLista = RepositorioDelTaller.ObtenerOrdenesRecibidas();
+            List<OrdenesDeMantenimiento> laLista = new List<OrdenesDeMantenimiento>();
+
+            try
+            {
+                var httpClient = new HttpClient();
+
+                var response = await httpClient.GetAsync("https://localhost:44355/api/CatalogoDeOrdenesDeMantenimientoRecibidas");
+
+                string apiResponse = await response.Content.ReadAsStringAsync();
+
+                laLista = JsonConvert.DeserializeObject<List<OrdenesDeMantenimiento>>(apiResponse);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
 
             return View(laLista);
         }
@@ -81,15 +98,30 @@ namespace GestionDeTaller.UI.Controllers
         }
 
 
-        public ActionResult ListarArticulosParaAsociar(string nombre, string descripcion, decimal montoDeAdelanto)
+        public async Task<ActionResult> ListarArticulosParaAsociar(string nombre, string descripcion, decimal montoDeAdelanto)
         {
-            List<Articulo> articulos;
-            articulos = RepositorioDelTaller.ObtenerTodosLosArticulos();
             ViewBag.NombreDelCliente = nombre;
             ViewBag.DescripcionDelProblema = descripcion;
             ViewBag.MontoDeAdelanto = montoDeAdelanto;
 
-            return View(articulos);
+            List<Articulo> laLista = new List<Articulo>();
+
+            try
+            {
+                var httpClient = new HttpClient();
+
+                var response = await httpClient.GetAsync("https://localhost:44355/api/CatalogoDeOrdenesDeMantenimientoRecibidas");
+
+                string apiResponse = await response.Content.ReadAsStringAsync();
+
+                laLista = JsonConvert.DeserializeObject<List<Articulo>>(apiResponse);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return View(laLista);
         }
 
 
@@ -104,25 +136,59 @@ namespace GestionDeTaller.UI.Controllers
             return RedirectToAction("Listar");
         }
 
-        public ActionResult ListarMantenimientos(int id_Orden)
+        public async Task<ActionResult> ListarMantenimientos(int id_Orden)
         {
             ViewBag.Id_Orden = id_Orden;
-            OrdenesDeMantenimiento orden;
-            Articulo articulo;
-            orden = RepositorioDelTaller.ObtenerOrdenPorID(id_Orden);
-            articulo = RepositorioDelTaller.ObtenerArticuloPorID(orden.Id_Articulo);
-            
-            List<Mantenimientos> mantenimientos;
-            mantenimientos = RepositorioDelTaller.ObtenerMantenimientosConElPrecioTotal(articulo);
+            List<Mantenimientos> laLista = new List<Mantenimientos>();
 
-             return View(mantenimientos);
+            try
+            {
+                var httpClient = new HttpClient();
+
+                var response = await httpClient.GetAsync("https://localhost:44355/api/CatalogoDeOrdenesDeMantenimientoRecibidas");
+
+                string apiResponse = await response.Content.ReadAsStringAsync();
+
+                laLista = JsonConvert.DeserializeObject<List<Mantenimientos>>(apiResponse);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return View(laLista);
         }
 
 
-        public ActionResult AgregarMantenimiento(int Id_Mantenimiento, int Id_Orden)
+        public async Task<ActionResult> AgregarMantenimiento(int Id_Mantenimiento, int Id_Orden)
         {
-            RepositorioDelTaller.AgregarMantenimientoAUnaOrden(Id_Mantenimiento, Id_Orden);
-            return RedirectToAction("Listar");
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    var httpClient = new HttpClient();
+
+                    string json = JsonConvert.SerializeObject(Id_Mantenimiento, (Formatting)Id_Orden);
+
+                    var buffer = System.Text.Encoding.UTF8.GetBytes(json);
+
+                    var byteContent = new ByteArrayContent(buffer);
+
+                    byteContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+
+                    await httpClient.PostAsync("https://localhost:44355/api/CatalogoDeArticulos", byteContent);
+
+                    return RedirectToAction(nameof(Listar));
+                }
+                else
+                {
+                    return View();
+                }
+            }
+            catch (Exception ex)
+            {
+                return View();
+            }
         }
 
         public ActionResult Editar(int id)

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
 using GestionDeTaller.BL;
 using GestionDeTaller.Models;
@@ -9,6 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using Newtonsoft.Json;
 
 namespace GestionDeTaller.UI.Controllers
 {
@@ -20,30 +22,56 @@ namespace GestionDeTaller.UI.Controllers
             RepositorioDelTaller = repositorioDeLibros;
         }
 
-        public ActionResult Listar(int Id)
+        public async Task<ActionResult> Listar(int Id)
         {
             Mantenimientos mantenimiento;
             mantenimiento = RepositorioDelTaller.ObtenerMantenimientoPorID(Id);
+            List<Repuestos> laListaDeRepuestos = new List<Repuestos>();
             ViewBag.Id_Articulo = mantenimiento.Id_Articulo;
             ViewBag.Id_Mantenimiento = Id;
             ViewBag.descripconDelMantenimiento = mantenimiento.Descripcion;
-            List<Repuestos> laListaDeRepuestos = new List<Repuestos>();
-            List<RepuestosParaMantenimiento> laListaDeRepuestosYMantenimientos = new List<RepuestosParaMantenimiento>();
-            laListaDeRepuestosYMantenimientos = RepositorioDelTaller.ObtenerRepuestoParaMantenimientos(Id);
-            laListaDeRepuestos = RepositorioDelTaller.ObtenerRepuestosPorMantenimiento(laListaDeRepuestosYMantenimientos);   
+
+            try
+            {
+                var httpClient = new HttpClient();
+
+                var response = await httpClient.GetAsync("https://localhost:44355/api/CatalogoDeRpuestosParaMantenimiento");
+
+                string apiResponse = await response.Content.ReadAsStringAsync();
+
+                laListaDeRepuestos = JsonConvert.DeserializeObject<List<Repuestos>>(apiResponse);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
             return View(laListaDeRepuestos);
         }
 
-        public ActionResult ListarRepuestosSinMantenimiento(int Id_Mantenimiento) 
+        public async Task<ActionResult> ListarRepuestosSinMantenimientoAsync(int Id_Mantenimiento) 
         {     
             Mantenimientos mantenimiento;
             mantenimiento = RepositorioDelTaller.ObtenerMantenimientoPorID(Id_Mantenimiento);
             ViewBag.Id_Mantenimiento = Id_Mantenimiento;
             ViewBag.descripcionDelMantenimiento = mantenimiento.Descripcion;
-
             ViewBag.Id_Articulo = mantenimiento.Id_Articulo;
-            List<Repuestos> listaDeRepuestosSinMantenimiento;
-            listaDeRepuestosSinMantenimiento = RepositorioDelTaller.ObtenerRepuestosSinAsociar(mantenimiento.Id);
+
+            List<Repuestos> listaDeRepuestosSinMantenimiento = new List<Repuestos>();
+            try
+            {
+                var httpClient = new HttpClient();
+
+                var response = await httpClient.GetAsync("https://localhost:44355/api/CatalogoDeRpuestosParaMantenimiento");
+
+                string apiResponse = await response.Content.ReadAsStringAsync();
+
+                listaDeRepuestosSinMantenimiento = JsonConvert.DeserializeObject<List<Repuestos>>(apiResponse);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
 
             return View(listaDeRepuestosSinMantenimiento);
         }

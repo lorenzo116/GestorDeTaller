@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
 using GestionDeTaller.BL;
 using GestionDeTaller.Models;
 using GestionDeTaller.UI.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 
 namespace GestionDeTaller.UI.Controllers
 {
@@ -19,13 +21,26 @@ namespace GestionDeTaller.UI.Controllers
             RepositorioDelTaller = repositorioDeOrdenes;
         }
 
-        public ActionResult Listar()
+        public async Task<ActionResult> ListarAsync()
         {
-            List<OrdenesDeMantenimiento> ordenes;
+            List<OrdenesDeMantenimiento> laLista = new List<OrdenesDeMantenimiento>();
 
-            ordenes = RepositorioDelTaller.ObtenerOrdenesCanceladas();
+            try
+            {
+                var httpClient = new HttpClient();
 
-            return View(ordenes);
+                var response = await httpClient.GetAsync("https://localhost:44355/api/CatalogoDeArticulos");
+
+                string apiResponse = await response.Content.ReadAsStringAsync();
+
+                laLista = JsonConvert.DeserializeObject<List<OrdenesDeMantenimiento>>(apiResponse);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return View(laLista);
         }
         public ActionResult Detalles(int Id)
         {

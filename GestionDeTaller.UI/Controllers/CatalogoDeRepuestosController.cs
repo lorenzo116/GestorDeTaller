@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using GestionDeTaller.BL;
 using GestionDeTaller.Models;
@@ -8,6 +10,7 @@ using GestionDeTaller.UI.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
+using Newtonsoft.Json;
 
 namespace GestionDeTaller.UI.Controllers
 {
@@ -21,16 +24,28 @@ namespace GestionDeTaller.UI.Controllers
         }
 
 
-        public ActionResult Listar(int Id)
+        public async Task<ActionResult> Listar(int Id)
         {
             ViewBag.Id_Articulo = Id;
 
-            List<Repuestos> laListaDeRepuestos = new List<Repuestos>();
-            Articulo articulo = new Articulo();
-            articulo = RepositorioDelTaller.ObtenerArticuloPorID(Id);
-            laListaDeRepuestos = RepositorioDelTaller.ObtenerRepuestosAsociados(articulo);
-            
-            return View(laListaDeRepuestos);
+            List<Repuestos> laLista = new List<Repuestos>();
+
+            try
+            {
+                var httpClient = new HttpClient();
+
+                var response = await httpClient.GetAsync("https://localhost:44355/api/CatalogoDeRepuestos");
+
+                string apiResponse = await response.Content.ReadAsStringAsync();
+
+                laLista = JsonConvert.DeserializeObject<List<Repuestos>>(apiResponse);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return View(laLista);
         }
 
 
@@ -44,26 +59,33 @@ namespace GestionDeTaller.UI.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Agregar(Repuestos repuesto)
+        public async Task<ActionResult> Agregar(Repuestos repuesto)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
-                    RepositorioDelTaller.AgregarRepuesto(repuesto);
-                    return RedirectToAction("Listar", new RouteValueDictionary(new
-                    {
-                        controller = "CatalogoDeRepuestos",
-                        Action = "Listar",
-                        Id = repuesto.Id_Articulo
-                    }));
+                    var httpClient = new HttpClient();
+
+                    string json = JsonConvert.SerializeObject(repuesto);
+
+                    var buffer = System.Text.Encoding.UTF8.GetBytes(json);
+
+                    var byteContent = new ByteArrayContent(buffer);
+
+                    byteContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+
+                    await httpClient.PostAsync("https://localhost:44355/api/CatalogoDeRepuestos", byteContent);
+
+
+                    return RedirectToAction(nameof(Listar));
                 }
                 else
                 {
                     return View();
                 }
             }
-            catch
+            catch (Exception ex)
             {
                 return View();
             }
