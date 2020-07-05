@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using GestionDeTaller.BL;
 using GestionDeTaller.Models;
@@ -9,6 +11,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Routing;
 using Microsoft.AspNetCore.Routing;
+using Newtonsoft.Json;
 
 namespace GestionDeTaller.UI.Controllers
 {
@@ -20,10 +23,24 @@ namespace GestionDeTaller.UI.Controllers
             RepositorioDelTaller = repositorioDeLibros;
         }
 
-        public ActionResult Listar()
+        public async Task<IActionResult> Listar()
         {
-            List<Articulo> laLista;
-            laLista = RepositorioDelTaller.ObtenerTodosLosArticulos();
+            List<Articulo> laLista = new List<Articulo>();
+
+            try
+            {
+                var httpClient = new HttpClient();
+
+                var response = await httpClient.GetAsync("https://localhost:44355/api/CatalogoDeArticulos");
+
+                string apiResponse = await response.Content.ReadAsStringAsync();
+
+                laLista = JsonConvert.DeserializeObject<List<Articulo>>(apiResponse);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
 
             return View(laLista);
         }
@@ -49,22 +66,34 @@ namespace GestionDeTaller.UI.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult AgregarArticulo(Articulo articulo)
+        public async Task<IActionResult> AgregarArticulo(Articulo articulo)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
-                    // TODO: Add insert logic here
-                    RepositorioDelTaller.AgregarArticulo(articulo);
+                    var httpClient = new HttpClient();
+
+                    string json = JsonConvert.SerializeObject(articulo);
+
+                    var buffer = System.Text.Encoding.UTF8.GetBytes(json);
+
+                    var byteContent = new ByteArrayContent(buffer);
+
+                    byteContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+
+                    await httpClient.PostAsync("https://localhost:44355/api/CatalogoDeArticulos", byteContent);
+
+
                     return RedirectToAction(nameof(Listar));
                 }
                 else
                 {
                     return View();
                 }
+
             }
-            catch
+            catch (Exception ex)
             {
                 return View();
             }
