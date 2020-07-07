@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
 using GestionDeTaller.BL;
 using GestionDeTaller.Models;
 using GestionDeTaller.UI.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 
 namespace GestionDeTaller.UI.Controllers
 {
@@ -30,23 +32,22 @@ namespace GestionDeTaller.UI.Controllers
         }
 
 
-        public ActionResult Detalles(int Id)
+        public async Task<IActionResult> Detalles(int Id)
         {
-            OrdenDetallada ordenDetallada = new OrdenDetallada();
-            OrdenesDeMantenimiento orden = Repositorio.ObtenerOrdenPorID(Id);
-            ordenDetallada.NombreDelCliente = orden.NombreDelCliente;
-            ordenDetallada.DescripcionDelProblema = orden.DescripcionDelProblema;
-            ordenDetallada.FechaDeIngreso = orden.FechaDeIngreso;
-            ordenDetallada.FechaDeInicio = orden.FechaDeInicio;
-            ordenDetallada.FechaDeFinalizacion = orden.FechaDeFinalizacion;
-            ordenDetallada.MontoDeAdelanto = orden.MontoDeAdelanto;
-            Articulo articulo = new Articulo();
-            articulo = Repositorio.ObtenerArticuloPorID(orden.Id_Articulo);
-            ordenDetallada.NombreArticulo = articulo.Nombre;
-            ordenDetallada.MarcaArticulo = articulo.Marca;
-            ordenDetallada.ListaDeMantenimientosAsociados = Repositorio.ObtenerMantenimientosParaUnaOrden(Id);
+            OrdenDetallada orden;
 
-            return View(ordenDetallada);
+            try
+            {
+                var httpClient = new HttpClient();
+                var response = await httpClient.GetAsync("https://localhost:44355/api/OrdenesDeMantenimientoTerminadas" + Id);
+                string apiResponse = await response.Content.ReadAsStringAsync();
+                orden = JsonConvert.DeserializeObject<OrdenDetallada>(apiResponse);
+            }
+            catch (Exception Ex)
+            {
+                throw Ex;
+            }
+            return View(orden);
         }
     }
 }

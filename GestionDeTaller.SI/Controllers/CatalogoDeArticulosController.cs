@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using GestionDeTaller.BL;
 using GestionDeTaller.Models;
+using GestionDeTaller.UI.Models;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -32,9 +33,21 @@ namespace GestionDeTaller.SI.Controllers
 
         // GET api/<CatalogoDeArticulosController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public IActionResult Get(int id)
         {
-            return "value";
+            ArticuloDetallado articuloDetallado = new ArticuloDetallado();
+            Articulo articulo = RepositorioDelTaller.ObtenerArticuloPorID(id);
+            articuloDetallado.Nombre = articulo.Nombre;
+            articuloDetallado.Marca = articulo.Marca;
+            articuloDetallado.Descripcion = articulo.Descripcion;
+            articuloDetallado.CantidadDeOrdenesEnProceso = RepositorioDelTaller.ContarOrdenesEnProceso(id);
+            articuloDetallado.CantidadDeOrdenesTerminadas = RepositorioDelTaller.ContarOrdenesTerminadas(id);
+            articuloDetallado.RepuestosAsociados = RepositorioDelTaller.ObtenerRepuestosAsociados(articulo);
+            if (articulo == null) { return NotFound(); }
+            else
+            {
+                return Ok(articuloDetallado);
+            }
         }
 
         // POST api/<CatalogoDeArticulosController>
@@ -63,10 +76,19 @@ namespace GestionDeTaller.SI.Controllers
             
         }
 
-        // DELETE api/<CatalogoDeArticulosController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+        public IActionResult DetallarArticulo([FromBody] int id)
         {
+            ArticuloDetallado articuloDetallado = new ArticuloDetallado();
+            Articulo articulo = RepositorioDelTaller.ObtenerArticuloPorID(id);
+            articuloDetallado.Nombre = articulo.Nombre;
+            articuloDetallado.Marca = articulo.Marca;
+            articuloDetallado.Descripcion = articulo.Descripcion;
+            articuloDetallado.CantidadDeOrdenesEnProceso = RepositorioDelTaller.ContarOrdenesEnProceso(id);
+            articuloDetallado.CantidadDeOrdenesTerminadas = RepositorioDelTaller.ContarOrdenesTerminadas(id);
+            articuloDetallado.RepuestosAsociados = RepositorioDelTaller.ObtenerRepuestosAsociados(articulo);
+
+            return Ok(articuloDetallado);
         }
+
     }
 }
