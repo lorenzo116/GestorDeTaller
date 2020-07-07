@@ -38,7 +38,7 @@ namespace GestionDeTaller.SI.Controllers
         public IActionResult Get(int id)
         {
             OrdenDetallada ordenDetallada = new OrdenDetallada();
-            OrdenesDeMantenimiento orden = Repositorio.ObtenerOrdenPorID(Id);
+            OrdenesDeMantenimiento orden = Repositorio.ObtenerOrdenPorID(id);
             ordenDetallada.NombreDelCliente = orden.NombreDelCliente;
             ordenDetallada.DescripcionDelProblema = orden.DescripcionDelProblema;
             ordenDetallada.FechaDeIngreso = orden.FechaDeIngreso;
@@ -49,11 +49,11 @@ namespace GestionDeTaller.SI.Controllers
             articulo = Repositorio.ObtenerArticuloPorID(orden.Id_Articulo);
             ordenDetallada.NombreArticulo = articulo.Nombre;
             ordenDetallada.MarcaArticulo = articulo.Marca;
-            ordenDetallada.ListaDeMantenimientosAsociados = Repositorio.ObtenerMantenimientosParaUnaOrden(Id);
+            ordenDetallada.ListaDeMantenimientosAsociados = Repositorio.ObtenerMantenimientosParaUnaOrden(id);
             if (orden == null) { return NotFound(); }
             else
             {
-                return Ok(articuloDetallado);
+                return Ok(ordenDetallada);
             }
         }
 
