@@ -19,14 +19,27 @@ namespace GestionDeTaller.UI.Controllers
             
         }
 
-        //public ActionResult Listar()
-        //{
-        //    List<OrdenesDeMantenimiento> ordenes;
+        public async Task<ActionResult> Listar()
+        {
+            List<OrdenesDeMantenimiento> laLista = new List<OrdenesDeMantenimiento>();
 
-        //    ordenes = Repositorio.ObtenerOrdenesTerminadas();
+            try
+            {
+                var httpClient = new HttpClient();
 
-        //    return View(ordenes);
-        //}
+                var response = await httpClient.GetAsync("https://localhost:44355/api/CatalogoDeOrdenesDeMantenimientoTerminadas");
+
+                string apiResponse = await response.Content.ReadAsStringAsync();
+
+                laLista = JsonConvert.DeserializeObject<List<OrdenesDeMantenimiento>>(apiResponse);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return View(laLista);
+        }
 
 
         public async Task<IActionResult> Detalles(int Id)
