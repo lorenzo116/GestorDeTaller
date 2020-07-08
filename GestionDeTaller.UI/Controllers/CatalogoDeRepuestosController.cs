@@ -17,10 +17,9 @@ namespace GestionDeTaller.UI.Controllers
     public class CatalogoDeRepuestosController : Controller
     {
 
-        private IRepositorioDelTaller RepositorioDelTaller;
-        public CatalogoDeRepuestosController(IRepositorioDelTaller repositorioDeLibros)
+        public CatalogoDeRepuestosController()
         {
-            RepositorioDelTaller = repositorioDeLibros;
+            
         }
 
 
@@ -92,43 +91,43 @@ namespace GestionDeTaller.UI.Controllers
         }
 
 
-        public ActionResult Editar(int Id)
-        {
-            Repuestos Repuesto = RepositorioDelTaller.ObtenerRepuestoPorID(Id);
-            ViewBag.Id_Articulo = Repuesto.Id_Articulo;
-            if (ModelState.IsValid)
-            {
-                Repuestos repuesto;
-                repuesto = RepositorioDelTaller.ObtenerRepuestoPorID(Id);
-                return View(repuesto);
-            }
-            else
-            {
-                return View();
-            }
-        }
+        //public ActionResult Editar(int Id)
+        //{
+        //    Repuestos Repuesto = RepositorioDelTaller.ObtenerRepuestoPorID(Id);
+        //    ViewBag.Id_Articulo = Repuesto.Id_Articulo;
+        //    if (ModelState.IsValid)
+        //    {
+        //        Repuestos repuesto;
+        //        repuesto = RepositorioDelTaller.ObtenerRepuestoPorID(Id);
+        //        return View(repuesto);
+        //    }
+        //    else
+        //    {
+        //        return View();
+        //    }
+        //}
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Editar(Repuestos repuesto)
-        {
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Editar(Repuestos repuesto)
+        //{
             
-            try
-            {
-                RepositorioDelTaller.EditarRepuesto(repuesto);
+        //    try
+        //    {
+        //        RepositorioDelTaller.EditarRepuesto(repuesto);
 
-                return RedirectToAction("Listar", new RouteValueDictionary(new
-                {
-                    controller = "CatalogoDeRepuestos",
-                    Action = "Listar",
-                    Id = repuesto.Id_Articulo
-                }));
-            }
-            catch
-            {
-                return View();
-            }
-        }
+        //        return RedirectToAction("Listar", new RouteValueDictionary(new
+        //        {
+        //            controller = "CatalogoDeRepuestos",
+        //            Action = "Listar",
+        //            Id = repuesto.Id_Articulo
+        //        }));
+        //    }
+        //    catch
+        //    {
+        //        return View();
+        //    }
+        //}
 
         public async Task<IActionResult> DetallesDeArticulo(int Id)
         {

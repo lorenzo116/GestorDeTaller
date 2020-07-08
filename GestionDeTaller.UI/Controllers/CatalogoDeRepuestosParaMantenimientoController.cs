@@ -16,16 +16,15 @@ namespace GestionDeTaller.UI.Controllers
 {
     public class CatalogoDeRepuestosParaMantenimientoController : Controller
     {
-        private IRepositorioDelTaller RepositorioDelTaller;
-        public CatalogoDeRepuestosParaMantenimientoController(IRepositorioDelTaller repositorioDeLibros)
+        
+        public CatalogoDeRepuestosParaMantenimientoController()
         {
-            RepositorioDelTaller = repositorioDeLibros;
+            
         }
 
         public async Task<ActionResult> Listar(int Id)
         {
-            Mantenimientos mantenimiento;
-            mantenimiento = RepositorioDelTaller.ObtenerMantenimientoPorID(Id);
+            Mantenimientos mantenimiento = new Mantenimientos();
             List<Repuestos> laListaDeRepuestos = new List<Repuestos>();
             ViewBag.Id_Articulo = mantenimiento.Id_Articulo;
             ViewBag.Id_Mantenimiento = Id;
@@ -35,7 +34,7 @@ namespace GestionDeTaller.UI.Controllers
             {
                 var httpClient = new HttpClient();
 
-                var response = await httpClient.GetAsync("https://localhost:44355/api/CatalogoDeRpuestosParaMantenimiento");
+                var response = await httpClient.GetAsync("https://localhost:44355/api/CatalogoDeRepuestosParaMantenimiento");
 
                 string apiResponse = await response.Content.ReadAsStringAsync();
 
@@ -51,8 +50,8 @@ namespace GestionDeTaller.UI.Controllers
 
         public async Task<ActionResult> ListarRepuestosSinMantenimientoAsync(int Id_Mantenimiento) 
         {     
-            Mantenimientos mantenimiento;
-            mantenimiento = RepositorioDelTaller.ObtenerMantenimientoPorID(Id_Mantenimiento);
+            Mantenimientos mantenimiento = new Mantenimientos();
+            //mantenimiento = RepositorioDelTaller.ObtenerMantenimientoPorID(Id_Mantenimiento);
             ViewBag.Id_Mantenimiento = Id_Mantenimiento;
             ViewBag.descripcionDelMantenimiento = mantenimiento.Descripcion;
             ViewBag.Id_Articulo = mantenimiento.Id_Articulo;
@@ -62,7 +61,7 @@ namespace GestionDeTaller.UI.Controllers
             {
                 var httpClient = new HttpClient();
 
-                var response = await httpClient.GetAsync("https://localhost:44355/api/CatalogoDeRpuestosParaMantenimiento");
+                var response = await httpClient.GetAsync("https://localhost:44355/api/CatalogoDeRepuestosParaMantenimiento");
 
                 string apiResponse = await response.Content.ReadAsStringAsync();
 
@@ -77,30 +76,30 @@ namespace GestionDeTaller.UI.Controllers
         }
 
 
-        public ActionResult Asociar(int Id_Repuesto, int Id_Mantenimiento) 
-        {
-            RepuestosParaMantenimiento repuestoParaAsociar = new RepuestosParaMantenimiento();
-            repuestoParaAsociar.Id_Mantenimiento = Id_Mantenimiento;
-            repuestoParaAsociar.Id_Repuesto = Id_Repuesto;
-            RepositorioDelTaller.AsociarRepuestoConUnMantenimiento(repuestoParaAsociar);
+        //public ActionResult Asociar(int Id_Repuesto, int Id_Mantenimiento) 
+        //{
+        //    RepuestosParaMantenimiento repuestoParaAsociar = new RepuestosParaMantenimiento();
+        //    repuestoParaAsociar.Id_Mantenimiento = Id_Mantenimiento;
+        //    repuestoParaAsociar.Id_Repuesto = Id_Repuesto;
+        //    RepositorioDelTaller.AsociarRepuestoConUnMantenimiento(repuestoParaAsociar);
 
-            return RedirectToAction("ListarRepuestosSinMantenimiento", new RouteValueDictionary(new
-            {
-                controller = "CatalogoDeRepuestosParaMantenimiento",
-                Action = "ListarRepuestosSinMantenimiento", 
-                Id_Mantenimiento = Id_Mantenimiento }));
-        }
+        //    return RedirectToAction("ListarRepuestosSinMantenimiento", new RouteValueDictionary(new
+        //    {
+        //        controller = "CatalogoDeRepuestosParaMantenimiento",
+        //        Action = "ListarRepuestosSinMantenimiento", 
+        //        Id_Mantenimiento = Id_Mantenimiento }));
+        //}
 
-        public ActionResult Desasociar(int Id_Repuesto, int Id_Mantenimiento) 
-        {
-            RepositorioDelTaller.DesasociarRepuestoDeMantenimiento(Id_Repuesto, Id_Mantenimiento);
-            return RedirectToAction("Listar", new RouteValueDictionary(new
-            {
-                controller = "CatalogoDeRepuestosParaMantenimiento",
-                Action = "ListarRepuestosSinMantenimiento",
-                Id = Id_Mantenimiento
-            }));
-        }
+        //public ActionResult Desasociar(int Id_Repuesto, int Id_Mantenimiento) 
+        //{
+        //    RepositorioDelTaller.DesasociarRepuestoDeMantenimiento(Id_Repuesto, Id_Mantenimiento);
+        //    return RedirectToAction("Listar", new RouteValueDictionary(new
+        //    {
+        //        controller = "CatalogoDeRepuestosParaMantenimiento",
+        //        Action = "ListarRepuestosSinMantenimiento",
+        //        Id = Id_Mantenimiento
+        //    }));
+        //}
 
        
     }

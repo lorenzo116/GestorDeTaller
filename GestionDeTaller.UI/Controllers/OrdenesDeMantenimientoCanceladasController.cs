@@ -14,11 +14,9 @@ namespace GestionDeTaller.UI.Controllers
 {
     public class OrdenesDeMantenimientoCanceladasController : Controller
     {
-        private readonly IRepositorioDelTaller RepositorioDelTaller;
-
-        public OrdenesDeMantenimientoCanceladasController(IRepositorioDelTaller repositorioDeOrdenes)
+        public OrdenesDeMantenimientoCanceladasController()
         {
-            RepositorioDelTaller = repositorioDeOrdenes;
+            
         }
 
         public async Task<ActionResult> ListarAsync()

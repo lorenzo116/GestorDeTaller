@@ -16,11 +16,9 @@ namespace GestionDeTaller.UI.Controllers
 {
     public class OrdenesDeMantenimientoRecibidasController : Controller
     {
-        private readonly IRepositorioDelTaller RepositorioDelTaller;
-
-        public OrdenesDeMantenimientoRecibidasController(IRepositorioDelTaller repositorioDeOrdenes)
+        public OrdenesDeMantenimientoRecibidasController()
         {
-            RepositorioDelTaller = repositorioDeOrdenes;
+            
         }
 
         public async Task<ActionResult> Listar()
@@ -126,16 +124,16 @@ namespace GestionDeTaller.UI.Controllers
         }
 
 
-        public ActionResult AsociarArticulo(int Id_Articulo, string nombre, string descripcion, decimal montoDeAdelanto) 
-        {
-            OrdenesDeMantenimiento orden = new OrdenesDeMantenimiento();
-            orden.NombreDelCliente = nombre;
-            orden.DescripcionDelProblema = descripcion;
-            orden.MontoDeAdelanto = montoDeAdelanto;
-            orden.Id_Articulo = Id_Articulo;
-            RepositorioDelTaller.AgregarOrden(orden);
-            return RedirectToAction("Listar");
-        }
+        //public ActionResult AsociarArticulo(int Id_Articulo, string nombre, string descripcion, decimal montoDeAdelanto) 
+        //{
+        //    OrdenesDeMantenimiento orden = new OrdenesDeMantenimiento();
+        //    orden.NombreDelCliente = nombre;
+        //    orden.DescripcionDelProblema = descripcion;
+        //    orden.MontoDeAdelanto = montoDeAdelanto;
+        //    orden.Id_Articulo = Id_Articulo;
+        //    RepositorioDelTaller.AgregarOrden(orden);
+        //    return RedirectToAction("Listar");
+        //}
 
         public async Task<ActionResult> ListarMantenimientos(int id_Orden)
         {
@@ -192,51 +190,51 @@ namespace GestionDeTaller.UI.Controllers
             }
         }
 
-        public ActionResult Editar(int id)
-        {
-            if (ModelState.IsValid)
-            {
-                OrdenesDeMantenimiento orden;
-                orden = RepositorioDelTaller.ObtenerOrdenPorID(id);
-                return View(orden);
-            }
-            else
-            {
-                return View();
-            }
-        }
+        //public ActionResult Editar(int id)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        OrdenesDeMantenimiento orden;
+        //        orden = RepositorioDelTaller.ObtenerOrdenPorID(id);
+        //        return View(orden);
+        //    }
+        //    else
+        //    {
+        //        return View();
+        //    }
+        //}
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Editar(OrdenesDeMantenimiento orden)
-        {
-            try
-            {
-                RepositorioDelTaller.EditarOrden(orden);
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Editar(OrdenesDeMantenimiento orden)
+        //{
+        //    try
+        //    {
+        //        RepositorioDelTaller.EditarOrden(orden);
 
-                return RedirectToAction(nameof(Listar));
-            }
-            catch
-            {
-                return View();
-            }
-        }
+        //        return RedirectToAction(nameof(Listar));
+        //    }
+        //    catch
+        //    {
+        //        return View();
+        //    }
+        //}
 
-        public ActionResult Iniciar(int id)
-        {
-            if (ModelState.IsValid)
-            {
-                OrdenesDeMantenimiento orden;
-                orden = RepositorioDelTaller.ObtenerOrdenPorID(id);
-                RepositorioDelTaller.IniciarOrden(orden);
+        //public ActionResult Iniciar(int id)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        OrdenesDeMantenimiento orden;
+        //        orden = RepositorioDelTaller.ObtenerOrdenPorID(id);
+        //        RepositorioDelTaller.IniciarOrden(orden);
 
-                return RedirectToAction(nameof(Listar));
+        //        return RedirectToAction(nameof(Listar));
 
-            }
-            else
-            {
-                return View();
-            }
-        }
+        //    }
+        //    else
+        //    {
+        //        return View();
+        //    }
+        //}
     }
 }

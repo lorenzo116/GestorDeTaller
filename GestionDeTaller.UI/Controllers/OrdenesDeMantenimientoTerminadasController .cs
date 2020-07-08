@@ -14,22 +14,19 @@ namespace GestionDeTaller.UI.Controllers
 {
     public class OrdenesDeMantenimientoTerminadasController : Controller
     {
-
-        private readonly IRepositorioDelTaller Repositorio;
-
-        public OrdenesDeMantenimientoTerminadasController(IRepositorioDelTaller repositorio)
+        public OrdenesDeMantenimientoTerminadasController()
         {
-            Repositorio = repositorio;
+            
         }
 
-        public ActionResult Listar()
-        {
-            List<OrdenesDeMantenimiento> ordenes;
+        //public ActionResult Listar()
+        //{
+        //    List<OrdenesDeMantenimiento> ordenes;
 
-            ordenes = Repositorio.ObtenerOrdenesTerminadas();
+        //    ordenes = Repositorio.ObtenerOrdenesTerminadas();
 
-            return View(ordenes);
-        }
+        //    return View(ordenes);
+        //}
 
 
         public async Task<IActionResult> Detalles(int Id)

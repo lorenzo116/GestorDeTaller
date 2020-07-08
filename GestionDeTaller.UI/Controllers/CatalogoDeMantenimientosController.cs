@@ -16,10 +16,9 @@ namespace GestionDeTaller.UI.Controllers
 {
     public class CatalogoDeMantenimientosController : Controller
     {
-        private IRepositorioDelTaller RepositorioDelTaller;
-        public CatalogoDeMantenimientosController(IRepositorioDelTaller repositorioDeLibros)
+        public CatalogoDeMantenimientosController()
         {
-            RepositorioDelTaller = repositorioDeLibros;
+            
         }
 
         public async Task<IActionResult> Listar(int Id)
@@ -108,42 +107,42 @@ namespace GestionDeTaller.UI.Controllers
             }
         }
 
-        public ActionResult Editar(int Id)
-        {
-            Mantenimientos mantenimiento = RepositorioDelTaller.ObtenerMantenimientoPorID(Id);
-            ViewBag.Id_Articulo = mantenimiento.Id_Articulo;
-            if (ModelState.IsValid)
-            {
-                Mantenimientos mantenimientos;
-                mantenimientos = RepositorioDelTaller.ObtenerMantenimientoPorID(Id);
-                return View(mantenimientos);
-            }
-            else
-            {
-                return View();
-            }
-        }
+        //public ActionResult Editar(int Id)
+        //{
+        //    Mantenimientos mantenimiento = RepositorioDelTaller.ObtenerMantenimientoPorID(Id);
+        //    ViewBag.Id_Articulo = mantenimiento.Id_Articulo;
+        //    if (ModelState.IsValid)
+        //    {
+        //        Mantenimientos mantenimientos;
+        //        mantenimientos = RepositorioDelTaller.ObtenerMantenimientoPorID(Id);
+        //        return View(mantenimientos);
+        //    }
+        //    else
+        //    {
+        //        return View();
+        //    }
+        //}
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Editar(Mantenimientos mantenimientos)
-        {
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Editar(Mantenimientos mantenimientos)
+        //{
 
-            try
-            {
-                RepositorioDelTaller.EditarMantenimiento(mantenimientos);
+        //    try
+        //    {
+        //        RepositorioDelTaller.EditarMantenimiento(mantenimientos);
 
-                return RedirectToAction("Listar", new RouteValueDictionary(new
-                {
-                    controller = "CatalogoDeMantenimientos",
-                    Action = "Listar",
-                    Id = mantenimientos.Id_Articulo
-                }));
-            }
-            catch
-            {
-                return View();
-            }
-        }
+        //        return RedirectToAction("Listar", new RouteValueDictionary(new
+        //        {
+        //            controller = "CatalogoDeMantenimientos",
+        //            Action = "Listar",
+        //            Id = mantenimientos.Id_Articulo
+        //        }));
+        //    }
+        //    catch
+        //    {
+        //        return View();
+        //    }
+        //}
     }
 }

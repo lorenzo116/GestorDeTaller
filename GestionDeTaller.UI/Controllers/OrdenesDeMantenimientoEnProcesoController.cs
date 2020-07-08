@@ -15,13 +15,10 @@ namespace GestionDeTaller.UI.Controllers
 {
     public class OrdenesDeMantenimientoEnProcesoController : Controller
     {
-        private readonly IRepositorioDelTaller Repositorio;
-
-        public OrdenesDeMantenimientoEnProcesoController(IRepositorioDelTaller repositorio)
+        public OrdenesDeMantenimientoEnProcesoController()
         {
-            Repositorio = repositorio;
+            
         }
-
 
         public async Task<ActionResult> Listar()
         {
@@ -118,37 +115,37 @@ namespace GestionDeTaller.UI.Controllers
             return View(orden);
         }
 
-        public ActionResult Terminar(int id)
-        {
-            OrdenesDeMantenimiento orden;
+        //public ActionResult Terminar(int id)
+        //{
+        //    OrdenesDeMantenimiento orden;
 
-            orden = Repositorio.ObtenerOrdenPorID(id);
+        //    orden = Repositorio.ObtenerOrdenPorID(id);
 
-            Repositorio.TerminarOrden(orden);
+        //    Repositorio.TerminarOrden(orden);
 
-            return RedirectToAction(nameof(Listar));
-        }
-        public ActionResult Cancelar(int id)
-        {
-            OrdenesDeMantenimiento orden;
-            orden = Repositorio.ObtenerOrdenPorID(id);
-            return View(orden);
-        }
+        //    return RedirectToAction(nameof(Listar));
+        //}
+        //public ActionResult Cancelar(int id)
+        //{
+        //    OrdenesDeMantenimiento orden;
+        //    orden = Repositorio.ObtenerOrdenPorID(id);
+        //    return View(orden);
+        //}
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Cancelar(OrdenesDeMantenimiento orden)
-        {
-            try
-            {
-                Repositorio.CancelarOrden(orden);
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Cancelar(OrdenesDeMantenimiento orden)
+        //{
+        //    try
+        //    {
+        //        Repositorio.CancelarOrden(orden);
 
-                return RedirectToAction(nameof(Listar));
-            }
-            catch
-            {
-                return View();
-            }
-        }
+        //        return RedirectToAction(nameof(Listar));
+        //    }
+        //    catch
+        //    {
+        //        return View();
+        //    }
+        //}
     }
 }
