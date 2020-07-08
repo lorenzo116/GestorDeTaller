@@ -23,7 +23,7 @@ namespace GestionDeTaller.SI.Controllers
 
         // GET: api/<OrdenesDeMantenimientoCanceladasController>
         [HttpGet]
-        public IEnumerable<OrdenesDeMantenimiento> Get()
+        public IEnumerable<OrdenesDeMantenimiento> listar()
         {
             List<OrdenesDeMantenimiento> ordenes;
 
@@ -34,9 +34,26 @@ namespace GestionDeTaller.SI.Controllers
 
         // GET api/<OrdenesDeMantenimientoCanceladasController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public IActionResult Get(int id)
         {
-            return "value";
+            OrdenDetallada ordenDetallada = new OrdenDetallada();
+            OrdenesDeMantenimiento orden = RepositorioDelTaller.ObtenerOrdenPorID(id);
+            ordenDetallada.NombreDelCliente = orden.NombreDelCliente;
+            ordenDetallada.DescripcionDelProblema = orden.DescripcionDelProblema;
+            ordenDetallada.FechaDeIngreso = orden.FechaDeIngreso;
+            ordenDetallada.FechaDeInicio = orden.FechaDeInicio;
+            ordenDetallada.MontoDeAdelanto = orden.MontoDeAdelanto;
+            ordenDetallada.MotivoDeCancelacion = orden.MotivoDeCancelacion;
+            Articulo articulo = new Articulo();
+            articulo = RepositorioDelTaller.ObtenerArticuloPorID(orden.Id_Articulo);
+            ordenDetallada.NombreArticulo = articulo.Nombre;
+            ordenDetallada.MarcaArticulo = articulo.Marca;
+            ordenDetallada.ListaDeMantenimientosAsociados = RepositorioDelTaller.ObtenerMantenimientosParaUnaOrden(id);
+            if (orden == null) { return NotFound(); }
+            else
+            {
+                return Ok(ordenDetallada);
+            }
         }
 
         // POST api/<OrdenesDeMantenimientoCanceladasController>

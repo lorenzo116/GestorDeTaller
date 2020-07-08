@@ -47,9 +47,25 @@ namespace GestionDeTaller.SI.Controllers
 
         // GET api/<OrdenesDeMantenimientoEnProcesoController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public IActionResult Get(int id)
         {
-            return "value";
+            OrdenDetallada ordenDetallada = new OrdenDetallada();
+            OrdenesDeMantenimiento orden = Repositorio.ObtenerOrdenPorID(id);
+            ordenDetallada.NombreDelCliente = orden.NombreDelCliente;
+            ordenDetallada.DescripcionDelProblema = orden.DescripcionDelProblema;
+            ordenDetallada.FechaDeIngreso = orden.FechaDeIngreso;
+            ordenDetallada.FechaDeInicio = orden.FechaDeInicio;
+            ordenDetallada.MontoDeAdelanto = orden.MontoDeAdelanto;
+            Articulo articulo = new Articulo();
+            articulo = Repositorio.ObtenerArticuloPorID(orden.Id_Articulo);
+            ordenDetallada.NombreArticulo = articulo.Nombre;
+            ordenDetallada.MarcaArticulo = articulo.Marca;
+            ordenDetallada.ListaDeMantenimientosAsociados = Repositorio.ObtenerMantenimientosParaUnaOrden(id);
+            if (orden == null) { return NotFound(); }
+            else
+            {
+                return Ok(ordenDetallada);
+            }
         }
 
         // POST api/<OrdenesDeMantenimientoEnProcesoController>

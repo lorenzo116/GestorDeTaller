@@ -45,21 +45,22 @@ namespace GestionDeTaller.UI.Controllers
             return View(laLista);
         }
 
-        public ActionResult Detalles(int Id)
+        public async Task<IActionResult> Detalles(int Id)
         {
-            OrdenDetallada ordenDetallada = new OrdenDetallada();
-            OrdenesDeMantenimiento orden = RepositorioDelTaller.ObtenerOrdenPorID(Id);
-            ordenDetallada.NombreDelCliente = orden.NombreDelCliente;
-            ordenDetallada.DescripcionDelProblema = orden.DescripcionDelProblema;
-            ordenDetallada.FechaDeIngreso = orden.FechaDeIngreso;
-            ordenDetallada.MontoDeAdelanto = orden.MontoDeAdelanto;
-            Articulo articulo = new Articulo();
-            articulo = RepositorioDelTaller.ObtenerArticuloPorID(orden.Id_Articulo);
-            ordenDetallada.NombreArticulo = articulo.Nombre;
-            ordenDetallada.MarcaArticulo = articulo.Marca;
-            ordenDetallada.ListaDeMantenimientosAsociados = RepositorioDelTaller.ObtenerMantenimientosParaUnaOrden(Id);
+            OrdenDetallada orden;
 
-            return View(ordenDetallada);
+            try
+            {
+                var httpClient = new HttpClient();
+                var response = await httpClient.GetAsync("https://localhost:44355/api/OrdenesDeMantenimientoRecibidas" + Id);
+                string apiResponse = await response.Content.ReadAsStringAsync();
+                orden = JsonConvert.DeserializeObject<OrdenDetallada>(apiResponse);
+            }
+            catch (Exception Ex)
+            {
+                throw Ex;
+            }
+            return View(orden);
         }
 
         public ActionResult Agregar()
