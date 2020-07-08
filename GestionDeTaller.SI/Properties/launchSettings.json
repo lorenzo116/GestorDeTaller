@@ -12,7 +12,7 @@
     "IIS Express": {
       "commandName": "IISExpress",
       "launchBrowser": true,
-      "launchUrl": "api/CatalogoDeArticulos",
+      "launchUrl": "api/CatalogoDeMantenimientos",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
@@ -20,7 +20,7 @@
     "GestionDeTaller.SI": {
       "commandName": "Project",
       "launchBrowser": true,
-      "launchUrl": "api/CatalogoDeArticulos",
+      "launchUrl": "api/CatalogoDeMantenimientos",
       "applicationUrl": "https://localhost:5001;http://localhost:5000",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
