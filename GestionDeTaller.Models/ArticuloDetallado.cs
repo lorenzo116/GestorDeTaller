@@ -1,15 +1,12 @@
-﻿using GestionDeTaller.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Text;
 
-namespace GestionDeTaller.UI.Models
+namespace GestionDeTaller.Models
 {
     public class ArticuloDetallado
     {
-
         public string Nombre { get; set; }
 
         public string Marca { get; set; }
@@ -22,7 +19,5 @@ namespace GestionDeTaller.UI.Models
         [Display(Name = "Ordenes En Proceso")]
         public string CantidadDeOrdenesEnProceso { get; set; }
         public List<Repuestos> RepuestosAsociados { get; set; }
-
-
     }
 }

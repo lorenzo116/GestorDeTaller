@@ -1,20 +1,16 @@
-﻿using GestionDeTaller.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Text;
 
-namespace GestionDeTaller.UI.Models
+namespace GestionDeTaller.Models
 {
     public class RepuestoDetallado
     {
-
-
         public int Id { get; set; }
 
         public string Nombre { get; set; }
-        
+
         public double Precio { get; set; }
 
         [Display(Name = "Descripción")]
@@ -23,12 +19,7 @@ namespace GestionDeTaller.UI.Models
         public Articulo ArticuloAsociado { get; set; }
 
         public List<Mantenimientos> MantenimientosAsociados { get; set; }
-        [Display(Name ="Resumen de uso")]
+        [Display(Name = "Resumen de uso")]
         public int ResumenDeUso { get; set; }
-
-
-
-
-
     }
 }

@@ -1,11 +1,10 @@
-﻿using GestionDeTaller.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.Text;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace GestionDeTaller.UI.Models
+namespace GestionDeTaller.Models
 {
     public class MantenimientoDetallado
     {
