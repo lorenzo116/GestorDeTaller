@@ -17,10 +17,10 @@ namespace GestionDeTaller.UI.Controllers
 {
     public class CatalogoDeArticulosController : Controller
     {
-        private  IRepositorioDelTaller RepositorioDelTaller;
-        public CatalogoDeArticulosController(IRepositorioDelTaller repositorioDeLibros)
+       
+        public CatalogoDeArticulosController()
         {
-            RepositorioDelTaller = repositorioDeLibros;
+            
         }
 
         public async Task<IActionResult> Listar()
@@ -102,7 +102,7 @@ namespace GestionDeTaller.UI.Controllers
                 return View();
             }
         }
-
+/*
         public ActionResult Editar(int Id)
         {
             if (ModelState.IsValid)
@@ -133,6 +133,6 @@ namespace GestionDeTaller.UI.Controllers
             }
         } 
       
-
+        */
     }
 }
