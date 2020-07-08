@@ -46,22 +46,20 @@ namespace GestionDeTaller.UI.Controllers
             return View(laListaDeMantenimientos);
         }
 
-        public async Task<IActionResult> DetallesDeMantenimientos(int Id)
+        public ActionResult DetallesDeMantenimientos(int Id)
         {
-            MantenimientoDetallado mantenimiento;
-
-            try
-            {
-                var httpClient = new HttpClient();
-                var response = await httpClient.GetAsync("https://localhost:44355/api/CatalogoDeMantenimientos" + Id);
-                string apiResponse = await response.Content.ReadAsStringAsync();
-                mantenimiento = JsonConvert.DeserializeObject<MantenimientoDetallado>(apiResponse);
-            }
-            catch (Exception Ex)
-            {
-                throw Ex;
-            }
-            return View(mantenimiento);
+           
+            MantenimientoDetallado mantenimientoDetallado = new MantenimientoDetallado();
+            Mantenimientos mantenimiento;
+            mantenimiento = RepositorioDelTaller.ObtenerMantenimientoPorID(Id);
+            ViewBag.Id_Articulo = mantenimiento.Id_Articulo;
+            mantenimientoDetallado.Id = mantenimiento.Id;
+            mantenimientoDetallado.Descripcion = mantenimiento.Descripcion;
+            List<RepuestosParaMantenimiento> repuestosAsociados;
+            repuestosAsociados = RepositorioDelTaller.ObtenerRepuestoParaMantenimientos(Id);
+            mantenimientoDetallado.RepuestosAsociados = RepositorioDelTaller.ObtenerRepuestosPorMantenimiento(repuestosAsociados);
+            mantenimientoDetallado.ResumenDeUso = RepositorioDelTaller.ResumenDeUsoDelMantenimiento(Id);
+            return View(mantenimientoDetallado);
         }
 
         public ActionResult AgregarMantenimiento(int Id_Articulo)

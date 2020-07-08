@@ -45,22 +45,18 @@ namespace GestionDeTaller.UI.Controllers
             return View(laLista);
         }
 
-        public async Task<IActionResult> DetallesDeArticulo(int Id)
+        public ActionResult DetallesDeArticulo(int Id)
         {
-            ArticuloDetallado articulo;
+            ArticuloDetallado articuloDetallado = new ArticuloDetallado();
+            Articulo articulo = RepositorioDelTaller.ObtenerArticuloPorID(Id);
+            articuloDetallado.Nombre = articulo.Nombre;
+            articuloDetallado.Marca = articulo.Marca;
+            articuloDetallado.Descripcion = articulo.Descripcion;
+            articuloDetallado.CantidadDeOrdenesEnProceso = RepositorioDelTaller.ContarOrdenesEnProceso(Id);
+            articuloDetallado.CantidadDeOrdenesTerminadas = RepositorioDelTaller.ContarOrdenesTerminadas(Id);
+            articuloDetallado.RepuestosAsociados = RepositorioDelTaller.ObtenerRepuestosAsociados(articulo);
 
-            try
-            {
-                var httpClient = new HttpClient();
-                var response = await httpClient.GetAsync("https://localhost:44355/api/CatalogoDeArticulos" + Id);
-                string apiResponse = await response.Content.ReadAsStringAsync();
-                articulo = JsonConvert.DeserializeObject<ArticuloDetallado>(apiResponse);
-            }
-            catch (Exception Ex)
-            {
-                throw Ex;
-            }
-            return View(articulo);
+            return View(articuloDetallado);
         }
 
         public ActionResult AgregarArticulo()

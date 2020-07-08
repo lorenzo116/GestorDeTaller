@@ -100,22 +100,22 @@ namespace GestionDeTaller.UI.Controllers
             }
         }
 
-        public async Task<IActionResult> Detalles(int Id)
+        public ActionResult Detalles(int Id)
         {
-            OrdenDetallada orden;
+            OrdenDetallada ordenDetallada = new OrdenDetallada();
+            OrdenesDeMantenimiento orden = Repositorio.ObtenerOrdenPorID(Id);
+            ordenDetallada.NombreDelCliente = orden.NombreDelCliente;
+            ordenDetallada.DescripcionDelProblema = orden.DescripcionDelProblema;
+            ordenDetallada.FechaDeIngreso = orden.FechaDeIngreso;
+            ordenDetallada.FechaDeInicio = orden.FechaDeInicio;
+            ordenDetallada.MontoDeAdelanto = orden.MontoDeAdelanto;
+            Articulo articulo = new Articulo();
+            articulo = Repositorio.ObtenerArticuloPorID(orden.Id_Articulo);
+            ordenDetallada.NombreArticulo = articulo.Nombre;
+            ordenDetallada.MarcaArticulo = articulo.Marca;
+            ordenDetallada.ListaDeMantenimientosAsociados = Repositorio.ObtenerMantenimientosParaUnaOrden(Id);
 
-            try
-            {
-                var httpClient = new HttpClient();
-                var response = await httpClient.GetAsync("https://localhost:44355/api/CatalogoDeArticulos" + Id);
-                string apiResponse = await response.Content.ReadAsStringAsync();
-                orden = JsonConvert.DeserializeObject<OrdenDetallada>(apiResponse);
-            }
-            catch (Exception Ex)
-            {
-                throw Ex;
-            }
-            return View(orden);
+            return View(ordenDetallada);
         }
 
         public ActionResult Terminar(int id)

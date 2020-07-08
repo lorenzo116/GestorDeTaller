@@ -4,7 +4,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using GestionDeTaller.BL;
 using GestionDeTaller.Models;
-using GestionDeTaller.UI.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
 
@@ -25,7 +24,7 @@ namespace GestionDeTaller.SI.Controllers
 
         // GET: api/<CatalogoDeRepuestosController>
         [HttpGet]
-        public IEnumerable<Repuestos> Listar(int Id)
+        public IEnumerable<Repuestos> Get(int Id)
         {
             List<Repuestos> laListaDeRepuestos = new List<Repuestos>();
             Articulo articulo = new Articulo();
@@ -37,26 +36,9 @@ namespace GestionDeTaller.SI.Controllers
 
         // GET api/<CatalogoDeRepuestosController>/5
         [HttpGet("{id}")]
-        public IActionResult Get(int id)
+        public string Get()
         {
-            RepuestoDetallado repuestoDetallado = new RepuestoDetallado();
-            Repuestos repuesto = RepositorioDelTaller.ObtenerRepuestoPorID(id);
-            //ViewBag.Id_Articulo = repuesto.Id_Articulo; Otra vez este hpta viewbag jode la vida
-            Articulo articulo = RepositorioDelTaller.ObtenerArticuloPorID(repuesto.Id_Articulo);
-            repuestoDetallado.Nombre = repuesto.Nombre;
-            repuestoDetallado.Precio = repuesto.Precio;
-            repuestoDetallado.Descripcion = repuesto.Descripcion;
-            repuestoDetallado.ArticuloAsociado = articulo;
-            List<RepuestosParaMantenimiento> repuestosAsociados;
-            repuestosAsociados = RepositorioDelTaller.ObtenerMantenimientosParaRepuestos(id);
-            repuestoDetallado.MantenimientosAsociados = RepositorioDelTaller.ObtenerMantenimientosPorRepuesto(repuestosAsociados);
-            repuestoDetallado.ResumenDeUso = RepositorioDelTaller.ResumenDeUsoDelRepuesto(id);
-
-            if (repuesto == null) { return NotFound(); }
-            else
-            {
-                return Ok(repuestoDetallado);
-            }
+            return "value";
         }
 
         // POST api/<CatalogoDeRepuestosController>

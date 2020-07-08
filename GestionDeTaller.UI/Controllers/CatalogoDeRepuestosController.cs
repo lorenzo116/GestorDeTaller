@@ -130,22 +130,23 @@ namespace GestionDeTaller.UI.Controllers
             }
         }
 
-        public async Task<IActionResult> DetallesDeArticulo(int Id)
+        public ActionResult DetallesDeRepuesto(int Id)
         {
-            RepuestoDetallado repuesto;
+            
+            RepuestoDetallado repuestoDetallado = new RepuestoDetallado();
+            Repuestos repuesto = RepositorioDelTaller.ObtenerRepuestoPorID(Id);
+            ViewBag.Id_Articulo = repuesto.Id_Articulo;
+            Articulo articulo = RepositorioDelTaller.ObtenerArticuloPorID(repuesto.Id_Articulo);
+            repuestoDetallado.Nombre = repuesto.Nombre;
+            repuestoDetallado.Precio = repuesto.Precio;
+            repuestoDetallado.Descripcion = repuesto.Descripcion;
+            repuestoDetallado.ArticuloAsociado = articulo;
+            List<RepuestosParaMantenimiento> repuestosAsociados;
+            repuestosAsociados = RepositorioDelTaller.ObtenerMantenimientosParaRepuestos(Id);
+            repuestoDetallado.MantenimientosAsociados = RepositorioDelTaller.ObtenerMantenimientosPorRepuesto(repuestosAsociados);
+            repuestoDetallado.ResumenDeUso = RepositorioDelTaller.ResumenDeUsoDelRepuesto(Id);
 
-            try
-            {
-                var httpClient = new HttpClient();
-                var response = await httpClient.GetAsync("https://localhost:44355/api/CatalogoDeRepuestos" + Id);
-                string apiResponse = await response.Content.ReadAsStringAsync();
-                repuesto = JsonConvert.DeserializeObject<RepuestoDetallado>(apiResponse);
-            }
-            catch (Exception Ex)
-            {
-                throw Ex;
-            }
-            return View(repuesto);
+            return View(repuestoDetallado);
         }
 
         public ActionResult VolverADetallesDeRepuesto(int id) {

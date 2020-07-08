@@ -4,7 +4,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using GestionDeTaller.BL;
 using GestionDeTaller.Models;
-using GestionDeTaller.UI.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
 
@@ -23,7 +22,7 @@ namespace GestionDeTaller.SI.Controllers
         }
         // GET: api/<CatalogoDeMantenimientosController>
         [HttpGet]
-        public IEnumerable<Mantenimientos> Listar(int Id)
+        public IEnumerable<Mantenimientos> Get(int Id)
         {
             List<Mantenimientos> laListaDeMantenimientos;
             Articulo articulo;
@@ -35,23 +34,9 @@ namespace GestionDeTaller.SI.Controllers
 
         // GET api/<CatalogoDeMantenimientosController>/5
         [HttpGet("{id}")]
-        public IActionResult Get(int id)
+        public string Get()
         {
-            MantenimientoDetallado mantenimientoDetallado = new MantenimientoDetallado();
-            Mantenimientos mantenimiento;
-            mantenimiento = RepositorioDelTaller.ObtenerMantenimientoPorID(id);
-           // ViewBag.Id_Articulo = mantenimiento.Id_Articulo; // No se que hacer acá este viewbag te tiene con hasta la verg
-            mantenimientoDetallado.Id = mantenimiento.Id;
-            mantenimientoDetallado.Descripcion = mantenimiento.Descripcion;
-            List<RepuestosParaMantenimiento> repuestosAsociados;
-            repuestosAsociados = RepositorioDelTaller.ObtenerRepuestoParaMantenimientos(id);
-            mantenimientoDetallado.RepuestosAsociados = RepositorioDelTaller.ObtenerRepuestosPorMantenimiento(repuestosAsociados);
-            mantenimientoDetallado.ResumenDeUso = RepositorioDelTaller.ResumenDeUsoDelMantenimiento(id);
-            if (mantenimiento == null) { return NotFound(); }
-            else
-            {
-                return Ok(mantenimientoDetallado);
-            }
+            return "value";
         }
 
         // POST api/<CatalogoDeMantenimientosController>

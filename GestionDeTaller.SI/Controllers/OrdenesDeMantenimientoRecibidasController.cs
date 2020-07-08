@@ -4,7 +4,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using GestionDeTaller.BL;
 using GestionDeTaller.Models;
-using GestionDeTaller.UI.Models;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -56,24 +55,9 @@ namespace GestionDeTaller.SI.Controllers
 
         // GET api/<OrdenesRecibidasController>/5
         [HttpGet("{id}")]
-        public IActionResult Get(int id)
+        public string Get(int id)
         {
-            OrdenDetallada ordenDetallada = new OrdenDetallada();
-            OrdenesDeMantenimiento orden = RepositorioDelTaller.ObtenerOrdenPorID(id);
-            ordenDetallada.NombreDelCliente = orden.NombreDelCliente;
-            ordenDetallada.DescripcionDelProblema = orden.DescripcionDelProblema;
-            ordenDetallada.FechaDeIngreso = orden.FechaDeIngreso;
-            ordenDetallada.MontoDeAdelanto = orden.MontoDeAdelanto;
-            Articulo articulo = new Articulo();
-            articulo = RepositorioDelTaller.ObtenerArticuloPorID(orden.Id_Articulo);
-            ordenDetallada.NombreArticulo = articulo.Nombre;
-            ordenDetallada.MarcaArticulo = articulo.Marca;
-            ordenDetallada.ListaDeMantenimientosAsociados = RepositorioDelTaller.ObtenerMantenimientosParaUnaOrden(id);
-            if (orden == null) { return NotFound(); }
-            else
-            {
-                return Ok(ordenDetallada);
-            }
+            return "value";
         }
 
         // POST api/<OrdenesRecibidasController>
