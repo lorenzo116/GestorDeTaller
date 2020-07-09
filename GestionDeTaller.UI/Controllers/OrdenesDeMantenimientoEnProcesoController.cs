@@ -28,7 +28,7 @@ namespace GestionDeTaller.UI.Controllers
             {
                 var httpClient = new HttpClient();
 
-                var response = await httpClient.GetAsync("https://localhost:44355/api/OrdenesDeMantenimientoEnProceso");
+                var response = await httpClient.GetAsync("https://localhost:44355/api/OrdenesDeMantenimientoEnProceso/listar/");
 
                 string apiResponse = await response.Content.ReadAsStringAsync();
 
@@ -51,7 +51,7 @@ namespace GestionDeTaller.UI.Controllers
             {
                 var httpClient = new HttpClient();
 
-                var response = await httpClient.GetAsync("https://localhost:44355/api/OrdenesDeMantenimientoEnProceso");
+                var response = await httpClient.GetAsync("https://localhost:44355/api/OrdenesDeMantenimientoEnProceso/listarmantenimientos/");
 
                 string apiResponse = await response.Content.ReadAsStringAsync();
 

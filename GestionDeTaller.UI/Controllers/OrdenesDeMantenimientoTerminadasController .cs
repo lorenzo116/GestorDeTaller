@@ -37,7 +37,6 @@ namespace GestionDeTaller.UI.Controllers
             {
                 throw ex;
             }
-
             return View(laLista);
         }
 

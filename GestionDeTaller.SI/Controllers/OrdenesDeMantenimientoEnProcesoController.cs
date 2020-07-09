@@ -22,7 +22,7 @@ namespace GestionDeTaller.SI.Controllers
         }
 
         // GET: api/<OrdenesDeMantenimientoEnProcesoController>
-        [HttpGet]
+        [HttpGet("listar")]
         public IEnumerable<OrdenesDeMantenimiento> Listar()
         {
             List<OrdenesDeMantenimiento> ordenes;
@@ -32,7 +32,7 @@ namespace GestionDeTaller.SI.Controllers
             return ordenes;
         }
 
-        [HttpGet]
+        [HttpGet("listarmantenimientos")]
         public IEnumerable<Mantenimientos> ListarMantenimientos(int Id_Orden)
         {
             OrdenesDeMantenimiento orden;
