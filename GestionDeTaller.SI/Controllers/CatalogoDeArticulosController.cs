@@ -31,23 +31,6 @@ namespace GestionDeTaller.SI.Controllers
         }
 
         // GET api/<CatalogoDeArticulosController>/5
-        [HttpGet("{id}")]
-        public IActionResult Get(int id)
-        {
-            ArticuloDetallado articuloDetallado = new ArticuloDetallado();
-            Articulo articulo = RepositorioDelTaller.ObtenerArticuloPorID(id);
-            articuloDetallado.Nombre = articulo.Nombre;
-            articuloDetallado.Marca = articulo.Marca;
-            articuloDetallado.Descripcion = articulo.Descripcion;
-            articuloDetallado.CantidadDeOrdenesEnProceso = RepositorioDelTaller.ContarOrdenesEnProceso(id);
-            articuloDetallado.CantidadDeOrdenesTerminadas = RepositorioDelTaller.ContarOrdenesTerminadas(id);
-            articuloDetallado.RepuestosAsociados = RepositorioDelTaller.ObtenerRepuestosAsociados(articulo);
-            if (articulo == null) { return NotFound(); }
-            else
-            {
-                return Ok(articuloDetallado);
-            }
-        }
 
         // POST api/<CatalogoDeArticulosController>
         [HttpPost]
@@ -66,6 +49,25 @@ namespace GestionDeTaller.SI.Controllers
             }
 
             return Ok(articulo);
+        }
+
+
+        [HttpGet("{id}")]
+        public IActionResult Get(int id)
+        {
+            ArticuloDetallado articuloDetallado = new ArticuloDetallado();
+            Articulo articulo = RepositorioDelTaller.ObtenerArticuloPorID(id);
+            articuloDetallado.Nombre = articulo.Nombre;
+            articuloDetallado.Marca = articulo.Marca;
+            articuloDetallado.Descripcion = articulo.Descripcion;
+            articuloDetallado.CantidadDeOrdenesEnProceso = RepositorioDelTaller.ContarOrdenesEnProceso(id);
+            articuloDetallado.CantidadDeOrdenesTerminadas = RepositorioDelTaller.ContarOrdenesTerminadas(id);
+            articuloDetallado.RepuestosAsociados = RepositorioDelTaller.ObtenerRepuestosAsociados(articulo);
+            if (articulo == null) { return NotFound(); }
+            else
+            {
+                return Ok(articuloDetallado);
+            }
         }
 
         // PUT api/<CatalogoDeArticulosController>/5

@@ -28,7 +28,7 @@ namespace GestionDeTaller.UI.Controllers
             {
                 var httpClient = new HttpClient();
 
-                var response = await httpClient.GetAsync("https://localhost:44355/api/OrdenesEnProceso");
+                var response = await httpClient.GetAsync("https://localhost:44355/api/OrdenesDeMantenimientoEnProceso");
 
                 string apiResponse = await response.Content.ReadAsStringAsync();
 
@@ -51,7 +51,7 @@ namespace GestionDeTaller.UI.Controllers
             {
                 var httpClient = new HttpClient();
 
-                var response = await httpClient.GetAsync("https://localhost:44355/api/OrdenesEnProceso");
+                var response = await httpClient.GetAsync("https://localhost:44355/api/OrdenesDeMantenimientoEnProceso");
 
                 string apiResponse = await response.Content.ReadAsStringAsync();
 
@@ -80,7 +80,7 @@ namespace GestionDeTaller.UI.Controllers
 
                     byteContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
 
-                    await httpClient.PostAsync("https://localhost:44355/api/CatalogoDeArticulos", byteContent);
+                    await httpClient.PostAsync("https://localhost:44355/api/OrdenesDeMantenimientoEnProceso", byteContent);
 
 
                     return RedirectToAction(nameof(Listar));
@@ -104,7 +104,7 @@ namespace GestionDeTaller.UI.Controllers
             try
             {
                 var httpClient = new HttpClient();
-                var response = await httpClient.GetAsync("https://localhost:44355/api/CatalogoDeArticulos" + Id);
+                var response = await httpClient.GetAsync("https://localhost:44355/api/OrdenesDeMantenimientoEnProceso" + Id);
                 string apiResponse = await response.Content.ReadAsStringAsync();
                 orden = JsonConvert.DeserializeObject<OrdenDetallada>(apiResponse);
             }

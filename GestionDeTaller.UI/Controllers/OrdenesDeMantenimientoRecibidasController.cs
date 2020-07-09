@@ -20,7 +20,7 @@ namespace GestionDeTaller.UI.Controllers
         {
             
         }
-
+        
         public async Task<ActionResult> Listar()
         {
             List<OrdenesDeMantenimiento> laLista = new List<OrdenesDeMantenimiento>();
@@ -29,7 +29,7 @@ namespace GestionDeTaller.UI.Controllers
             {
                 var httpClient = new HttpClient();
 
-                var response = await httpClient.GetAsync("https://localhost:44355/api/CatalogoDeOrdenesDeMantenimientoRecibidas");
+                var response = await httpClient.GetAsync("https://localhost:44355/api/OrdenesDeMantenimientoRecibidas");
 
                 string apiResponse = await response.Content.ReadAsStringAsync();
 
@@ -39,7 +39,6 @@ namespace GestionDeTaller.UI.Controllers
             {
                 throw ex;
             }
-
             return View(laLista);
         }
 
@@ -109,7 +108,7 @@ namespace GestionDeTaller.UI.Controllers
             {
                 var httpClient = new HttpClient();
 
-                var response = await httpClient.GetAsync("https://localhost:44355/api/CatalogoDeOrdenesDeMantenimientoRecibidas");
+                var response = await httpClient.GetAsync("https://localhost:44355/api/OrdenesDeMantenimientoRecibidas");
 
                 string apiResponse = await response.Content.ReadAsStringAsync();
 
@@ -144,7 +143,7 @@ namespace GestionDeTaller.UI.Controllers
             {
                 var httpClient = new HttpClient();
 
-                var response = await httpClient.GetAsync("https://localhost:44355/api/CatalogoDeOrdenesDeMantenimientoRecibidas");
+                var response = await httpClient.GetAsync("https://localhost:44355/api/OrdenesDeMantenimientoRecibidas");
 
                 string apiResponse = await response.Content.ReadAsStringAsync();
 
@@ -175,7 +174,7 @@ namespace GestionDeTaller.UI.Controllers
 
                     byteContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
 
-                    await httpClient.PostAsync("https://localhost:44355/api/CatalogoDeArticulos", byteContent);
+                    await httpClient.PostAsync("https://localhost:44355/api/OrdenesDeMantenimientoRecibidas", byteContent);
 
                     return RedirectToAction(nameof(Listar));
                 }
