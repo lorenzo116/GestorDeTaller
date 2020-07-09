@@ -129,7 +129,7 @@ namespace GestionDeTaller.UI.Controllers
         //    }
         //}
 
-        public async Task<IActionResult> DetallesDeArticulo(int Id)
+        public async Task<IActionResult> DetallesDeRepuesto(int Id)
         {
             RepuestoDetallado repuesto;
 

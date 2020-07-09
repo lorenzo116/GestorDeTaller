@@ -1,0 +1,98 @@
+﻿@model GestionDeTaller.Models.RepuestoDetallado
+
+@{
+    ViewData["Title"] = "DetallesDeRepuesto";
+}
+
+<h1>Detalles del repuesto </h1>
+<br />
+<div>
+    <a asp-action="Listar" asp-controller="CatalogoDeArticulos" class="btn btn-outline-primary btn-sm">Regresar a la lista de articulos</a>
+
+    <a asp-action="Listar" asp-route-Id="@ViewBag.Id_Articulo" class="btn btn-outline-primary btn-sm">Regresar a la lista de repuestos</a>
+</div>
+<br>
+<br>
+<hr />
+
+<div>
+
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Nombre)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Nombre)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Precio)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Precio)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Descripcion)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Descripcion)
+        </dd>
+    </dl>
+</div>
+<div>
+
+    <hr />
+    <br />
+    <div class="card bg-secondary mb-3" style="max-width: 20rem;">
+        <div class="card-header">Artículo Asociado</div>
+        <div class="card-body">
+
+            <p class="card-text">
+
+                <h5>Nombre</h5>
+                @Model.ArticuloAsociado.Nombre
+                <h5>Marca</h5>
+                @Model.ArticuloAsociado.Marca
+            </p>
+        </div>
+    </div>
+
+
+</div>
+
+
+<div>
+    <h4>Mantenimientos Asociados</h4>
+    <hr />
+    <br />
+    @foreach (var item in Model.MantenimientosAsociados)
+    {
+        <div class="card bg-secondary mb-3" style="max-width: 20rem;">
+            <div class="card-header">Mantenimiento asociado</div>
+            <div class="card-body">
+
+                <p class="card-text">
+
+                    <h5>Descripción</h5>
+                    @item.Descripcion
+                </p>
+            </div>
+        </div>
+        <br />
+    }
+</div>
+
+<div>
+    <h4>Resumen De Uso</h4>
+    <hr />
+    <br />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ResumenDeUso)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ResumenDeUso)
+        </dd>
+    </dl>
+
+</div>
